@@ -2,6 +2,7 @@
 #+OPTIONS: ^:{}
 
 * Nick's Emacs config
+
 I started using emacs when I started learning Clojure using Daniel Higginbotham's book [[http://www.braveclojure.com/][Clojure for the brave and true]].
 Initially, I used his stock emacs config file which was great to get started. 
 Now, I am trying to learn more emacs-list so I can customize more intelligently and make this thing my own. I love org mode so I will use it to organize my init file as well!
@@ -20,6 +21,7 @@ research toolkit, very useful
 ** [[http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html][great org init]]
 ** help
 In the past I have had trouble with misbehaving libraries. I have found that often this is due to byte compilation errors and removing all .elc files seems to fix the problem.
+
 * Personal info
 #+BEGIN_SRC emacs-lisp
   (setq user-full-name "Nick George"
