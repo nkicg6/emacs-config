@@ -9,3 +9,6 @@ org-clock-save.el
 projectile-bookmarks.eld
 srecode-map.el
 *~
+.recentf
+.smex*
+config.el
