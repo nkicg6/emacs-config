@@ -54,6 +54,15 @@ In the past I have had trouble with misbehaving libraries. I have found that oft
     :defer t)
 
 #+END_SRC
+** solarized
+#+BEGIN_SRC emacs-lisp 
+(use-package solarized-theme
+  :defer 10
+  :init
+  (setq solarized-use-variable-pitch nil)
+  :ensure t)
+#+END_SRC
+
 ** Leuven theme
 #+BEGIN_SRC emacs-lisp 
     (require 'material-theme)
@@ -74,6 +83,31 @@ In the past I have had trouble with misbehaving libraries. I have found that oft
   ;;     '(enable-theme 'leuven)))
 
 #+END_SRC
+** Switch themes
+Thank [[Daniel][Daniel!]]
+
+#+BEGIN_SRC emacs-lisp 
+  (defun switch-theme (theme)
+    "Disables any currently active themes and loads THEME."
+    ;; This interactive call is taken from `load-theme'
+    (interactive
+     (list
+      (intern (completing-read "Load custom theme: "
+                               (mapc 'symbol-name
+                                     (custom-available-themes))))))
+    (let ((enabled-themes custom-enabled-themes))
+      (mapc #'disable-theme custom-enabled-themes)
+      (load-theme theme t)))
+
+  (defun disable-active-themes ()
+    "Disables any currently active themes listed in `custom-enabled-themes'."
+    (interactive)
+    (mapc #'disable-theme custom-enabled-themes))
+
+  (global-set-key (kbd "C-c t") 'switch-theme)
+#+END_SRC 
+
+
 * open with
 open some programs with the system default
 
