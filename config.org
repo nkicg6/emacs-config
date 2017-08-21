@@ -1,5 +1,6 @@
 #+TITLE: Nick's org-mode config file.
 #+OPTIONS: ^:{}
+
 * Nick's Emacs config
 I started using emacs when I started learning Clojure using Daniel Higginbotham's book [[http://www.braveclojure.com/][Clojure for the brave and true]].
 Initially, I used his stock emacs config file which was great to get started. 
