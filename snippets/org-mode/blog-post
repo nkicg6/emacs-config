@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: blog-post
+# key: blog
+# --
+#+HTML: title: $0
+#+HTML: date: `(format-time-string "%Y-%m-%d")`
+#+HTML: tags: [about, LaTeX, open-science, python, flask, org-mode, pi, teensy, statistics, image-analysis, data-science, programming]
+#+OPTIONS: \n:1 toc:nil num:0 todo:nil ^:{}

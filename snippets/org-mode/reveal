@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: reveal
+# key: reveal
+# --
+#+TITLE: $1
+#+OPTIONS: ^:{} num:nil 
+#+REVEAL_TRANS: ${2:none|default|cube|page|concave|zoom|linear|fade}
+#+REVEAL_THEME: ${3:black,white,league,beige,sky,night,serif,simple,solarized}
+
+$0

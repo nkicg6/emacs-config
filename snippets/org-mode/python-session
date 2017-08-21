@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: python-session
+# key: pys
+# --
+#+NAME: $1
+#+BEGIN_SRC python :session ${2:*ipython*} :results output
+$0
+#+END_SRC

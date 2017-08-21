@@ -1,0 +1,41 @@
+# -*- mode: snippet -*-
+# name: immuno-day-1
+# key: immuno1
+# --
+**** General Immunostaining `(format-time-string "%Y-%m-%d")` :immuno:
+***** Objective 
+${1: Purpose of labeling. Is this troubleshooting, regular procedure, etc. What type of sample (human or mouse) what project is this for (neuronavigation, STED, random)}
+
+***** Samples
+- Number and type of samples: ${2: 3 mouse slides}
+  - Animal and slide ID: [${3: for example H001-01 for human 001 slide 1 comma seperated}]
+***** Protocol
+****** Day 1
+- 3 washes in PBS (5 min recommended)
+  - wash 1: ${4: mins 00}minutes
+  - wash 1: ${5: mins 00}minutes
+  - wash 1: ${6: mins 00}minutes
+- Antigen retrieval done? ${7: yes-or-no} 
+  - ${8:"none" or buffer (10mM sodium citrate + 0.5% Tween pH6.0)}
+  - ${9: "none" or time and wattage (5 mins at 550W normal)}
+- 3 washes in PBS (5 min recommended)
+  - wash 1: ${10: mins 00}minutes
+  - wash 1: ${11: mins 00}minutes
+  - wash 1: ${12: mins 00}minutes
+- Permeabilize
+  - ${13: percent triton or "none"}%
+  - ${14:length or "none"}mins 
+- 3 washes in PBS ${15: "none" (5 min recommended)}
+  - wash 1: ${16: mins 00}minutes
+  - wash 1: ${17: mins 00}minutes
+  - wash 1: ${18: mins 00}minutes
+- Block
+  - ${19: concentration of block (PBST 0.3% and 5%NDS typical)}
+  - ${20: time in block(1hour typical)}
+- Primary Antibody in blocking solution
+  - ${21: Ab 1 (species, antigen, concentration (1:400))}
+    - ${22: Amount added}
+  - ${23: Ab 2 or "none"}
+    - ${24: Amount added or "none"}
+***** Notes
+$0

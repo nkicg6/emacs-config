@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: image
+# key: image
+# --
+
+#+CAPTION: $1
+#+NAME: $2
+#+ATTR_HTML: :width 50% :height 50%
+#+ATTR_LATEX: :width 50% :height 50%
+$0

@@ -1,0 +1,66 @@
+# -*- mode: snippet -*-
+# name: back
+# key: back
+# --
+
+**** Stats
+:PROPERTIES:
+- actual workout date: ${36:year-month-day or "today"}
+:END:
+
+- Weight: $1
+- Supplement?: ${2:protein+creatine scoops?}
+- Time Start:<${3:00:00}>
+- Workout time: <${4:00:00}>
+**** Warmup
+*Tabata*
+- Style: ${5:$$(yas-choose-value '("sprints" "bike" "row"))}
+  - 4 minute workout
+  - 20 seconds all out/ 10 second rest by 8
+**** Workout
+***** Deadlift
+****** Warmup
+:Restrictions:
+wt >=135
+:End:
+- ${6:reps} X ${7:weight}
+****** Work
+:Restrictions:
+wt >=185
+:End:
+- ${8:reps} X ${9:weight}
+- ${10:reps} X ${11:weight}
+- ${12:reps} X ${13:weight}
+- ${14:reps} X ${15:weight}
+***** Reverse Crunch
+****** Work
+:Restrictions:
+reps >=12
+wt >=25
+:End:
+- ${16:reps} X ${17:weight}
+- ${18:reps} X ${19:weight}
+- ${20:reps} X ${21:weight}
+- ${22:reps} X ${23:weight}
+***** Kettlebell upright row
+****** Work
+:Restrictions:
+wt >=30
+:End:
+- ${24:reps} X ${25:weight}
+- ${26:reps} X ${27:weight}
+- ${28:reps} X ${29:weight}
+- ${30:reps} X ${31:weight}
+***** Sit ups
+****** Work
+:Restrictions:
+reps >=10
+:End:
+- ${32:reps}
+- ${33:reps}
+- ${34:reps}
+***** Pull ups
+- ${35:as many as possible}
+**** Notes
+$0
+

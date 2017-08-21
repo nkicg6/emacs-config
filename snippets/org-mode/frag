@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: frag
+# key: frag
+# --
+#+ATTR_REVEAL: :frag (appear)$0

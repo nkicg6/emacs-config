@@ -1,0 +1,36 @@
+# -*- mode: snippet -*-
+# name: immuno-day-2
+# key: immuno2
+# --
+**** General Immunostaining Day 2 `(format-time-string "%Y-%m-%d")` :immuno:
+***** Objective 
+${1: Purpose of labeling. Is this troubleshooting, regular procedure, etc. What type of sample (human or mouse) what project is this for (neuronavigation, STED, random)}
+
+***** Samples
+- Number and type of samples: ${2: 3 mouse slides}
+  - Animal and slide ID: [${3: for example H001-01 for human 001 slide 1 comma seperated}]
+- Date of original staining: ${4: YYYY-MM-DD}
+***** Protocol
+****** Day 2
+- 3 washes in PBS (5 min recommended)
+  - wash 1: ${5: mins 00}minutes
+  - wash 1: ${6: mins 00}minutes
+  - wash 1: ${7: mins 00}minutes
+- Secondary Antibody
+  - ${8:Secondary 1 species generated, species against, isotype, wavelength of reporter}
+    - ${9: Concentration 1:X}
+  - ${10: "none" Secondary 2 species generated, species against, isotype, wavelength of reporter}
+    - ${11: Concentration 1:X}
+  - incubation ${12: time room temp 1hr typical}
+- 3 washes in PBS (10 min recommended)
+  - wash 1: ${13: mins 00}minutes
+  - wash 1: ${14: mins 00}minutes
+  - wash 1: ${15: mins 00}minutes
+- Counterstain
+  - type ${16: "none" Hoescht, DAPI?}
+  - ${17: "none" or time and concentration}
+- Mounting media?
+  - ${18: vectashield or fluoromount-G}
+***** Notes
+$0
+

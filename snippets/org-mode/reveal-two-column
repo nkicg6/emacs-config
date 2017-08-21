@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: reveal-two-column
+# key: reveal-2
+# --
+#+REVEAL_HTML: <div class="column" style="float:left; width: 50%">
+${1:#+ATTR_REVEAL: :frag (appear)}
+$2
+#+REVEAL_HTML: </div>
+
+#+REVEAL_HTML: <div class="column" style="float:right; width: 50%">
+${3:#+ATTR_HTML: :height 75% :width 75%}
+$0
+#+REVEAL_HTML: </div>

@@ -1,0 +1,70 @@
+# -*- mode: snippet -*-
+# name: shoulders
+# key: shoulders
+# --
+
+**** Stats
+:PROPERTIES:
+- actual workout date: ${39:year-month-day or "today"}
+:END:
+
+- Weight: $1
+- Supplement?: ${2:protein+creatine scoops?}
+- Time Start:<${3:00:00}>
+- Workout time: <${4:00:00}>
+**** Warmup
+*Tabata*
+- Style: ${5:$$(yas-choose-value '("sprints" "bike" "row"))}
+  - 4 minute workout
+  - 20 seconds all out/ 10 second rest by 8
+**** Workout
+***** Shoulder press
+****** Warmup
+:Restrictions:
+reps >=10
+wt >=65
+:End:
+- ${6:reps} X ${7:weight}
+****** Work
+:Restrictions:
+wt >=95
+:End:
+- ${8:reps} X ${9:weight}
+- ${10:reps} X ${11:weight}
+- ${12:reps} X ${13:weight}
+- ${14:reps} X ${15:weight}
+***** Reverse Body Row
+****** Work
+:Restrictions:
+reps >=12
+:End:
+- ${16:reps}
+- ${17:reps}
+- ${18:reps}
+- ${19:reps}
+***** Side raise
+****** Work
+:Restrictions:
+wt >=20
+:End:
+- ${20:reps} X ${21:weight}
+- ${22:reps} X ${23:weight}
+- ${24:reps} X ${25:weight}
+- ${26:reps} X ${27:weight}
+***** One arm overhead press
+****** Work
+:Restrictions:
+wt >=35
+:End:
+- ${28:reps} X ${29:weight}
+- ${30:reps} X ${31:weight}
+- ${32:reps} X ${33:weight}
+- ${34:reps} X ${35:weight}
+
+**** Sit ups
+- $36
+- $37
+- $38
+
+**** Notes
+$0

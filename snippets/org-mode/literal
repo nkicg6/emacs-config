@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: literal
+# key: l
+# --
+=$1= $0

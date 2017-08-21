@@ -1,0 +1,20 @@
+# -*- mode: snippet -*-
+# name: preamble
+# key: pre
+# --
+#+TITLE: ${1:insert title}
+#+DATE: `(format-time-string "%Y-%m-%d")`
+#+OPTIONS: toc:nil author:nil title:nil date:nil num:nil ^:{} \n:1 todo:nil
+#+PROPERTY: header-args :exports both :eval no
+#+LATEX_HEADER: \usepackage[margin=1.0in]{geometry}
+#+LATEX_HEADER: \hypersetup{citecolor=black,colorlinks=true,urlcolor=blue,linkbordercolor=blue,pdfborderstyle={/S/U/W 1}}
+#+LATEX_HEADER: \usepackage[round]{natbib}
+#+LATEX_HEADER: \renewcommand{\bibsection}
+* $0
+
+
+* References
+bibliographystyle:apalike
+bibliography:~/Dropbox/bibliography/library.bib
+
+

@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: cpp
+# key: cp
+# --
+#+NAME: $1
+#+BEGIN_SRC C++ :eval no
+$0
+#+END_SRC

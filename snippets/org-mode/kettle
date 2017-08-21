@@ -1,0 +1,55 @@
+# -*- mode: snippet -*-
+# name: kettle
+# key: kettle
+# --
+
+**** Stats
+:PROPERTIES:
+- actual workout date: ${21:year-month-day}
+:END:
+
+- Weight: $1
+- Supplement?: ${2:protein+creatine scoops?}
+- Time Start:<${3:00:00}>
+- Workout time: <${4:00:00}>
+**** Warmup
+*Tabata*
+- Style: ${5:$$(yas-choose-value '("sprints" "bike" "row"))}
+  - 4 minute workout
+  - 20 seconds all out/ 10 second rest by 8
+**** Workout
+***** Kettlebell Swings
+****** Warmup
+:Restrictions:
+reps >=20
+wt >=10
+:End:
+- ${6:reps} X ${7:weight}
+****** Work
+:Restrictions:
+wt >=25
+reps: >=15
+:End:
+- ${8:reps} X ${9:weight}
+- ${10:reps} X ${11:weight}
+
+***** Kettlebell squat
+****** Work
+:Restrictions:
+wt >=95
+reps >=15
+:End:
+- ${13:reps} X ${14:weight}
+- ${15:reps} X ${16:weight}
+***** Pull ups
+- ${17:as many as possible}
+***** Sit ups
+:Restrictions:
+reps >=10
+:End:
+- ${18:reps}
+- ${19:reps}
+- ${20:reps}
+**** Notes
+$0
+

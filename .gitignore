@@ -1,0 +1,11 @@
+# gitignore for Emacs-init
+
+elpa/*
+backups/*
+auto-save-list/*
+eshell/*
+projectile.cache
+org-clock-save.el
+projectile-bookmarks.eld
+srecode-map.el
+*~
