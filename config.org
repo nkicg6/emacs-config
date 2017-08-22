@@ -20,11 +20,13 @@ research toolkit, very useful
 ** [[http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html][great org init]]
 ** help
 In the past I have had trouble with misbehaving libraries. I have found that often this is due to byte compilation errors and removing all .elc files seems to fix the problem.
+
 * Personal info
 #+BEGIN_SRC emacs-lisp
   (setq user-full-name "Nick George"
         user-mail-address "nicholas.m.george@ucdenver.edu")
 #+END_SRC
+
 * Use-packages
 #+BEGIN_SRC emacs-lisp 
         (setq use-package-always-ensure t)
@@ -47,6 +49,7 @@ In the past I have had trouble with misbehaving libraries. I have found that oft
   ;;       :ensure org-plus-contrib)
 
 #+END_SRC
+
 * Theme
 ** material theme
 #+BEGIN_SRC emacs-lisp
@@ -121,6 +124,7 @@ open some programs with the system default
                                 ("\\.xlsx?\\'" "open" (file))))
   (openwith-mode t)
 #+END_SRC
+
 * Key bindings and shortcuts
 #+BEGIN_SRC emacs-lisp 
   ;; don't pop up font menu
@@ -149,12 +153,14 @@ open some programs with the system default
 (bind-key "C-c a" 'org-agenda)
 #+END_SRC
 From init.el, install the defvar my-packages
+
 * Customize settings 
 Set up custom file thing so it writes to its own file
 #+BEGIN_SRC emacs-lisp
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
  (load custom-file)
 #+END_SRC
+
 * ui and editing
 ** UI file
 
@@ -275,6 +281,7 @@ Set up custom file thing so it writes to its own file
 	  (setq electric-indent-mode nil)
 
 #+END_SRC
+
 * Buffer stuff
 ** navigation.el
 from my old navigation file
@@ -324,6 +331,7 @@ from my old navigation file
 
 #+END_SRC
 
+
 * Helm
 
 #+BEGIN_SRC emacs-lisp
@@ -363,6 +371,7 @@ from my old navigation file
 ;;  (run-at-time nil (* 5 60) 'recentf-save-list)
   (setq create-lockfiles nil) ;; see this https://github.com/syl20bnr/spacemacs/issues/5554
 #+END_SRC
+
 * Org mode
 Cool! [[https://github.com/xgarrido/emacs-starter-kit/blob/master/starter-kit-org.org][starter guide]]
 ** org setup
@@ -716,6 +725,7 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
           ("nick-site" :components ("projects" "about" "blog" "notes" "static" "templates" "main_app"))))
 
 #+END_SRC
+
 * yas snippet
   
 #+BEGIN_SRC emacs-lisp 
@@ -725,6 +735,7 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
   (yas-global-mode t)
   (setq yas-trigger-key "<tab>")
 #+END_SRC
+
 * python mode
 emacs ipython and python mode. 
 #+BEGIN_SRC emacs-lisp 
@@ -885,6 +896,7 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
 ;; and type C-x C-o.
 #+END_SRC
 
+
 * elisp
 
 #+BEGIN_SRC emacs-lisp 
@@ -908,6 +920,7 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
   (add-hook 'ielm-mode-hook 'turn-on-eldoc-mode)
 
 #+END_SRC
+
 * html_nick.el
 #+BEGIN_SRC emacs-lisp 
 ;; setup file for html mode. 
@@ -926,6 +939,7 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
 (add-to-list 'auto-mode-alist '("\\.css$ . html-mode"))
 
 #+END_SRC
+
 * platformIO
 
 #+BEGIN_SRC emacs-lisp 
@@ -957,6 +971,7 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
 
 #+RESULTS:
 
+
 * javascript
 
 #+BEGIN_SRC emacs-lisp 
@@ -984,6 +999,7 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
  '(coffee-tab-width 2))
 
 #+END_SRC
+
 * Magit for git
 again need to explore more
 #+BEGIN_SRC emacs-lisp 
@@ -994,6 +1010,7 @@ again need to explore more
   :config
   (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
 #+END_SRC
+
 
 * shell
 
@@ -1027,6 +1044,7 @@ https://github.com/porterjamesj/virtualenvwrapper.el
   :init
   (exec-path-from-shell-initialize))
 #+END_SRC
+
 * Clojure mode
 ** basic setup
 Shell scripts to setup basics
@@ -1131,7 +1149,8 @@ org babel clojure is not working. I have a hacky fix from [[http://fgiasson.com/
   ;;   ;; enable paredit in your REPL
      (add-hook 'cider-repl-mode-hook 'paredit-mode)
 #+END_SRC
-* COMMENT spelling
+
+* spelling
 
 shell script for installing ispell dictionary with homebrew:
 #+BEGIN_SRC bash :results verbatim 
