@@ -1,7 +1,6 @@
 *My org more config*
 It starts by reading =init.el= which then uses org-babel to load my config.org. 
 * Nick's Emacs config
-
 I started using emacs when I started learning Clojure using Daniel Higginbotham's book [[http://www.braveclojure.com/][Clojure for the brave and true]].
 Initially, I used his stock emacs config file which was great to get started. 
 Now, I am trying to learn more emacs-list so I can customize more intelligently and make this thing my own. I love org mode so I will use it to organize my init file as well!
