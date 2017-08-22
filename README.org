@@ -1,5 +1,4 @@
 #+TITLE: Nick's org-mode config file.
-#+OPTIONS: ^:{}
 
 * Nick's Emacs config
 
@@ -766,7 +765,6 @@ emacs ipython and python mode.
 #+END_SRC
 
 
-Before using virtual environments, I need to get off the anaconda python distribution. In the meantime, just continue as before. 
 
 #+BEGIN_SRC emacs-lisp 
 
