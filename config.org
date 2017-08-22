@@ -1,3 +1,4 @@
+*My org-mode config file*
 
 * Nick's Emacs config
 
