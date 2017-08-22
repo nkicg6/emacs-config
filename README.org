@@ -1,22 +1,25 @@
-*My org more config*
-It starts by reading =init.el= which then uses org-babel to load my config.org. 
+#+TITLE: My org more config
+#+AUTHOR: Nick George
+
+This works by reading =init.el= which then uses org-babel to tangle =config.org= into =config.el= to finish setting up my mac OSX Emacs environment. 
 * Nick's Emacs config
 I started using emacs when I started learning Clojure using Daniel Higginbotham's book [[http://www.braveclojure.com/][Clojure for the brave and true]].
 Initially, I used his stock emacs config file which was great to get started. 
-Now, I am trying to learn more emacs-list so I can customize more intelligently and make this thing my own. I love org mode so I will use it to organize my init file as well!
+Now, I am obsessed with Emacs and org-mode and am trying to learn more emacs-lisp so I can customize more intelligently and make this thing my own.
 This is heavily based on this [[https://www.youtube.com/watch?v=gRb3bq0NiXY][video]] and the [[https://github.com/danielmai/.emacs.d/blob/master/config.org][github repo]]
 Other files I found useful and continue to refer to:
-** [[https://github.com/jcf/emacs.d/blob/master/init-packages.org][JCF]]
-** [[https://github.com/dvb-industries/.emacs.d/blob/master/package-configuration/clojure.org][Daan van Berkel]]
-** [[http://orgmode.org/elpa.html][org plus contrib]] 
-This one was giving me problems
-** [[https://github.com/danielmai/.emacs.d/blob/master/config.org][Daniel Mai]]
+- [[https://github.com/jcf/emacs.d/blob/master/init-packages.org][JCF]]
+- [[https://github.com/dvb-industries/.emacs.d/blob/master/package-configuration/clojure.org][Daan van Berkel]]
+- [[http://orgmode.org/elpa.html][org plus contrib]] 
+- [[https://github.com/danielmai/.emacs.d/blob/master/config.org][Daniel Mai]]
 This one is what started my obsession with the org config. Still working on the shell scripts to set up the environment. 
-** [[https://www.youtube.com/watch?v=2TSKxxYEbII][use-package]]
-** [[https://github.com/jkitchin/org-ref][org-ref]]
-** [[https://github.com/vikasrawal/orgpaper/blob/master/orgpapers.org][org papers]]
+- [[https://www.youtube.com/watch?v=2TSKxxYEbII][use-package]]
+- [[https://github.com/jkitchin/org-ref][org-ref]]
+For research
+- [[https://github.com/vikasrawal/orgpaper/blob/master/orgpapers.org][org papers]]
 research toolkit, very useful
-** [[http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html][great org init]]
-** help
-In the past I have had trouble with misbehaving libraries. I have found that often this is due to byte compilation errors and removing all .elc files seems to fix the problem.
+- [[http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html][great org init]]
+- /help/
+In the past I have had trouble with weird library errors. I have found that often this is due to byte compilation errors and removing all .elc files seems to fix the problem.
 
+Click my =config.org= to see my config. 
