@@ -1,33 +1,15 @@
-*My org-mode config file*
+#+TITLE: My org-mode config file*
 
-* Nick's Emacs config
-
-I started using emacs when I started learning Clojure using Daniel Higginbotham's book [[http://www.braveclojure.com/][Clojure for the brave and true]].
-Initially, I used his stock emacs config file which was great to get started. 
-Now, I am trying to learn more emacs-list so I can customize more intelligently and make this thing my own. I love org mode so I will use it to organize my init file as well!
-This is heavily based on this [[https://www.youtube.com/watch?v=gRb3bq0NiXY][video]] and the [[https://github.com/danielmai/.emacs.d/blob/master/config.org][github repo]]
-Other files I found useful and continue to refer to:
-** [[https://github.com/jcf/emacs.d/blob/master/init-packages.org][JCF]]
-** [[https://github.com/dvb-industries/.emacs.d/blob/master/package-configuration/clojure.org][Daan van Berkel]]
-** [[http://orgmode.org/elpa.html][org plus contrib]] 
-This one was giving me problems
-** [[https://github.com/danielmai/.emacs.d/blob/master/config.org][Daniel Mai]]
-This one is what started my obsession with the org config. Still working on the shell scripts to set up the environment. 
-** [[https://www.youtube.com/watch?v=2TSKxxYEbII][use-package]]
-** [[https://github.com/jkitchin/org-ref][org-ref]]
-** [[https://github.com/vikasrawal/orgpaper/blob/master/orgpapers.org][org papers]]
-research toolkit, very useful
-** [[http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html][great org init]]
-** help
-In the past I have had trouble with misbehaving libraries. I have found that often this is due to byte compilation errors and removing all .elc files seems to fix the problem.
 
 * Personal info
+
 #+BEGIN_SRC emacs-lisp
   (setq user-full-name "Nick George"
         user-mail-address "nicholas.m.george@ucdenver.edu")
 #+END_SRC
 
 * Use-packages
+
 #+BEGIN_SRC emacs-lisp 
         (setq use-package-always-ensure t)
         ;; rainbows
@@ -52,13 +34,16 @@ In the past I have had trouble with misbehaving libraries. I have found that oft
 
 * Theme
 ** material theme
+
 #+BEGIN_SRC emacs-lisp
   (use-package material-theme
     :ensure t
     :defer t)
 
 #+END_SRC
+
 ** solarized
+
 #+BEGIN_SRC emacs-lisp 
 (use-package solarized-theme
   :defer 10
@@ -68,6 +53,7 @@ In the past I have had trouble with misbehaving libraries. I have found that oft
 #+END_SRC
 
 ** Leuven theme
+
 #+BEGIN_SRC emacs-lisp 
     (require 'material-theme)
         (use-package leuven-theme
@@ -88,6 +74,7 @@ In the past I have had trouble with misbehaving libraries. I have found that oft
 
 #+END_SRC
 ** Switch themes
+
 Thank [[Daniel][Daniel!]]
 
 #+BEGIN_SRC emacs-lisp 
@@ -113,6 +100,7 @@ Thank [[Daniel][Daniel!]]
 
 
 * open with
+
 open some programs with the system default
 
 #+BEGIN_SRC emacs-lisp 
@@ -126,6 +114,7 @@ open some programs with the system default
 #+END_SRC
 
 * Key bindings and shortcuts
+
 #+BEGIN_SRC emacs-lisp 
   ;; don't pop up font menu
   ;;(global-set-key (kbd "s-t") '(lambda () (interactive)))
@@ -147,6 +136,7 @@ open some programs with the system default
 #+END_SRC
 
 ** org mode
+
 #+BEGIN_SRC emacs-lisp
 (bind-key "C-c l" 'org-store-link)
 (bind-key "C-c c" 'org-capture)
@@ -155,7 +145,9 @@ open some programs with the system default
 From init.el, install the defvar my-packages
 
 * Customize settings 
+
 Set up custom file thing so it writes to its own file
+
 #+BEGIN_SRC emacs-lisp
   (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
  (load custom-file)
@@ -284,7 +276,9 @@ Set up custom file thing so it writes to its own file
 
 * Buffer stuff
 ** navigation.el
+
 from my old navigation file
+
 #+BEGIN_SRC emacs-lisp 
 
       ;; ido-mode allows you to more easily navigate choices. For example,
@@ -352,9 +346,6 @@ from my old navigation file
   (helm-projectile-on)
 #+END_SRC
 
-#+RESULTS:
-| 63 | Commander help buffer. | #[0 \3021 \303!0\202 \210\202 \210r\304!q\210\305c\210	\211\2031 \211@\306\307@A@#c\210A\266\202\202 \210eb\210\310 \210\311p\312"\210)\313 \207 [projectile-commander-help-buffer projectile-commander-methods (error) kill-buffer get-buffer-create Projectile Commander Methods: |
-
 
 * Recentf
 
@@ -373,8 +364,11 @@ from my old navigation file
 #+END_SRC
 
 * Org mode
+
 Cool! [[https://github.com/xgarrido/emacs-starter-kit/blob/master/starter-kit-org.org][starter guide]]
+
 ** org setup
+
 #+BEGIN_SRC emacs-lisp
     ;;(require 'org)
   ;; source editing takes over current window
@@ -407,7 +401,9 @@ Cool! [[https://github.com/xgarrido/emacs-starter-kit/blob/master/starter-kit-or
 #+END_SRC
 
 ** clocking functions
+
   Super useful [[https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html][guide here]] 
+
 #+BEGIN_SRC emacs-lisp 
 
 ;; dealing with time here: https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html
@@ -438,13 +434,16 @@ Cool! [[https://github.com/xgarrido/emacs-starter-kit/blob/master/starter-kit-or
 #+END_SRC
 
 tags
+
 #+BEGIN_SRC emacs-lisp 
 (setq org-tags-column 45)
 #+END_SRC
 
 ** org LaTeX
 *** Shell scripts
+
 Requires homebrew
+
 #+BEGIN_SRC bash :results verbatim 
 brew install basictex
 sudo tlmgr --update self
@@ -457,8 +456,10 @@ sudo tlmgr install framed
 #+END_SRC
 
 *** setup
+
  See [[http://clarkdonley.com/blog/2014-10-26-org-mode-and-writing-papers-some-tips.html][this link]] for info on writing papers in org and setting things up. 
 Because I use pandoc for export, I often have to pass certain command line options. ox-latex provides excellent documentation for this, thought it took me a long time to find [[https://github.com/kawabata/ox-pandoc][here]]
+
  #+BEGIN_SRC emacs-lisp 
    ;; redundancies with org here...
      (require 'ox-latex)
@@ -497,16 +498,20 @@ Because I use pandoc for export, I often have to pass certain command line optio
    ;; get rid of temporary files on export
    (setq org-latex-logfiles-extensions (quote ("lof" "lot" "tex" "aux" "idx" "log" "out" "toc" "nav" "snm" "vrb" "dvi" "fdb_latexmk" "blg" "brf" "fls" "entoc" "ps" "spl" "bbl" "pygtex" "pygstyle" "pyg")))
  #+END_SRC
+
 *** FIX NORMAL ORG EXPORT!
+
 make minted work. see
 http://orgmode.org/worg/org-dependencies.html
 https://emacs.stackexchange.com/questions/27982/export-code-blocks-in-org-mode-with-minted-environment
 
 Find everywhere you are messing with org-export and get rid of em here. Sart vanilla work from there. 
 *** Export 
+
 Pandoc is different form the org mode exporter, but I have had better luck with it. See [[https://github.com/kawabata/ox-pandoc][this link]] for better instructions. 
 Note, when exporting source code, there is a problem with exporting results. Pandoc ignores the #+RESULTS tag when converting. As a hacky way to address this, I regexp replaced #+RESULTS: with #+RESULTS:\n and it exports ok. Look into fixing this in the future. 
 Could be related to [[https://github.com/jgm/pandoc/issues/3477][this issue]] on github
+
  #+BEGIN_SRC emacs-lisp 
           ;; from https://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
           ;; and this video https://www.youtube.com/watch?v=lsYdK0C2RvQ
@@ -543,7 +548,9 @@ Could be related to [[https://github.com/jgm/pandoc/issues/3477][this issue]] on
           ;;    '("xelatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "xelatex -interaction nonstopmode -output-directory %o %f" "xelatex -interaction nonstopmode -output-directory %o %f")) ;; turned biber to bibtex
  #+END_SRC
 *** org ref
+
 For setting up references, I use org-ref combined with pandoc export. slight changes, which are reflected in my shortcut header setup and pandoc options can be changed using #+PANDOC_OPTIONS as described [[https://github.com/kawabata/ox-pandoc][here]]. Note that I cloned [[https://github.com/citation-style-language/styles][the styles]] repository from github and it is located in ~/.emacs.d/styles/
+
 #+BEGIN_SRC emacs-lisp 
   ;; reftex
    (use-package reftex
@@ -571,11 +578,13 @@ For setting up references, I use org-ref combined with pandoc export. slight cha
 
 ** org babel
 *** basics
+
 Upon re-installing emacs, I was having problems with a lot of my files. I was getting the Invalid function: org-babel-header-args-safe-fn error and after some experimentation, it turns out it was due to only one language: R. 
 After stumbling around for some time, I discovered this [[http://irreal.org/blog/?p=4295][blog]] had the answer. You need to re-byte compile ob-R.el. to do this, M-x RET byte-compile-file <path to file>
 In my case, the path is:
 ~/.emacs.d/elpa/org-plus-contrib-20170515/ob-R.el
 No idea why that took me so long to find. 
+
 #+BEGIN_SRC emacs-lisp
   ;; Edit source in current window. 
 
@@ -619,13 +628,12 @@ No idea why that took me so long to find.
 
 #+END_SRC
 
-#+RESULTS:
-: t
 *** clojure setup
 
 Unfortunately, values are returning in the repel following C-x\C-e and not in the document. But I can tangle these files if I want .clj files in the future and this is how I will take notes. 
 Setup is that I have to M-x cider-jack-in
 Then evaluate with C-x C-e
+
 #+BEGIN_SRC emacs-lisp 
   (use-package cider)
   (setq org-babel-clojure-backend 'cider)
@@ -641,7 +649,9 @@ Then evaluate with C-x C-e
 #+END_SRC
 
 ** org reveal
+
 This is how I will be giving presentations from now on. see [[https://github.com/yjwen/org-reveal][instructions]] on the site. 
+
 #+BEGIN_SRC emacs-lisp 
   (use-package ox-reveal
     :ensure t)
@@ -651,6 +661,7 @@ This is how I will be giving presentations from now on. see [[https://github.com
 #+END_SRC
 
 ** org website
+
 for exporting to a certain directory (i.e. for your website, see "Exporting org files" from the [[http://orgmode.org/worg/org-hacks.html][worg blog]] 
 Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html][org publish]] tutorial
 
@@ -737,7 +748,9 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
 #+END_SRC
 
 * python mode
+
 emacs ipython and python mode. 
+
 #+BEGIN_SRC emacs-lisp 
      ;; regular python stuff
      (use-package python-mode
@@ -838,6 +851,7 @@ this is interesting, not sure what [[http://kitchingroup.cheme.cmu.edu/blog/2015
 #+END_SRC
 
 recommended by http://www.jeshamrick.com/2012/09/18/emacs-as-a-python-ide/
+
 #+BEGIN_SRC emacs-lisp 
 
   ; use IPython
@@ -857,6 +871,7 @@ recommended by http://www.jeshamrick.com/2012/09/18/emacs-as-a-python-ide/
   ;; (setq py-smart-indentation t)
 
 #+END_SRC
+
 Below is a fix for a weird error I was getting when I ran ipython. Explained [[https://emacs.stackexchange.com/questions/30082/your-python-shell-interpreter-doesn-t-seem-to-support-readline][here]]
 
 #+BEGIN_SRC emacs-lisp 
@@ -921,7 +936,8 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
 
 #+END_SRC
 
-* html_nick.el
+* html
+
 #+BEGIN_SRC emacs-lisp 
 ;; setup file for html mode. 
 ;; added 2017-4-02
@@ -941,6 +957,8 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
 #+END_SRC
 
 * platformIO
+
+For arduino
 
 #+BEGIN_SRC emacs-lisp 
   (use-package irony-eldoc)
@@ -968,8 +986,6 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
               (irony-cdb-autosetup-compile-options)))
 
 #+END_SRC
-
-#+RESULTS:
 
 
 * javascript
@@ -1001,7 +1017,9 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
 #+END_SRC
 
 * Magit for git
+
 again need to explore more
+
 #+BEGIN_SRC emacs-lisp 
 (use-package magit
   :ensure t
@@ -1037,6 +1055,7 @@ https://github.com/porterjamesj/virtualenvwrapper.el
          (propertize (eshell/pwd)'face '(:foreground "blue")) " - " venv-current-name " $ ")))
 #+END_SRC
 ** exec from shell
+
 #+BEGIN_SRC emacs-lisp
 (use-package exec-path-from-shell
   :if (memq window-system '(mac ns))
@@ -1047,6 +1066,7 @@ https://github.com/porterjamesj/virtualenvwrapper.el
 
 * Clojure mode
 ** basic setup
+
 Shell scripts to setup basics
 
 #+BEGIN_SRC bash :results verbatim 
@@ -1121,6 +1141,8 @@ org babel clojure is not working. I have a hacky fix from [[http://fgiasson.com/
 #+END_SRC
 ** cider
 
+Old. I already set up cider above. 
+
 #+BEGIN_SRC emacs-lisp 
   ;;;;
   ;; ;; Cider
@@ -1153,6 +1175,7 @@ org babel clojure is not working. I have a hacky fix from [[http://fgiasson.com/
 * spelling
 
 shell script for installing ispell dictionary with homebrew:
+
 #+BEGIN_SRC bash :results verbatim 
 brew install aspell
 #+END_SRC
@@ -1164,6 +1187,7 @@ brew install aspell
 ;; todo mode hooks. 
 (add-hook 'org-mode-hook 'flyspell-mode)
 #+END_SRC
+
 autoabrev is awesome this list is copied from their website [[https://www.emacswiki.org/emacs/autocorrection_abbrev_defs][here]]
 mode is explained [[https://www.emacswiki.org/emacs/AbbrevMode][here]]
 
@@ -1175,13 +1199,12 @@ mode is explained [[https://www.emacswiki.org/emacs/AbbrevMode][here]]
     (setq default-abbrev-mode t)
 #+END_SRC
 
-#+RESULTS:
-: t
-
 
 * TODO Ace
+
 AWESOME! check [[http://emacsrocks.com/e10.html][this]] out
 ** Ace jump
+
 #+BEGIN_SRC emacs-lisp 
 
   ;; (use-package ace-jump-mode
@@ -1192,6 +1215,7 @@ AWESOME! check [[http://emacsrocks.com/e10.html][this]] out
 
 #+END_SRC
 ** Ace window
+
 #+BEGIN_SRC emacs-lisp 
   ;; (use-package ace-window
   ;;   :ensure t
