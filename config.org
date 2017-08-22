@@ -1,4 +1,3 @@
-#+TITLE: Nick's org-mode config file.
 
 * Nick's Emacs config
 
