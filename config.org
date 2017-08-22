@@ -1131,7 +1131,7 @@ org babel clojure is not working. I have a hacky fix from [[http://fgiasson.com/
   ;;   ;; enable paredit in your REPL
      (add-hook 'cider-repl-mode-hook 'paredit-mode)
 #+END_SRC
-* spelling
+* COMMENT spelling
 
 shell script for installing ispell dictionary with homebrew:
 #+BEGIN_SRC bash :results verbatim 
@@ -1149,10 +1149,17 @@ autoabrev is awesome this list is copied from their website [[https://www.emacsw
 mode is explained [[https://www.emacswiki.org/emacs/AbbrevMode][here]]
 
 #+BEGIN_SRC emacs-lisp 
-(setq abbrev-file-name             ;; tell emacs where to read abbrev
-        "~/.emacs.d/abbrev_defs")    ;; definitions from...
-(setq save-abbrevs t)
+    (setq abbrev-file-name             ;; tell emacs where to read abbrev
+            "~/.emacs.d/abbrev_defs")    ;; definitions from...
+
+    (setq save-abbrevs t)
+    (setq default-abbrev-mode t)
 #+END_SRC
+
+#+RESULTS:
+: t
+
+
 * TODO Ace
 AWESOME! check [[http://emacsrocks.com/e10.html][this]] out
 ** Ace jump
