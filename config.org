@@ -453,6 +453,7 @@ sudo tlmgr install fvextra
 sudo tlmgr install ifplatform
 sudo tlmgr install xstring
 sudo tlmgr install framed
+sudo tlmgr install dvipng # for anki flash card LaTeX rendering
 #+END_SRC
 
 *** setup
@@ -462,7 +463,6 @@ Because I use pandoc for export, I often have to pass certain command line optio
 
  #+BEGIN_SRC emacs-lisp 
    ;; redundancies with org here...
-     (require 'ox-latex)
      (require 'ox-beamer)
          (use-package auctex-latexmk
            :ensure t
@@ -516,8 +516,6 @@ Could be related to [[https://github.com/jgm/pandoc/issues/3477][this issue]] on
           ;; from https://stackoverflow.com/questions/21005885/export-org-mode-code-block-and-result-with-different-styles
           ;; and this video https://www.youtube.com/watch?v=lsYdK0C2RvQ
       (add-to-list 'exec-path "/usr/local/bin") ;; add pandoc to search path
-      (use-package ox-latex)
-
       (unless (boundp 'org-latex-classes)
         (setq org-latex-classes nil))
       (add-to-list 'org-latex-classes
@@ -598,14 +596,13 @@ No idea why that took me so long to find.
   (org-babel-do-load-languages
            'org-babel-load-languages
            '((python . t) 
-             (ipython . t) 
              (clojure . t)
              (R . t) 
              (sh . t)
              (C . t)
              (sqlite . t)
              (latex . t)
-             (shell . t)
+             (bash . t)
              (octave . t)
              (matlab . t)
              (org . t)
@@ -771,10 +768,10 @@ emacs ipython and python mode.
   (elpy-enable)
 
   ;; for org mode
-  (use-package ob-ipython
-       :ensure t
-       :init
-       (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
+  ;; (use-package ob-ipython
+  ;;      :ensure t
+  ;;      :init
+  ;;      (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
 
   ;; code completion with jedi
     (add-hook 'python-mode-hook 'jedi:setup)
@@ -1039,20 +1036,42 @@ and
 https://github.com/porterjamesj/virtualenvwrapper.el
 
 #+BEGIN_SRC emacs-lisp 
-  ;; Sets up exec-path-from shell
-  ;; https://github.com/purcell/exec-path-from-shell
-  (use-package exec-path-from-shell)
-  (when (memq window-system '(mac ns))
-    (exec-path-from-shell-initialize)
-    (exec-path-from-shell-copy-envs
-     '("PATH")))
+    ;; Sets up exec-path-from shell
+    ;; https://github.com/purcell/exec-path-from-shell
+    (use-package exec-path-from-shell)
+    (when (memq window-system '(mac ns))
+      (exec-path-from-shell-initialize)
+      (exec-path-from-shell-copy-envs
+       '("PATH")))
 
-  ;; for venv and customizations
+    ;; for venv and customizations
+  ;; think about this https://www.emacswiki.org/emacs/EshellPrompt
+    (setq eshell-prompt-function
+        (lambda ()
+          (concat
+           (propertize (eshell/pwd)'face '(:foreground "blue")) " - " venv-current-name " $ ")))
+  ;; try this one https://www.emacswiki.org/emacs/EshellPrompt
 
-  (setq eshell-prompt-function
-      (lambda ()
-        (concat
-         (propertize (eshell/pwd)'face '(:foreground "blue")) " - " venv-current-name " $ ")))
+  ;; (defun shortened-path (path max-len)
+  ;;       "Return a modified version of `path', replacing some components
+  ;;       with single characters starting from the left to try and get
+  ;;       the path down to `max-len'"
+  ;;       (let* ((components (split-string (abbreviate-file-name path) "/"))
+  ;;              (len (+ (1- (length components))
+  ;;                      (reduce '+ components :key 'length)))
+  ;;              (str ""))
+  ;;         (while (and (> len max-len)
+  ;;                     (cdr components))
+  ;;           (setq str (concat str (if (= 0 (length (car components)))
+  ;;                                     "/"
+  ;;                                   (string (elt (car components) 0) ?/)))
+  ;;                 len (- len (1- (length (car components))))
+  ;;                 components (cdr components)))
+  ;;         (concat str (reduce (lambda (a b) (concat a "/" b)) components))))
+
+  ;;     (defun rjs-eshell-prompt-function ()
+  ;;       (concat (shortened-path (eshell/pwd) 40)
+  ;;               (if (= (user-uid) 0) " # " " $ ")))
 #+END_SRC
 ** exec from shell
 
