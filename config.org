@@ -98,7 +98,11 @@ Thank [[Daniel][Daniel!]]
   (global-set-key (kbd "C-c t") 'switch-theme)
 #+END_SRC 
 
-
+* Copy paste linux
+#+BEGIN_SRC emacs-lisp 
+  ;; (setq x-select-enable-clipboard t)
+  ;; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+#+END_SRC
 * open with
 
 open some programs with the system default
@@ -363,6 +367,172 @@ from my old navigation file
   (setq create-lockfiles nil) ;; see this https://github.com/syl20bnr/spacemacs/issues/5554
 #+END_SRC
 
+* python mode
+
+emacs ipython and python mode. 
+
+#+BEGIN_SRC emacs-lisp 
+     ;; regular python stuff
+     (use-package python-mode
+       :defer t
+       :ensure t)
+
+  ;; ipython notebooks
+     ;; (use-package ein
+     ;;   :ensure t
+     ;;   :defer t)
+  ;; ob-ipython
+  (use-package ob-ipython)
+
+  ;; python environment
+  (use-package elpy
+    :ensure t
+    :init
+    (add-hook 'python-mode-hook 'elpy-mode)
+    )
+  (elpy-enable)
+
+  ;; for org mode
+  ;; (use-package ob-ipython
+  ;;      :ensure t
+  ;;      :init
+  ;;      (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
+
+  ;; code completion with jedi
+    (add-hook 'python-mode-hook 'jedi:setup)
+    (setq jedi:complete-on-dot t)
+
+   ;; syntax check
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+
+#+END_SRC
+
+
+
+#+BEGIN_SRC emacs-lisp 
+
+  (use-package virtualenvwrapper
+    :ensure t
+    :init
+    (venv-initialize-eshell)
+    (venv-initialize-interactive-shells))
+
+  ;; show venv in icon when active
+  (venv-initialize-eshell)
+  (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+#+END_SRC
+
+
+interpreter. Try to [[https://github.com/jonathanslenders/ptpython][ptpython]] soon? 
+using some [[https://github.com/gregsexton/ob-ipython][ob-ipython]] setup stuff
+
+#+BEGIN_SRC emacs-lisp 
+  ;;    (add-hook 'python-mode-hook 'electric-indent-mode)
+      (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+      (add-hook 'python-mode-hook 'electric-pair-mode)
+      ;; (add-hook 'python-mode-hook 'jedi:setup)
+      ;; (add-hook 'python-mode-hook 'jedi:install-server)
+      ;; (setq python-shell-interpreter "ipython"
+      ;; python-shell-interpreter-args "--simple-prompt -i")
+  (setq python-shell-interpreter "/usr/local/bin/python3")
+    (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+#+END_SRC
+
+This was created by John Kitchin, super helpful for removing the extra '>>>' prompts in python session results.
+link is [[http://kitchingroup.cheme.cmu.edu/blog/2015/03/12/Making-org-mode-Python-sessions-look-better/][here]]
+this is interesting, not sure what [[http://kitchingroup.cheme.cmu.edu/blog/2015/03/11/Updating-Multiple-RESULTS-blocks-in-org-mode/][this does]] but it says update all results after running a named block?
+#+BEGIN_SRC emacs-lisp 
+  (defun org-babel-python-strip-session-chars ()
+    "Remove >>> and ... from a Python session output."
+    (when (and (string=
+                "python"
+                (org-element-property :language (org-element-at-point)))
+               (string-match
+                ":session"
+                (org-element-property :parameters (org-element-at-point))))
+
+      (save-excursion
+        (when (org-babel-where-is-src-block-result)
+          (goto-char (org-babel-where-is-src-block-result))
+          (end-of-line 1)
+          ;(while (looking-at "[\n\r\t\f ]") (forward-char 1))
+          (while (re-search-forward
+                  "\\(>>> \\|\\.\\.\\. \\|: $\\|: >>>$\\)"
+                  (org-element-property :end (org-element-at-point))
+                  t)
+            (replace-match "")
+            ;; this enables us to get rid of blank lines and blank : >>>
+            (beginning-of-line)
+            (when (looking-at "^$")
+              (kill-line)))))))
+
+  (add-hook 'org-babel-after-execute-hook 'org-babel-python-strip-session-chars)
+
+#+END_SRC
+
+recommended by http://www.jeshamrick.com/2012/09/18/emacs-as-a-python-ide/
+
+#+BEGIN_SRC emacs-lisp 
+
+  ; use IPython
+  ;; (setq-default py-shell-name "ipython")
+  ;; (setq-default py-which-bufname "IPython")
+  ; use the wx backend, for both mayavi and matplotlib
+  (setq py-python-command-args
+    '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
+  ;; (setq py-force-py-shell-name-p t)
+
+  ;; ; switch to the interpreter after executing code
+  ;; (setq py-shell-switch-buffers-on-execute-p t)
+  ;; (setq py-switch-buffers-on-execute-p t)
+  ;; ; don't split windows
+  ;; (setq py-split-windows-on-execute-p nil)
+  ;; ; try to automagically figure out indentation
+  ;; (setq py-smart-indentation t)
+
+#+END_SRC
+
+Below is a fix for a weird error I was getting when I ran ipython. Explained [[https://emacs.stackexchange.com/questions/30082/your-python-shell-interpreter-doesn-t-seem-to-support-readline][here]]
+
+#+BEGIN_SRC emacs-lisp 
+
+  (with-eval-after-load 'python
+    (defun python-shell-completion-native-try ()
+      "Return non-nil if can trigger native completion."
+      (let ((python-shell-completion-native-enable t)
+            (python-shell-completion-native-output-timeout
+             python-shell-completion-native-try-output-timeout))
+        (python-shell-completion-native-get-completions
+         (get-buffer-process (current-buffer))
+         nil "_"))))
+
+#+END_SRC
+
+Format py files on saving. http://docs.astropy.org/en/stable/development/codeguide_emacs.html
+#+BEGIN_SRC emacs-lisp 
+;; Remove trailing whitespace manually by typing C-t C-w.
+(add-hook 'python-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-t C-w")
+                           'delete-trailing-whitespace)))
+
+;; Automatically remove trailing whitespace when file is saved.
+(add-hook 'python-mode-hook
+      (lambda()
+        (add-hook 'local-write-file-hooks
+              '(lambda()
+                 (save-excursion
+                   (delete-trailing-whitespace))))))
+
+;; Use M-SPC (use ALT key) to make sure that words are separated by
+;; just one space. Use C-x C-o to collapse a set of empty lines
+;; around the cursor to one empty line. Useful for deleting all but
+;; one blank line at end of file. To do this go to end of file (M->)
+;; and type C-x C-o.
+#+END_SRC
+
 * Org mode
 
 Cool! [[https://github.com/xgarrido/emacs-starter-kit/blob/master/starter-kit-org.org][starter guide]]
@@ -596,13 +766,14 @@ No idea why that took me so long to find.
   (org-babel-do-load-languages
            'org-babel-load-languages
            '((python . t) 
+             (ipython . t) ;; ob-ipython
              (clojure . t)
              (R . t) 
              (sh . t)
              (C . t)
              (sqlite . t)
              (latex . t)
-             (bash . t)
+             (shell . t)
              (octave . t)
              (matlab . t)
              (org . t)
@@ -742,170 +913,6 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
 
   (yas-global-mode t)
   (setq yas-trigger-key "<tab>")
-#+END_SRC
-
-* python mode
-
-emacs ipython and python mode. 
-
-#+BEGIN_SRC emacs-lisp 
-     ;; regular python stuff
-     (use-package python-mode
-       :defer t
-       :ensure t)
-
-  ;; ipython notebooks
-     (use-package ein
-       :ensure t
-       :defer t)
-
-  ;; python environment
-  (use-package elpy
-    :ensure t
-    :init
-    (add-hook 'python-mode-hook 'elpy-mode)
-    )
-  (elpy-enable)
-
-  ;; for org mode
-  ;; (use-package ob-ipython
-  ;;      :ensure t
-  ;;      :init
-  ;;      (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
-
-  ;; code completion with jedi
-    (add-hook 'python-mode-hook 'jedi:setup)
-    (setq jedi:complete-on-dot t)
-
-   ;; syntax check
-  (use-package flycheck
-    :ensure t
-    :init (global-flycheck-mode))
-
-#+END_SRC
-
-
-
-#+BEGIN_SRC emacs-lisp 
-
-  (use-package virtualenvwrapper
-    :ensure t
-    :init
-    (venv-initialize-eshell)
-    (venv-initialize-interactive-shells))
-
-  ;; show venv in icon when active
-  (venv-initialize-eshell)
-  (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
-#+END_SRC
-
-
-interpreter. Try to [[https://github.com/jonathanslenders/ptpython][ptpython]] soon? 
-using some [[https://github.com/gregsexton/ob-ipython][ob-ipython]] setup stuff
-
-#+BEGIN_SRC emacs-lisp 
-;;    (add-hook 'python-mode-hook 'electric-indent-mode)
-    (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
-    (add-hook 'python-mode-hook 'electric-pair-mode)
-    ;; (add-hook 'python-mode-hook 'jedi:setup)
-    ;; (add-hook 'python-mode-hook 'jedi:install-server)
-    (setq python-shell-interpreter "ipython"
-    python-shell-interpreter-args "--simple-prompt -i")
-
-  (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
-#+END_SRC
-
-This was created by John Kitchin, super helpful for removing the extra '>>>' prompts in python session results.
-link is [[http://kitchingroup.cheme.cmu.edu/blog/2015/03/12/Making-org-mode-Python-sessions-look-better/][here]]
-this is interesting, not sure what [[http://kitchingroup.cheme.cmu.edu/blog/2015/03/11/Updating-Multiple-RESULTS-blocks-in-org-mode/][this does]] but it says update all results after running a named block?
-#+BEGIN_SRC emacs-lisp 
-  (defun org-babel-python-strip-session-chars ()
-    "Remove >>> and ... from a Python session output."
-    (when (and (string=
-                "python"
-                (org-element-property :language (org-element-at-point)))
-               (string-match
-                ":session"
-                (org-element-property :parameters (org-element-at-point))))
-
-      (save-excursion
-        (when (org-babel-where-is-src-block-result)
-          (goto-char (org-babel-where-is-src-block-result))
-          (end-of-line 1)
-          ;(while (looking-at "[\n\r\t\f ]") (forward-char 1))
-          (while (re-search-forward
-                  "\\(>>> \\|\\.\\.\\. \\|: $\\|: >>>$\\)"
-                  (org-element-property :end (org-element-at-point))
-                  t)
-            (replace-match "")
-            ;; this enables us to get rid of blank lines and blank : >>>
-            (beginning-of-line)
-            (when (looking-at "^$")
-              (kill-line)))))))
-
-  (add-hook 'org-babel-after-execute-hook 'org-babel-python-strip-session-chars)
-
-#+END_SRC
-
-recommended by http://www.jeshamrick.com/2012/09/18/emacs-as-a-python-ide/
-
-#+BEGIN_SRC emacs-lisp 
-
-  ; use IPython
-  ;; (setq-default py-shell-name "ipython")
-  ;; (setq-default py-which-bufname "IPython")
-  ; use the wx backend, for both mayavi and matplotlib
-  (setq py-python-command-args
-    '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
-  ;; (setq py-force-py-shell-name-p t)
-
-  ;; ; switch to the interpreter after executing code
-  ;; (setq py-shell-switch-buffers-on-execute-p t)
-  ;; (setq py-switch-buffers-on-execute-p t)
-  ;; ; don't split windows
-  ;; (setq py-split-windows-on-execute-p nil)
-  ;; ; try to automagically figure out indentation
-  ;; (setq py-smart-indentation t)
-
-#+END_SRC
-
-Below is a fix for a weird error I was getting when I ran ipython. Explained [[https://emacs.stackexchange.com/questions/30082/your-python-shell-interpreter-doesn-t-seem-to-support-readline][here]]
-
-#+BEGIN_SRC emacs-lisp 
-
-  (with-eval-after-load 'python
-    (defun python-shell-completion-native-try ()
-      "Return non-nil if can trigger native completion."
-      (let ((python-shell-completion-native-enable t)
-            (python-shell-completion-native-output-timeout
-             python-shell-completion-native-try-output-timeout))
-        (python-shell-completion-native-get-completions
-         (get-buffer-process (current-buffer))
-         nil "_"))))
-
-#+END_SRC
-
-Format py files on saving. http://docs.astropy.org/en/stable/development/codeguide_emacs.html
-#+BEGIN_SRC emacs-lisp 
-;; Remove trailing whitespace manually by typing C-t C-w.
-(add-hook 'python-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-t C-w")
-                           'delete-trailing-whitespace)))
-
-;; Automatically remove trailing whitespace when file is saved.
-(add-hook 'python-mode-hook
-      (lambda()
-        (add-hook 'local-write-file-hooks
-              '(lambda()
-                 (save-excursion
-                   (delete-trailing-whitespace))))))
-
-;; Use M-SPC (use ALT key) to make sure that words are separated by
-;; just one space. Use C-x C-o to collapse a set of empty lines
-;; around the cursor to one empty line. Useful for deleting all but
-;; one blank line at end of file. To do this go to end of file (M->)
-;; and type C-x C-o.
 #+END_SRC
 
 

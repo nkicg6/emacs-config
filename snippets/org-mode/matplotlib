@@ -1,7 +1,9 @@
 # -*- mode: snippet -*-
-# name: matplotlib
+# name: plot
 # key: plot
 # --
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+#+BEGIN_SRC python :session ${1:new} :results drawer :exports both
+$0
+print(plt.savefig('img/$2.png'))
+#+END_SRC
+
