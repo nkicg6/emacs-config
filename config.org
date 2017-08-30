@@ -398,11 +398,12 @@ emacs ipython and python mode.
   ;;      :init
   ;;      (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
 
-  ;; code completion with jedi
-    (add-hook 'python-mode-hook 'jedi:setup)
-    (setq jedi:complete-on-dot t)
+  ;; ;; code completion with jedi
+  ;;   (add-hook 'python-mode-hook 'jedi:setup)
+  ;;   (setq jedi:complete-on-dot t)
 
-   ;; syntax check
+  ;; syntax check
+
   (use-package flycheck
     :ensure t
     :init (global-flycheck-mode))
@@ -509,6 +510,7 @@ Below is a fix for a weird error I was getting when I ran ipython. Explained [[h
          nil "_"))))
 
 #+END_SRC
+
 
 Format py files on saving. http://docs.astropy.org/en/stable/development/codeguide_emacs.html
 #+BEGIN_SRC emacs-lisp 
@@ -815,6 +817,17 @@ Then evaluate with C-x C-e
     :ensure t
     :defer t)
 #+END_SRC
+
+** org python
+
+[[http://kitchingroup.cheme.cmu.edu/blog/2016/05/29/Expanding-orgmode-py-to-get-better-org-python-integration/][John Kitchin's great python integration]] requires this
+
+#+BEGIN_SRC emacs-lisp 
+  ;; (setq org-babel-default-header-args:python
+  ;;       (cons '(:results . "output org drawer replace")
+  ;;             (assq-delete-all :results org-babel-default-header-args)))
+#+END_SRC
+
 
 ** org reveal
 

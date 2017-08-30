@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: matplotlib
-# key: plot
-# --
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
