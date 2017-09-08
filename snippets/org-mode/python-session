@@ -3,6 +3,6 @@
 # key: pys
 # --
 #+NAME: $1
-#+BEGIN_SRC python :session ${2:new} :results org drawer
+#+BEGIN_SRC python :session ${2:new} :results output
 $0
 #+END_SRC

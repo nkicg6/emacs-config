@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: paper
+# key: paper
+# --
+#+TITLE: ${1:Paper title}
+#+DATE: 2017-09-07
+#+INTERLEAVE_PDF: ${2:path-to-paper}
+#+OPTIONS: toc:nil author:nil title:nil date:nil num:nil ^:{} \n:1 todo:nil
+
+** $2
+
+* Summary
+$0
+* Methods
+
+* Results
+
+* Remaining questions and summary

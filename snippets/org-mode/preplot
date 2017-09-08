@@ -3,6 +3,7 @@
 # key: preplot
 # --
 #+BEGIN_SRC python :session ${1:new} :results silent
+  # Emacs-plot venv
   import pycse.orgmode
   import os
   import matplotlib

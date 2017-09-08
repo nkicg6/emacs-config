@@ -2,8 +2,8 @@
 # name: plot
 # key: plot
 # --
-#+BEGIN_SRC python :session ${1:new} :results org drawer :exports both
+#+BEGIN_SRC python :session ${1:new} :results output :exports both
 $0
-print(plt.savefig('img/$2.png'))
+plt.savefig('img/$2.png')
 #+END_SRC
 
