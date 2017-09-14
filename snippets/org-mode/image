@@ -6,5 +6,5 @@
 #+CAPTION: $1
 #+NAME: $2
 #+ATTR_HTML: :width 50% :height 50%
-#+ATTR_LATEX: :width 50% :height 50%
+#+ATTR_LATEX: :placement [H] :width 0.5\textwidth
 $0

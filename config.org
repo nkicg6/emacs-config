@@ -1,4 +1,4 @@
-#+TITLE: My org-mode config file*
+#+TITLE: My org-mode config file
 
 
 * Personal info
@@ -278,6 +278,16 @@ Set up custom file thing so it writes to its own file
 
 #+END_SRC
 
+* Don't prompt to quit
+from [[https://stackoverflow.com/questions/2706527/make-emacs-stop-asking-active-processes-exist-kill-them-and-exit-anyway][here]]
+#+BEGIN_SRC emacs-lisp 
+(require 'cl-lib)
+(defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
+  "Prevent annoying \"Active processes exist\" query when you quit Emacs."
+  (cl-letf (((symbol-function #'process-list) (lambda ())))
+    ad-do-it))
+#+END_SRC
+
 * Buffer stuff
 ** navigation.el
 
@@ -453,7 +463,9 @@ using some [[https://github.com/gregsexton/ob-ipython][ob-ipython]] setup stuff
       ;; (setq python-shell-interpreter "ipython"
       ;; python-shell-interpreter-args "--simple-prompt -i")
   (setq python-shell-interpreter "/usr/local/bin/python3")
-    (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+  ;; Decided this was an annoying behavior... 
+  ;; (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+
 #+END_SRC
 
 This was created by John Kitchin, super helpful for removing the extra '>>>' prompts in python session results.
@@ -591,14 +603,14 @@ Cool! [[https://github.com/xgarrido/emacs-starter-kit/blob/master/starter-kit-or
 Export all compiled docs to subfolder. From [[https://emacs.stackexchange.com/questions/3985/make-org-mode-export-to-beamer-keep-temporary-files-out-of-the-current-directory/7989#7989][Emacs stack exchange]]
 
 #+BEGIN_SRC emacs-lisp 
-  (defvar org-export-output-directory-prefix "compiled_" "prefix of directory used for org-mode export")
+  ;; (defvar org-export-output-directory-prefix "compiled_" "prefix of directory used for org-mode export")
 
-  (defadvice org-export-output-file-name (before org-add-export-dir activate)
-    "Modifies org-export to place exported files in a different directory"
-    (when (not pub-dir)
-        (setq pub-dir (concat org-export-output-directory-prefix (substring extension 1)))
-        (when (not (file-directory-p pub-dir))
-         (make-directory pub-dir))))
+  ;; (defadvice org-export-output-file-name (before org-add-export-dir activate)
+  ;;   "Modifies org-export to place exported files in a different directory"
+  ;;   (when (not pub-dir)
+  ;;       (setq pub-dir (concat org-export-output-directory-prefix (substring extension 1)))
+  ;;       (when (not (file-directory-p pub-dir))
+  ;;        (make-directory pub-dir))))
 #+END_SRC
 
 
@@ -728,24 +740,21 @@ Could be related to [[https://github.com/jgm/pandoc/issues/3477][this issue]] on
                      ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 
 
-      ;; minted for source code minting
-      (add-to-list 'org-latex-packages-alist '("" "minted"))
-      (setq org-latex-listings 'minted)
-   ;; breaklines from https://emacs.stackexchange.com/questions/33010/how-to-word-wrap-within-code-blocks
+   ;; ;; breaklines from https://emacs.stackexchange.com/questions/33010/how-to-word-wrap-within-code-blocks
+
+   (setq org-latex-listings 'minted
+         org-latex-packages-alist '(("" "minted"))
+         org-latex-pdf-process
+         '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+           "bibtex %b"
+           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+           "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+
    (setq org-latex-minted-options '(("breaklines" "true")
                                     ("breakanywhere" "true")))
 
-   (setq org-latex-pdf-process
-         '("pdflatex -interaction nonstopmode -output-directory %o %f"
-           "bibtex %b"
-           "pdflatex -interaction nonstopmode -output-directory %o %f"
-           "pdflatex -interaction nonstopmode -output-directory %o %f"))
-      ;; (use-package ox-pandoc)
-
       ;; ;; from research toolkit https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org
       ;; ;; and https://github.com/vikasrawal/orgpaper/blob/master/orgpapers.org
-          ;; (setq org-latex-pdf-process
-          ;;    '("xelatex -interaction nonstopmode -output-directory %o %f" "bibtex %b" "xelatex -interaction nonstopmode -output-directory %o %f" "xelatex -interaction nonstopmode -output-directory %o %f")) ;; turned biber to bibtex
  #+END_SRC
 *** org ref
 
@@ -813,7 +822,9 @@ No idea why that took me so long to find.
              (dot .t)))
 
   ;; dont evaluate on export
-  (setq org-export-babel-evaluate nil)
+  ;; this causes it to ignore header args and export anyways, so cancel it. 
+  ;; see this https://www.miskatonic.org/2016/10/03/orgexportbabelevaluate/
+  ;;(setq org-export-babel-evaluate nil)
     ;; dont confirm execute with these languages. 
          (defun my-org-confirm-babel-evaluate (lang body)
            (not (member lang '("octave" "sh" "python" "R" "emacs-lisp" "clojure" "shell" "ipython" "bash"))))
