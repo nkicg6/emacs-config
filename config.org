@@ -1045,7 +1045,14 @@ For arduino
 
 #+END_SRC
 
+* Emacs speaks statistics
 
+#+BEGIN_SRC emacs-lisp 
+(use-package ess-site) 
+(use-package ess
+  :ensure t
+  :init (require 'ess-site))
+#+END_SRC
 * javascript
 
 #+BEGIN_SRC emacs-lisp 
