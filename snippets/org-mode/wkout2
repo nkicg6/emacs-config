@@ -1,0 +1,46 @@
+# -*- mode: snippet -*-
+# name: wkout2
+# key: wkout2
+# --
+
+**** Stats
+- Weight: $1
+- Supplement?: ${2:protein+creatine scoops?}
+- Time Start:<${3:00:00}>
+- Workout time: <${4:00:00}>
+*Tabata*
+- stairs: ${5:reps-time}
+**** Workout
+***** Incline bench press
+****** Warmup
+:Restrictions:
+wt >=65
+:End:
+- ${6:reps} X ${7:weight}
+- ${8:reps} X ${9:weight}
+****** Work
+:Restrictions:
+wt >=105
+Go for 50 in as few sets as possible
+:End:
+
+- ${10:enter sets}
+-- ${11: enter total reps}
+***** Squat
+****** warmup
+- ${12:10} X ${13:95}
+- ${14:20} X ${15:wt}
+
+***** Chin up
+:PROPERTIES:
+go for 50 in as few sets as possible
+:END:
+
+- ${16:enter sets}
+
+***** Dips
+- ${17:10}
+- ${18:10}
+- ${19:10}
+- ${20:10}
+***** Notes $0

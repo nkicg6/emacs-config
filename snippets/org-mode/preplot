@@ -2,14 +2,21 @@
 # name: preplot
 # key: preplot
 # --
-#+BEGIN_SRC python :session ${1:new} :results silent
-  # Emacs-plot venv
-  import pycse.orgmode
-  import os
-  import matplotlib
-  matplotlib.use('Agg')
-  import matplotlib.pyplot as plt
-  from imagetools import imageinfo
-  if not 'img' in os.listdir("."):
-      os.mkdir('img')
-#+END_SRC $0
+#+NAME: fig:${1:}
+#+BEGIN_SRC python :results file :exports results
+# Emacs-plot venv
+import os
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from matplotlib_scalebar.scalebar import ScaleBar
+from imagetools import imageinfo
+
+if not 'img' in os.listdir("."):
+    os.mkdir('img')
+
+$0
+
+plt.savefig('img/${2:image name}.png', bbox_inches='tight', dpi=300)
+return 'img/$2.png'
+#+END_SRC

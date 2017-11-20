@@ -39,7 +39,7 @@
       :empty-lines-after 1)
      ("n" "lab notebook")
      ("no" "odor training" entry
-      (file+datetree "~/Dropbox/lab_notebook/lab_notebook.org")
+      (file+datetree "~/Dropbox/lab_notebook/notebook/lab_notebook.org")
       (file "~/.emacs.d/templates/training_notebook.orgtmpl")
       :empty-lines-after 1)
      ("q" "quick note" entry
@@ -48,10 +48,15 @@
       :empty-lines-after 1)
      ("w" "workout" entry
       (file+datetree "~/Dropbox/orgs/workout.org")
-      (file "~/.emacs.d/templates/workout.orgtmpl")))))
+      (file "~/.emacs.d/templates/workout.orgtmpl"))
+     ("n" "notebook")
+     ("ng" "General lab notebook entry" entry
+      (file+datetree "~/Dropbox/lab_notebook/notebook/lab_notebook.org")
+      (file "~/.emacs.d/templates/general-lab.orgtmpl")
+      :jump-to-captured t :empty-lines-after 1))))
  '(package-selected-packages
    (quote
-    (ess-site ess leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode))))
+    (leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

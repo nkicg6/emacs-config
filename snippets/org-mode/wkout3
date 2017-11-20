@@ -1,0 +1,52 @@
+# -*- mode: snippet -*-
+# name: wkout3
+# key: wkout3
+# --
+
+**** Stats
+- Weight: $1
+- Supplement?: ${2:protein+creatine scoops?}
+- Time Start:<${3:00:00}>
+- Workout time: <${4:00:00}>
+*Tabata*
+- stairs: ${5:reps-time}
+**** Workout
+***** Deadlift
+****** Warmup
+:Restrictions:
+wt >=95
+:End:
+- ${6:10} X ${7:95}
+- ${8:10} X ${9:135}
+****** Work
+:Restrictions:
+wt >=185
+:End:
+- ${10:8} X ${11:weight}
+- ${12:8} X ${13:weight}
+- ${14:8} X ${15:weight}
+***** Squat
+****** warmup
+- ${16:10} X ${17:95}
+- ${18:20} X ${19:wt}
+
+***** Lat pull down
+:PROPERTIES:
+wt >= 60
+:END:
+- ${20:20} X ${21:weight}
+- ${22:20} X ${23:weight}
+- ${24:20} X ${25:weight}
+***** Dumbell curl
+:PROPERTIES:
+wt >=30
+:END:
+- ${26:8} X ${27:weight}
+- ${28:8} X ${29:weight}
+- ${30:8} X ${31:weight}
+
+***** Reverse crunch
+- ${32:20} X ${33:25}
+- ${34:20} X ${35:25}
+
+***** Notes $0

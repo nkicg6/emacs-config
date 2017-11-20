@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: split
+# key: split
+# --
+#+REVEAL: split
+$0

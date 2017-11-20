@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: r
+# key: r
+# --
+#+BEGIN_SRC R :session ${1:rsesh} :results output :exports results
+$0
+#+END_SRC

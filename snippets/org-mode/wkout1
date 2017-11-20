@@ -1,0 +1,46 @@
+# -*- mode: snippet -*-
+# name: wkout1
+# key: wkout1
+# --
+
+**** Stats
+- Weight: $1
+- Supplement?: ${2:protein+creatine scoops?}
+- Time Start:<${3:00:00}>
+- Workout time: <${4:00:00}>
+*Tabata*
+- stairs: ${5:reps-time}
+**** Workout
+***** Bench press
+****** Warmup
+:Restrictions:
+wt >=95
+:End:
+- ${6:reps} X ${7:weight}
+- ${8:reps} X ${9:weight}
+****** Work
+:Restrictions:
+wt >=185
+:End:
+- ${10:8} X ${11:weight}
+- ${12:8} X ${13:weight}
+- ${14:8} X ${15:weight}
+***** Squat
+****** warmup
+- ${16:10} X ${17:95}
+- ${18:20} X ${19:wt}
+
+***** Chest supported row
+:PROPERTIES:
+wt >= 40
+:END:
+- ${20:8} X ${21:weight}
+- ${22:8} X ${23:weight}
+- ${24:8} X ${25:weight}
+***** Bar curl
+- ${26:8} X ${27:weight}
+- ${28:8} X ${29:weight}
+- ${30:8} X ${31:weight}
+
+***** Notes
+$0
