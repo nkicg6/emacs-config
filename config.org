@@ -164,7 +164,8 @@ Set up custom file thing so it writes to its own file
 ;; Turn off the menu bar at the top of each frame because it's distracting
 (menu-bar-mode -1)
 ;; Show line numbers
-(global-linum-mode)
+(use-package nlinum)
+(global-nlinum-mode)
 ;; You can uncomment this to remove the graphical toolbar at the top. After
 ;; awhile, you won't need the toolbar.
 (when (fboundp 'tool-bar-mode)
@@ -442,6 +443,17 @@ emacs ipython and python mode.
 #+END_SRC
 
 
+
+For python repl support
+
+#+BEGIN_SRC emacs-lisp 
+(setq ansi-color-for-comint-mode t)
+
+(setenv "IPY_TEST_SIMPLE_PROMPT" "1")
+(elpy-enable)
+;;(elpy-use-ipython)
+
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp 
 

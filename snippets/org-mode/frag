@@ -2,5 +2,4 @@
 # name: frag
 # key: frag
 # --
-#+ATTR_REVEAL: :frag (appear)
-$0
+#+ATTR_REVEAL: :frag (appear)$0
