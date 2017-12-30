@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: clojure-post
+# key: clojure-post
+# --
+{:title  "$1"
+ :layout :post
+ :date   "${2:YYY-MM-DD}"
+ :tags   ["$3"]}
+
+** $1
+
+$0
