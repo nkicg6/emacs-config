@@ -3,68 +3,45 @@
 # key: shoulders
 # --
 
-**** Stats
-:PROPERTIES:
-- actual workout date: ${39:year-month-day or "today"}
-:END:
-
+**** stats
 - Weight: $1
 - Supplement?: ${2:protein+creatine scoops?}
 - Time Start:<${3:00:00}>
 - Workout time: <${4:00:00}>
-**** Warmup
-*Tabata*
-- Style: ${5:$$(yas-choose-value '("sprints" "bike" "row"))}
-  - 4 minute workout
-  - 20 seconds all out/ 10 second rest by 8
+**** *Warmup*
+- row: ${5:2000m}, ${6:time} ,@ ${7:7} setting
+
 **** Workout
-***** Shoulder press
-****** Warmup
+***** standing military press
 :Restrictions:
-reps >=10
-wt >=65
+wt >= 95
+3 sets of 10
 :End:
-- ${6:reps} X ${7:weight}
-****** Work
+- ${8:10} - ${9:65}
+- ${10:reps X wt}
+***** dumbbell side-lats
 :Restrictions:
-wt >=95
+wt >= FIXME
+25-15-12-8
 :End:
-- ${8:reps} X ${9:weight}
-- ${10:reps} X ${11:weight}
-- ${12:reps} X ${13:weight}
-- ${14:reps} X ${15:weight}
-***** Reverse Body Row
-****** Work
+- ${11:25 X wt}
+- ${12:15 X wt}
+- ${13:12 X wt}
+- ${14:8 X wt}
+***** dumbbell front raises
 :Restrictions:
-reps >=12
+wt >= FIXME
+3 sets of 10
 :End:
-- ${16:reps}
+- ${15:reps X wt}
+***** rear laterals (lying on incline bench)
+:Restrictions:
+wt >= 20
+3 sets of 10
+:End:
+- ${16:reps X wt}
+***** rear delt machine
+:Restrictions:
+4 sets of 10
+:End:
 - ${17:reps}
-- ${18:reps}
-- ${19:reps}
-***** Side raise
-****** Work
-:Restrictions:
-wt >=20
-:End:
-- ${20:reps} X ${21:weight}
-- ${22:reps} X ${23:weight}
-- ${24:reps} X ${25:weight}
-- ${26:reps} X ${27:weight}
-***** One arm overhead press
-****** Work
-:Restrictions:
-wt >=35
-:End:
-- ${28:reps} X ${29:weight}
-- ${30:reps} X ${31:weight}
-- ${32:reps} X ${33:weight}
-- ${34:reps} X ${35:weight}
-
-**** Sit ups
-- $36
-- $37
-- $38
-
-**** Notes
-$0

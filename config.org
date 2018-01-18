@@ -108,14 +108,16 @@ Thank [[Daniel][Daniel!]]
 open some programs with the system default
 
 #+BEGIN_SRC emacs-lisp 
-  (use-package openwith
-    :defer t)
-  (require 'openwith)
-  (setq openwith-associations '(("\\.pptx?\\'" "open" (file))
-                                ("\\.docx?\\'" "open" (file))
-                                ("\\.xlsx?\\'" "open" (file))))
-  (openwith-mode t)
+    (use-package openwith
+      :defer t)
+    (require 'openwith)
+    (setq openwith-associations '(("\\.pptx?\\'" "open" (file))
+                                  ("\\.docx?\\'" "open" (file))
+                                  ("\\.xlsx?\\'" "open" (file))
+                                  ("\\.ods?\\'" "open" (file))))
+    (openwith-mode t)
 #+END_SRC
+
 
 * Key bindings and shortcuts
 
@@ -212,6 +214,10 @@ Set up custom file thing so it writes to its own file
 
 ;; no bell
 (setq ring-bell-function 'ignore)
+;; indent AGGRESSIVE
+(use-package aggressive-indent)
+(global-aggressive-indent-mode 1)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode 'org-mode)
 #+END_SRC
 ** editing file
 

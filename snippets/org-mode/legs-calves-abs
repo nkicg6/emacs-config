@@ -1,0 +1,61 @@
+# -*- mode: snippet -*-
+# name: legs-calves-abs
+# key: legs-calves-abs
+# --
+
+**** stats
+- Weight: $1
+- Supplement?: ${2:protein+creatine scoops?}
+- Time Start:<${3:00:00}>
+- Workout time: <${4:00:00}>
+**** *Warmup*
+- row: ${5:2000m}, ${6:time} ,@ ${7:7} setting
+
+**** Workout
+***** leg curl
+:Restrictions:
+wt >= FIXME
+3 sets of 15
+:End:
+- ${8:15} - ${9:50}
+- ${10:reps X wt}
+***** leg extensions
+:Restrictions:
+wt >= FIXME
+3 sets of 15
+:End:
+- ${11:reps X wt}
+***** Kettle swing
+:Restrictions:
+wt >= 44
+3 sets of 12
+:End:
+- ${12:reps X wt}
+***** TRX squat
+:Restrictions:
+7 sets of 12
+:End:
+- ${13:reps X wt}
+
+***** stiff leg deadlifts
+:Restrictions:
+wt >= FIXME
+3 sets of 12
+:End:
+- ${14:reps X wt}
+***** calf raises
+:Restrictions:
+wt >= FIXME
+3 sets of 20
+:End:
+- ${15:reps X wt}
+***** hanging leg raises
+:Restrictions:
+3 sets of 20
+:End:
+- ${16:reps}
+***** crunches
+:Restrictions:
+3 sets of 20
+:End:
+- ${17:reps}

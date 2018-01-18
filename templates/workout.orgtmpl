@@ -1,4 +1,7 @@
-*** %^{workout day (wkout1, wkout2, wkout3, other)?}
-wkout1 %?
-wkout2
-wkout3
+*** %^{workout day (chest-abs, back-abs, shoulders, legs-calves-abs, arms-abs)?}
+chest-abs %?
+back-abs
+shoulders
+legs-calves-abs
+arms-abs
+
