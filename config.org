@@ -874,6 +874,7 @@ Then evaluate with C-x C-e
   (setq org-babel-clojure-backend 'cider)
 
   (org-defkey org-mode-map "\C-c\C-x\C-e" 'cider-eval-last-sexp)
+  (setq cider-repl-display-help-banner nil)
 #+END_SRC
 *** matlab mode
 
