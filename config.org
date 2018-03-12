@@ -410,12 +410,6 @@ emacs ipython and python mode.
        :defer t
        :ensure t)
 
-  ;; ipython notebooks
-     ;; (use-package ein
-     ;;   :ensure t
-     ;;   :defer t)
-  ;; ob-ipython
-  (use-package ob-ipython)
 
   ;; python environment
   (use-package elpy
@@ -424,16 +418,6 @@ emacs ipython and python mode.
     (add-hook 'python-mode-hook 'elpy-mode)
     )
   (elpy-enable)
-
-  ;; for org mode
-  ;; (use-package ob-ipython
-  ;;      :ensure t
-  ;;      :init
-  ;;      (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append))
-
-  ;; ;; code completion with jedi
-  ;;   (add-hook 'python-mode-hook 'jedi:setup)
-  ;;   (setq jedi:complete-on-dot t)
 
   ;; syntax check
 
@@ -455,9 +439,6 @@ For python repl support
 #+BEGIN_SRC emacs-lisp 
 (setq ansi-color-for-comint-mode t)
 
-(setenv "IPY_TEST_SIMPLE_PROMPT" "1")
-(elpy-enable)
-;;(elpy-use-ipython)
 
 #+END_SRC
 
@@ -479,16 +460,8 @@ interpreter. Try to [[https://github.com/jonathanslenders/ptpython][ptpython]] s
 using some [[https://github.com/gregsexton/ob-ipython][ob-ipython]] setup stuff
 
 #+BEGIN_SRC emacs-lisp 
-  ;;    (add-hook 'python-mode-hook 'electric-indent-mode)
       (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
       (add-hook 'python-mode-hook 'electric-pair-mode)
-      ;; (add-hook 'python-mode-hook 'jedi:setup)
-      ;; (add-hook 'python-mode-hook 'jedi:install-server)
-      ;; (setq python-shell-interpreter "ipython"
-      ;; python-shell-interpreter-args "--simple-prompt -i")
-  (setq python-shell-interpreter "/usr/local/bin/python3")
-  ;; Decided this was an annoying behavior... 
-  ;; (add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
 #+END_SRC
 
@@ -529,20 +502,10 @@ recommended by http://www.jeshamrick.com/2012/09/18/emacs-as-a-python-ide/
 #+BEGIN_SRC emacs-lisp 
 
   ; use IPython
-  ;; (setq-default py-shell-name "ipython")
-  ;; (setq-default py-which-bufname "IPython")
+
   ; use the wx backend, for both mayavi and matplotlib
   (setq py-python-command-args
     '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
-  ;; (setq py-force-py-shell-name-p t)
-
-  ;; ; switch to the interpreter after executing code
-  ;; (setq py-shell-switch-buffers-on-execute-p t)
-  ;; (setq py-switch-buffers-on-execute-p t)
-  ;; ; don't split windows
-  ;; (setq py-split-windows-on-execute-p nil)
-  ;; ; try to automagically figure out indentation
-  ;; (setq py-smart-indentation t)
 
 #+END_SRC
 
