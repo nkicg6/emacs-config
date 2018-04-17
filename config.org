@@ -118,7 +118,6 @@ open some programs with the system default
     (openwith-mode t)
 #+END_SRC
 
-
 * Key bindings and shortcuts
 
 #+BEGIN_SRC emacs-lisp 
@@ -957,13 +956,13 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
   (setq yas-trigger-key "<tab>")
 #+END_SRC
 
-
 * elisp
 
 #+BEGIN_SRC emacs-lisp 
   ;; Automatically load paredit when editing a lisp file
   ;; More at http://www.emacswiki.org/emacs/ParEdit
   ;;(use-package paredit)
+  (use-package lispy)
 
   (use-package parinfer
     :ensure t
@@ -984,6 +983,8 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
       (add-hook 'common-lisp-mode-hook #'parinfer-mode)
       (add-hook 'scheme-mode-hook #'parinfer-mode)
       (add-hook 'lisp-mode-hook #'parinfer-mode)))
+
+
 #+END_SRC
 
 * html
@@ -1085,7 +1086,6 @@ again need to explore more
   :config
   (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
 #+END_SRC
-
 
 * shell
 
@@ -1277,7 +1277,6 @@ mode is explained [[https://www.emacswiki.org/emacs/AbbrevMode][here]]
     (setq save-abbrevs t)
     (setq default-abbrev-mode t)
 #+END_SRC
-
 
 * TODO Ace
 
