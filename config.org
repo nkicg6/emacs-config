@@ -436,10 +436,16 @@ emacs ipython and python mode.
 For python repl support
 
 #+BEGIN_SRC emacs-lisp 
+;; for org babel
+(setq org-babel-python-command "python3")
+
 (setq ansi-color-for-comint-mode t)
 
 
 #+END_SRC
+
+#+RESULTS:
+: t
 
 #+BEGIN_SRC emacs-lisp 
 
