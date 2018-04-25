@@ -399,6 +399,21 @@ for kivy apps.
   (setq create-lockfiles nil) ;; see this https://github.com/syl20bnr/spacemacs/issues/5554
 #+END_SRC
 
+* markdown
+
+[[https://jblevins.org/projects/markdown-mode/][markdown mode]]
+
+  #+BEGIN_SRC emacs-lisp 
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+  #+END_SRC
+
+
 * python mode
 
 emacs ipython and python mode. 
