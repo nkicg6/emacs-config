@@ -215,8 +215,9 @@ Set up custom file thing so it writes to its own file
 (setq ring-bell-function 'ignore)
 ;; indent AGGRESSIVE
 (use-package aggressive-indent)
-(global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes '('html-mode 'org-mode 'parinfer-mode 'lisp-mode 'clojure-mode 'emacs-lisp-mode)
+;;(global-aggressive-indent-mode 1)
+(add-to-list 'aggressive-indent-excluded-modes 'clojure-mode)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode 'org-mode)
 #+END_SRC
 ** editing file
 
