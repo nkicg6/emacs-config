@@ -7,6 +7,7 @@
  '(custom-safe-themes
    (quote
     ("d5f17ae86464ef63c46ed4cb322703d91e8ed5e718bf5a7beb69dd63352b26b2" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" default)))
+ '(fci-rule-color "#37474f")
  '(markdown-command "/usr/local/bin/pandoc" t)
  '(org-agenda-files
    (quote
@@ -56,7 +57,29 @@
       :jump-to-captured t :empty-lines-after 1))))
  '(package-selected-packages
    (quote
-    (ess-site markdown-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode))))
+    (leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#f36c60")
+     (40 . "#ff9800")
+     (60 . "#fff59d")
+     (80 . "#8bc34a")
+     (100 . "#81d4fa")
+     (120 . "#4dd0e1")
+     (140 . "#b39ddb")
+     (160 . "#f36c60")
+     (180 . "#ff9800")
+     (200 . "#fff59d")
+     (220 . "#8bc34a")
+     (240 . "#81d4fa")
+     (260 . "#4dd0e1")
+     (280 . "#b39ddb")
+     (300 . "#f36c60")
+     (320 . "#ff9800")
+     (340 . "#fff59d")
+     (360 . "#8bc34a"))))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
