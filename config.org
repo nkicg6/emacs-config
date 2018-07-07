@@ -213,11 +213,7 @@ Set up custom file thing so it writes to its own file
 
 ;; no bell
 (setq ring-bell-function 'ignore)
-;; indent AGGRESSIVE
-(use-package aggressive-indent)
-;;(global-aggressive-indent-mode 1)
-;;(add-to-list 'aggressive-indent-excluded-modes 'clojure-mode)
-(add-to-list 'aggressive-indent-excluded-modes 'html-mode 'org-mode)
+
 #+END_SRC
 ** editing file
 
@@ -978,14 +974,21 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
   (setq yas-trigger-key "<tab>")
 #+END_SRC
 
-* elisp
+* lisp
 
 #+BEGIN_SRC emacs-lisp 
   ;; Automatically load paredit when editing a lisp file
   ;; More at http://www.emacswiki.org/emacs/ParEdit
   (use-package paredit)
   (use-package lispy)
-
+  ;; indent AGGRESSIVE
+  (use-package aggressive-indent)
+  ;;(global-aggressive-indent-mode 1)
+  ;;(add-to-list 'aggressive-indent-excluded-modes 'clojure-mode)
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode 'org-mode)
+  (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+  (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
+  (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
   ;; (use-package parinfer
   ;;   :ensure t
   ;;   :bind
