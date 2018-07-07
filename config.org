@@ -989,6 +989,8 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
   (add-hook 'clojure-mode-hook #'aggressive-indent-mode)
   (add-hook 'lisp-mode-hook #'aggressive-indent-mode)
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+  ;; sadly, I tried parinfer but as a beginner I found it difficult to work with based on 
+  ;; a lot of the reasons summarized ehre https://github.com/noctuid/parinfer-notes
   ;; (use-package parinfer
   ;;   :ensure t
   ;;   :bind
