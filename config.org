@@ -425,6 +425,8 @@ emacs ipython and python mode.
   ;; python environment
   (use-package elpy
     :ensure t
+    :config
+    (setenv "WORKON_HOME" "~/.ve")
     :init
     (add-hook 'python-mode-hook 'elpy-mode)
     )
@@ -472,6 +474,7 @@ For python repl support
   ;; (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
   (use-package pyenv-mode)
   (pyenv-mode)
+  
 
 #+END_SRC
 
