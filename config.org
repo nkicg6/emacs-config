@@ -1140,20 +1140,20 @@ and
 https://github.com/porterjamesj/virtualenvwrapper.el
 
 #+BEGIN_SRC emacs-lisp 
-    ;; Sets up exec-path-from shell
-    ;; https://github.com/purcell/exec-path-from-shell
-    (use-package exec-path-from-shell)
-    (when (memq window-system '(mac ns))
-      (exec-path-from-shell-initialize)
-      (exec-path-from-shell-copy-envs
-       '("PATH")))
+  ;; Sets up exec-path-from shell
+  ;; https://github.com/purcell/exec-path-from-shell
+  (use-package exec-path-from-shell)
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)
+    (exec-path-from-shell-copy-envs
+     '("PATH")))
 
-    ;; for venv and customizations
+  ;; for venv and customizations
   ;; think about this https://www.emacswiki.org/emacs/EshellPrompt
-    (setq eshell-prompt-function
+  (setq eshell-prompt-function
         (lambda ()
           (concat
-           (propertize (eshell/pwd)'face '(:foreground "blue")) " - " venv-current-name " $ ")))
+           (propertize (eshell/pwd)'face '(:foreground "blue")) " - " (pyenv-mode-version) " $ ")))
   ;; try this one https://www.emacswiki.org/emacs/EshellPrompt
 
   ;; (defun shortened-path (path max-len)
