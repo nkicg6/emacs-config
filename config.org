@@ -461,15 +461,18 @@ For python repl support
 
 #+BEGIN_SRC emacs-lisp 
 
-  (use-package virtualenvwrapper
-    :ensure t
-    :init
-    (venv-initialize-eshell)
-    (venv-initialize-interactive-shells))
+  ;; (use-package virtualenvwrapper
+  ;;   :ensure t
+  ;;   :init
+  ;;   (venv-initialize-eshell)
+  ;;   (venv-initialize-interactive-shells))
 
-  ;; show venv in icon when active
-  (venv-initialize-eshell)
-  (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+  ;; ;; show venv in icon when active
+  ;; (venv-initialize-eshell)
+  ;; (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+  (use-package pyenv-mode)
+  (pyenv-mode)
+
 #+END_SRC
 
 
