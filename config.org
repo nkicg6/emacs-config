@@ -742,7 +742,7 @@ Could be related to [[https://github.com/jgm/pandoc/issues/3477][this issue]] on
       (add-to-list 'exec-path "/usr/local/bin") ;; add pandoc to search path
       (unless (boundp 'org-latex-classes)
         (setq org-latex-classes nil))
-      (add-to-list 'org-latex-classes
+   (add-to-list 'org-latex-classes
                    '("article"
                      "\\documentclass{article}"
                      ("\\section{%s}" . "\\section*{%s}")
@@ -970,15 +970,24 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
 
   (setq org-publish-project-alist
         '(
-          ("posts"
-           :base-directory "~/personal_projects/website-clj/resources/org-posts"
+          ("programming"
+           :base-directory "~/personal_projects/website-clj/resources/org-programming"
            :base-extension "org"
-           :publishing-directory "~/personal_projects/website-clj/resources/posts"
+           :publishing-directory "~/personal_projects/website-clj/resources/programming"
            :publishing-function org-html-publish-to-html
            :headline-levels 4
            :html-extension "html"
-           :body-only t) 
-          ("clj-site" :components ("posts"))))
+           :body-only t)
+          ("science"
+           :base-directory "~/personal_projects/website-clj/resources/org-science"
+           :base-extension "org"
+           :publishing-directory "~/personal_projects/website-clj/resources/science"
+           :publishing-function org-html-publish-to-html
+           :headline-levels 4
+           :html-extension "html"
+           :body-only t)
+          ("clj-site" :components ("programming" "science"))))
+
 #+END_SRC
 
 * yas snippet
@@ -1226,12 +1235,22 @@ brew cask install java # need the JDK
        (define-key clojure-mode-map (kbd "C-c u") 'cider-user-ns)
        (define-key cider-mode-map (kbd "C-c u") 'cider-user-ns)))
 
-  (use-package flycheck-clojure)
-  (use-package flycheck-pos-tip)
-  (eval-after-load 'flycheck '(flycheck-clojure-setup))
-  (add-hook 'after-init-hook #'global-flycheck-mode)
-  (eval-after-load 'flycheck
-    '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+
+  ;; reference https://github.com/clojure-emacs/squiggly-clojure/issues/29
+  ;; (use-package flycheck-clojure
+  ;;   :commands (flycheck-clojure-setup)
+  ;;   :init
+  ;;   (add-hook 'clojure-mode-hook
+  ;;             (lambda ()
+  ;;               (eval-after-load 'flycheck
+  ;;                 '(flycheck-clojure-setup)))))
+
+  ;; (use-package flycheck-clojure)
+  ;;(use-package flycheck-pos-tip)
+  ;; (eval-after-load 'flycheck '(flycheck-clojure-setup))
+  ;; (add-hook 'after-init-hook #'global-flycheck-mode)
+  ;; (eval-after-load 'flycheck
+  ;;   '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
 #+END_SRC
 
 org babel clojure is not working. I have a hacky fix from [[http://fgiasson.com/blog/index.php/2016/06/21/optimal-emacs-settings-for-org-mode-for-literate-programming/][here]] that seems to be working for now though. 
