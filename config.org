@@ -1169,32 +1169,22 @@ https://github.com/porterjamesj/virtualenvwrapper.el
 
   ;; for venv and customizations
   ;; think about this https://www.emacswiki.org/emacs/EshellPrompt
-  (setq eshell-prompt-function
-        (lambda ()
+  ;; (setq eshell-prompt-function
+  ;;       (lambda ()
+  ;;         (concat
+  ;;          (propertize (eshell/pwd)'face '(:foreground "blue")) " - " (pyenv-mode-version) " $ ")))
+
+  (setq eshell-prompt-regexp "^[^#$\n]*[#$] "
+        eshell-prompt-function
+        (lambda nil
           (concat
-           (propertize (eshell/pwd)'face '(:foreground "blue")) " - " (pyenv-mode-version) " $ ")))
-  ;; try this one https://www.emacswiki.org/emacs/EshellPrompt
-
-  ;; (defun shortened-path (path max-len)
-  ;;       "Return a modified version of `path', replacing some components
-  ;;       with single characters starting from the left to try and get
-  ;;       the path down to `max-len'"
-  ;;       (let* ((components (split-string (abbreviate-file-name path) "/"))
-  ;;              (len (+ (1- (length components))
-  ;;                      (reduce '+ components :key 'length)))
-  ;;              (str ""))
-  ;;         (while (and (> len max-len)
-  ;;                     (cdr components))
-  ;;           (setq str (concat str (if (= 0 (length (car components)))
-  ;;                                     "/"
-  ;;                                   (string (elt (car components) 0) ?/)))
-  ;;                 len (- len (1- (length (car components))))
-  ;;                 components (cdr components)))
-  ;;         (concat str (reduce (lambda (a b) (concat a "/" b)) components))))
-
-  ;;     (defun rjs-eshell-prompt-function ()
-  ;;       (concat (shortened-path (eshell/pwd) 40)
-  ;;               (if (= (user-uid) 0) " # " " $ ")))
+           (propertize (user-login-name) 'face '(:foreground "black")) " "
+           (if (string= (eshell/pwd)
+                        (getenv "HOME"))
+               (propertize "~" 'face '(:foreground "blue"))
+             (propertize (eshell/basename (eshell/pwd)) 'face '(:foreground "blue"))) 
+           (if (= (user-uid) 0) "# "
+             (concat " "(pyenv-mode-version) " $ " )))))
 #+END_SRC
 
 * Clojure mode
