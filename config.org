@@ -861,7 +861,14 @@ Then evaluate with C-x C-e
 
   (org-defkey org-mode-map "\C-c\C-x\C-e" 'cider-eval-last-sexp)
   (setq cider-repl-display-help-banner nil)
+  ;; autocompletion from cider https://github.com/clojure-emacs/cider/blob/master/doc/code_completion.md
+  (use-package company-mode) ;; autocompletion
+  (add-hook 'cider-mode-hook #'company-mode)
+  (add-hook 'cider-repl-mode-hook #'company-mode)
+  (setq company-idle-delay nil) ; never start completions automatically
+  (global-set-key (kbd "TAB") #'company-indent-or-complete-common) 
 #+END_SRC
+
 *** matlab mode
 
 #+BEGIN_SRC emacs-lisp 
