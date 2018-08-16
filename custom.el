@@ -57,7 +57,7 @@
       :jump-to-captured t :empty-lines-after 1))))
  '(package-selected-packages
    (quote
-    (company-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
+    (leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote

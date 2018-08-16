@@ -410,7 +410,6 @@ for kivy apps.
   :init (setq markdown-command "multimarkdown"))
   #+END_SRC
 
-
 * python mode
 
 emacs ipython and python mode. 
