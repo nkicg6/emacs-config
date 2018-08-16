@@ -1046,6 +1046,19 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
 
 #+END_SRC
 
+** MIT Scheme
+MIT Scheme installed with 
+
+#+BEGIN_SRC bash :results verbatim 
+brew install mit-scheme
+#+END_SRC
+
+
+ #+BEGIN_SRC emacs-lisp 
+   ;; scheme
+   (setq scheme-program-name "/usr/local/bin/mit-scheme")
+   (add-hook 'scheme-mode-hook #'aggressive-indent-mode)
+ #+END_SRC
 * html
 
 #+BEGIN_SRC emacs-lisp 
