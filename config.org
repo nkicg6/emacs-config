@@ -473,7 +473,7 @@ For python repl support
   ;; (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
   (use-package pyenv-mode)
   (pyenv-mode)
-  
+  (unbind-key "C-c C-u" pyenv-mode-map) ;; this was ruining my org-mode nav
 
 #+END_SRC
 

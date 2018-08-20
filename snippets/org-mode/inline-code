@@ -1,5 +1,8 @@
 # -*- mode: snippet -*-
-# name: inline-code
-# key: ic
+# name: id
+# key: id
 # --
-src_$1[:exports ${2:code}]{$3} $0
+:PROPERTIES:
+:CUSTOM_ID: ${1:section name}
+:END:
+$0
