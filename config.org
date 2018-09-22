@@ -864,8 +864,9 @@ Then evaluate with C-x C-e
   (use-package company-mode) ;; autocompletion
   (add-hook 'cider-mode-hook #'company-mode)
   (add-hook 'cider-repl-mode-hook #'company-mode)
+  (define-key cider-mode-map (kbd "C-<tab>") #'company-complete)
   (setq company-idle-delay nil) ; never start completions automatically
-  (global-set-key (kbd "TAB") #'company-indent-or-complete-common) 
+  ;;(global-set-key (kbd "TAB") #'company-indent-or-complete-common) 
 #+END_SRC
 
 *** matlab mode
@@ -996,15 +997,6 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
 
 #+END_SRC
 
-* yas snippet
-  
-#+BEGIN_SRC emacs-lisp 
-  (use-package yasnippet
-    :ensure t)
-
-  (yas-global-mode t)
-  (setq yas-trigger-key "<tab>")
-#+END_SRC
 
 * lisp
 
@@ -1111,7 +1103,10 @@ For arduino
 #+END_SRC
 
 * Emacs speaks statistics
-
+keybindings in ESS:
+- "Control-tab" for autocomplete
+- "C-M-m" pipe character "%>%"
+- "C-=" assignment operator "<-"
 #+BEGIN_SRC emacs-lisp 
   (use-package ess-site) 
   (use-package ess
@@ -1119,7 +1114,7 @@ For arduino
     :init (require 'ess-site))
 
   (add-hook 'ess-mode-hook #'company-mode)
-  (define-key ess-mode-map (kbd "<tab>") #'company-complete)
+  (define-key ess-mode-map (kbd "C-<tab>") #'company-complete)
   ;; https://emacs.stackexchange.com/questions/8041/how-to-implement-the-piping-operator-in-ess-mode
   (defun then_R_operator ()
     "R - %>% operator or 'then' pipe operator"
@@ -1127,8 +1122,17 @@ For arduino
     (just-one-space 1)
     (insert " %>% ")
     (reindent-then-newline-and-indent))
+
+  (defun r_assignment_operator ()
+    "R assignment <- operator"
+    (interactive)
+    (just-one-space 1)
+    (insert " <- "))
   (define-key ess-mode-map (kbd "C-M-m") 'then_R_operator)
   (define-key inferior-ess-mode-map (kbd "C-M-m") 'then_R_operator)
+  (define-key ess-mode-map (kbd "C-=") 'r_assignment_operator)
+  (define-key inferior-ess-mode-map (kbd "C-=") 'r_assignment_operator)
+
 
   ;; also new YASnippet for assignment <- which is -<TAB>
 
@@ -1399,4 +1403,13 @@ AWESOME! check [[http://emacsrocks.com/e10.html][this]] out
   ;;   (setq aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   ;;   (ace-window-display-mode)
   ;;   :bind ("S-o" . ace-window))
+#+END_SRC
+* yas snippet
+  
+#+BEGIN_SRC emacs-lisp 
+  (use-package yasnippet
+    :ensure t)
+
+  (yas-global-mode t)
+  (setq yas-trigger-key "<tab>")
 #+END_SRC
