@@ -5,6 +5,14 @@
 #+HTML: <div id="edn">
 #+HTML: {:title "${1:title}" :date "`(format-time-string "%Y-%m-%d")`" :tags ${2:["clojure"]}}
 #+HTML: </div>
-#+OPTIONS: \n:1 toc:nil num:0 todo:nil ^:{}
+#+OPTIONS: \n:1 toc:nil num:0 todo:nil ^:{} title:nil
 #+PROPERTY: header-args :eval never-export
+#+DATE: `(format-time-string "%Y-%m-%d %a")`
+#+TITLE: $1
+#+HTML:<h1 id="mainTitle">$1</h1>
+#+HTML:<div id="timedate">
+/First published: {{{date}}}/
+/Last updated: {{{time(%Y-%m-%d %a)}}}/
+#+HTML:</div>
+${3:#+TOC: headlines 2}
 $0

@@ -1113,11 +1113,30 @@ For arduino
 * Emacs speaks statistics
 
 #+BEGIN_SRC emacs-lisp 
-(use-package ess-site) 
-(use-package ess
-  :ensure t
-  :init (require 'ess-site))
+  (use-package ess-site) 
+  (use-package ess
+    :ensure t
+    :init (require 'ess-site))
+
+  (add-hook 'ess-mode-hook #'company-mode)
+  (define-key ess-mode-map (kbd "<tab>") #'company-complete)
+  ;; https://emacs.stackexchange.com/questions/8041/how-to-implement-the-piping-operator-in-ess-mode
+  (defun then_R_operator ()
+    "R - %>% operator or 'then' pipe operator"
+    (interactive)
+    (just-one-space 1)
+    (insert " %>% ")
+    (reindent-then-newline-and-indent))
+  (define-key ess-mode-map (kbd "C-M-m") 'then_R_operator)
+  (define-key inferior-ess-mode-map (kbd "C-M-m") 'then_R_operator)
+
+  ;; also new YASnippet for assignment <- which is -<TAB>
+
+  ;; I do not like the underscore replace behavior. 
+  (ess-toggle-underscore nil)
 #+END_SRC
+
+
 * javascript
 
 #+BEGIN_SRC emacs-lisp 
