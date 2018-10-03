@@ -750,7 +750,6 @@
     ("perscriptions" "prescriptions" nil 0)
     ("personalyl" "personally" nil 0)
     ("pleasent" "pleasant" nil 0)
-    ("plugin" "plug-in" nil 0)
     ("poeple" "people" nil 0)
     ("porblem" "problem" nil 0)
     ("porblems" "problems" nil 0)

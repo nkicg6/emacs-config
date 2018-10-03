@@ -2,6 +2,6 @@
 # name: r
 # key: r
 # --
-#+BEGIN_SRC R :session ${1:rsesh} :results output :exports results
+#+BEGIN_SRC R :session ${1:rsesh} :results output :exports ${2:both}
 $0
 #+END_SRC
