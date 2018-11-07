@@ -461,20 +461,15 @@ For python repl support
 : t
 
 #+BEGIN_SRC emacs-lisp 
-
-  ;; (use-package virtualenvwrapper
-  ;;   :ensure t
+  ;; start using pipenv
+  ;; (use-package pipenv
   ;;   :init
-  ;;   (venv-initialize-eshell)
-  ;;   (venv-initialize-interactive-shells))
-
-  ;; ;; show venv in icon when active
-  ;; (venv-initialize-eshell)
-  ;; (setq-default mode-line-format (cons '(:exec venv-current-name) mode-line-format))
-  (use-package pyenv-mode)
-  (pyenv-mode)
-  (unbind-key "C-c C-u" pyenv-mode-map) ;; this was ruining my org-mode nav
-
+  ;;   (setq
+  ;;    pipenv-projectile-after-switch-function
+  ;;    #'pipenv-projectile-after-switch-extended))
+  ;; not installing from melpa
+  (load "~/.emacs.d/manual-packages/pipenv.el-master/pipenv.el")
+  (add-hook 'python-mode-hook #'pipenv-mode)
 #+END_SRC
 
 
