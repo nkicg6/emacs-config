@@ -467,9 +467,11 @@ For python repl support
   ;;   (setq
   ;;    pipenv-projectile-after-switch-function
   ;;    #'pipenv-projectile-after-switch-extended))
-  ;; not installing from melpa
+  ;; not installing from melpa, I'll do manual
   (load "~/.emacs.d/manual-packages/pipenv.el-master/pipenv.el")
   (add-hook 'python-mode-hook #'pipenv-mode)
+  (setq pipenv-projectile-after-switch-function
+        #'pipenv-projectile-after-switch-extended)
 #+END_SRC
 
 
@@ -477,8 +479,8 @@ interpreter. Try to [[https://github.com/jonathanslenders/ptpython][ptpython]] s
 using some [[https://github.com/gregsexton/ob-ipython][ob-ipython]] setup stuff
 
 #+BEGIN_SRC emacs-lisp 
-      (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
-      (add-hook 'python-mode-hook 'electric-pair-mode)
+  (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
+  (add-hook 'python-mode-hook 'electric-pair-mode)
 
 #+END_SRC
 
