@@ -125,8 +125,8 @@ open some programs with the system default
   ;;(global-set-key (kbd "s-t") '(lambda () (interactive)))
   (defalias 'yes-or-no-p 'y-or-n-p)
   ;; Brandon Rhodes https://github.com/brandon-rhodes/dot-emacs/blob/master/init.el
-  (global-set-key [C-tab] 'other-window)
-  (global-set-key [C-S-tab] (lambda () (interactive) (other-window -1)))
+  ;;(global-set-key [C-tab] 'other-window)
+  ;;(global-set-key [C-S-tab] (lambda () (interactive) (other-window -1)))
 #+END_SRC
 ** Find my files quickly
 
@@ -442,6 +442,9 @@ emacs ipython and python mode.
     :ensure t
     :init (global-flycheck-mode))
 
+  (use-package jedi)
+  (add-hook 'python-mode-hook 'jedi:setup)
+  (setq jedi:complete-on-dot t)
 #+END_SRC
 
 

@@ -13,3 +13,5 @@ srecode-map.el
 .smex*
 config.el
 /bookmarks
+/ac-comphist.dat
+/.python-environments/*
