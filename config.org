@@ -424,8 +424,8 @@ emacs ipython and python mode.
   ;; python environment
   (use-package elpy
     :ensure t
-    :config
-    (setenv "WORKON_HOME" "~/.ve")
+    ;;:config
+    ;;(setenv "WORKON_HOME" "~/.ve")
     :init
     (add-hook 'python-mode-hook 'elpy-mode)
     )
@@ -443,6 +443,7 @@ emacs ipython and python mode.
     :init (global-flycheck-mode))
 
 #+END_SRC
+
 
 
 
