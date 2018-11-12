@@ -103,6 +103,7 @@ Thank [[Daniel][Daniel!]]
   ;; (setq x-select-enable-clipboard t)
   ;; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 #+END_SRC
+
 * open with
 
 open some programs with the system default
@@ -576,6 +577,12 @@ Format py files on saving. http://docs.astropy.org/en/stable/development/codegui
 
 Cool! [[https://github.com/xgarrido/emacs-starter-kit/blob/master/starter-kit-org.org][starter guide]]
 
+** org pomodoro
+https://github.com/lolownia/org-pomodoro Cool! 
+#+BEGIN_SRC emacs-lisp 
+  (use-package org-pomodoro)
+#+END_SRC
+
 ** org setup
 
 #+BEGIN_SRC emacs-lisp
@@ -622,7 +629,6 @@ Export all compiled docs to subfolder. From [[https://emacs.stackexchange.com/qu
   ;;       (when (not (file-directory-p pub-dir))
   ;;        (make-directory pub-dir))))
 #+END_SRC
-
 
 ** clocking functions
 
@@ -766,6 +772,7 @@ Could be related to [[https://github.com/jgm/pandoc/issues/3477][this issue]] on
       ;; ;; from research toolkit https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org
       ;; ;; and https://github.com/vikasrawal/orgpaper/blob/master/orgpapers.org
  #+END_SRC
+
 *** org ref
 
 For setting up references, I use org-ref combined with pandoc export. slight changes, which are reflected in my shortcut header setup and pandoc options can be changed using #+PANDOC_OPTIONS as described [[https://github.com/kawabata/ox-pandoc][here]]. Note that I cloned [[https://github.com/citation-style-language/styles][the styles]] repository from github and it is located in ~/.emacs.d/styles/
@@ -888,7 +895,6 @@ Then evaluate with C-x C-e
   ;;             (assq-delete-all :results org-babel-default-header-args)))
 #+END_SRC
 
-
 ** org reveal
 
 This is how I will be giving presentations from now on. see [[https://github.com/yjwen/org-reveal][instructions]] on the site. 
@@ -998,7 +1004,6 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
 
 #+END_SRC
 
-
 * lisp
 
 #+BEGIN_SRC emacs-lisp 
@@ -1053,6 +1058,7 @@ brew install mit-scheme
    (setq scheme-program-name "/usr/local/bin/mit-scheme")
    (add-hook 'scheme-mode-hook #'aggressive-indent-mode)
  #+END_SRC
+
 * html
 
 #+BEGIN_SRC emacs-lisp 
@@ -1141,7 +1147,6 @@ keybindings in ESS:
   ;; I do not like the underscore replace behavior. 
   (ess-toggle-underscore nil)
 #+END_SRC
-
 
 * javascript
 
@@ -1396,6 +1401,7 @@ AWESOME! check [[http://emacsrocks.com/e10.html][this]] out
   ;;   :bind ("C-S-s" . ace-jump-mode))
 
 #+END_SRC
+
 ** Ace window
 
 #+BEGIN_SRC emacs-lisp 
@@ -1406,6 +1412,7 @@ AWESOME! check [[http://emacsrocks.com/e10.html][this]] out
   ;;   (ace-window-display-mode)
   ;;   :bind ("S-o" . ace-window))
 #+END_SRC
+
 * yas snippet
   
 #+BEGIN_SRC emacs-lisp 
@@ -1415,3 +1422,4 @@ AWESOME! check [[http://emacsrocks.com/e10.html][this]] out
   (yas-global-mode t)
   (setq yas-trigger-key "<tab>")
 #+END_SRC
+
