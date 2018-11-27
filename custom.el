@@ -3,11 +3,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
  '(coffee-tab-width 2)
  '(custom-safe-themes
    (quote
     ("d5f17ae86464ef63c46ed4cb322703d91e8ed5e718bf5a7beb69dd63352b26b2" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" default)))
  '(fci-rule-color "#37474f")
+ '(hl-sexp-background-color "#efebe9")
  '(markdown-command "/usr/local/bin/pandoc" t)
  '(org-agenda-files
    (quote
@@ -57,7 +60,7 @@
       :jump-to-captured t :empty-lines-after 1))))
  '(package-selected-packages
    (quote
-    (org-pomodoro leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
+    (leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
  '(vc-annotate-background nil)
  '(vc-annotate-color-map
    (quote

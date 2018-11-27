@@ -41,7 +41,14 @@
     :defer t)
 
 #+END_SRC
+** zenburn
 
+#+BEGIN_SRC emacs-lisp 
+  (use-package zenburn-theme
+    :ensure t
+    :defer t)
+
+#+END_SRC
 ** solarized
 
 #+BEGIN_SRC emacs-lisp 
@@ -462,8 +469,6 @@ For python repl support
 
 #+END_SRC
 
-#+RESULTS:
-: t
 
 #+BEGIN_SRC emacs-lisp 
   ;; start using pipenv
@@ -478,7 +483,6 @@ For python repl support
   (setq pipenv-projectile-after-switch-function
         #'pipenv-projectile-after-switch-extended)
 #+END_SRC
-
 
 interpreter. Try to [[https://github.com/jonathanslenders/ptpython][ptpython]] soon? 
 using some [[https://github.com/gregsexton/ob-ipython][ob-ipython]] setup stuff
