@@ -590,31 +590,37 @@ https://github.com/lolownia/org-pomodoro Cool!
 ** org setup
 
 #+BEGIN_SRC emacs-lisp
-    ;;(require 'org)
+  ;;(require 'org)
   ;; source editing takes over current window
-    (setq org-src-window-setup (quote current-window))
-    ;; auto open org files in org mode.
-    (add-to-list 'auto-mode-alist '("\\.org$" . org-mode)) ;; auto activate org mode for org docs.
+  (setq org-src-window-setup (quote current-window))
+  ;; auto open org files in org mode.
+  (add-to-list 'auto-mode-alist '("\\.org$" . org-mode)) ;; auto activate org mode for org docs.
 
-    (setq org-startup-with-inline-images t) ;; for inline code images in python
+  (setq org-startup-with-inline-images t) ;; for inline code images in python
 
-    ;; display preferences from https://www.youtube.com/watch?v=SzA2YODtgK4&t=36s
-    (setq org-todo-keywords
-          (quote ((sequence "TODO(t)" "NEXT(n)" "In-progress(ip)" "|" "DONE(d)" "CANCELLED(c)"))))
-    ;; log time on finish
-    (setq org-log-done 'time)
-    (setq org-todo-keyword-faces
-          (quote (("TODO" :foreground "red" :weight bold)
-                  ("NEXT" :foreground "yellow" :weight bold
-                   ("In-progress" :foreground "orange" :weight bold)
-                   ("DONE" :foreground "green" :weight bold)))))
+  ;; display preferences from https://www.youtube.com/watch?v=SzA2YODtgK4&t=36s
 
-    (add-hook 'org-mode-hook
-              (lambda ()
-                (org-bullets-mode t)))
-    ;; hook for org mode wrap paragraphs
-    (add-hook 'org-mode-hook  (lambda () (setq truncate-lines nil)))
-    (setq org-agenda-files '("~/Dropbox/orgs/" "~/Dropbox/lab_notebook/"))
+  ;; (setq org-todo-keywords
+  ;;       (quote ((sequence "TODO(t)" "NEXT(n)" "In-progress(ip)" "|" "DONE(d)" "CANCELLED(c)"))))
+
+  (setq org-todo-keywords
+        (quote ((sequence "TODO(t)" "NEXT(n)" "In-progress(ip)" "|" "DONE(d)" "CANCELLED(c)"))))
+  ;; log time on finish
+  (setq org-log-done 'time)
+
+  (setq org-todo-keyword-faces
+        '(("TODO" :foreground "red" :weight bold)
+          ("NEXT" :foreground "yellow" :weight bold)
+          ("In-progress" :foreground "orange" :weight bold)
+          ("DONE" :foreground "#2D6B2D" :weight bold)
+          ("CANCELLED" :foreground "#2D6B2D")))
+
+  (add-hook 'org-mode-hook
+            (lambda ()
+              (org-bullets-mode t)))
+  ;; hook for org mode wrap paragraphs
+  (add-hook 'org-mode-hook  (lambda () (setq truncate-lines nil)))
+  (setq org-agenda-files '("~/Dropbox/orgs/" "~/Dropbox/lab_notebook/"))
   ;; electric pairs rock!
   (add-hook 'org-mode-hook 'electric-pair-mode)
   (use-package org-bullets)
