@@ -832,37 +832,40 @@ No idea why that took me so long to find.
   ;; check out this website: http://irreal.org/blog/?p=4295
 
   (org-babel-do-load-languages
-           'org-babel-load-languages
-           '((python . t) 
-             (ipython . t) ;; ob-ipython
-             (clojure . t)
-             (R . t) 
-             (sh . t)
-             (C . t)
-             (sqlite . t)
-             (latex . t)
-             (shell . t)
-             (octave . t)
-             (matlab . t)
-             (org . t)
-             (emacs-lisp . t)
-             (dot .t)))
+   'org-babel-load-languages
+   '((python . t) 
+     (ipython . t) ;; ob-ipython
+     (clojure . t)
+     (R . t) 
+     (sh . t)
+     (C . t)
+     (sqlite . t)
+     (latex . t)
+     (shell . t)
+     (octave . t)
+     (matlab . t)
+     (org . t)
+     (emacs-lisp . t)
+     (dot .t)))
+  ;; use python 3 default
+
+  (setq org-babel-python-command "python3")
 
   ;; dont evaluate on export
   ;; this causes it to ignore header args and export anyways, so cancel it. 
   ;; see this https://www.miskatonic.org/2016/10/03/orgexportbabelevaluate/
   ;;(setq org-export-babel-evaluate nil)
-    ;; dont confirm execute with these languages. 
-         (defun my-org-confirm-babel-evaluate (lang body)
-           (not (member lang '("octave" "sh" "python" "R" "emacs-lisp" "clojure" "shell" "ipython" "bash"))))
-       (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
-         ;; inline images-- nevermind this is annoying
-         ;;(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
+  ;; dont confirm execute with these languages. 
+  (defun my-org-confirm-babel-evaluate (lang body)
+    (not (member lang '("octave" "sh" "python" "R" "emacs-lisp" "clojure" "shell" "ipython" "bash"))))
+  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+  ;; inline images-- nevermind this is annoying
+  ;;(add-hook 'org-babel-after-execute-hook 'org-display-inline-images 'append)
 
-        ;; format source blocks natively
-        ;; from http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html
-       (setq org-src-fontify-natively t)
-       (setq org-src-tab-acts-natively t)
+  ;; format source blocks natively
+  ;; from http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html
+  (setq org-src-fontify-natively t)
+  (setq org-src-tab-acts-natively t)
 
 #+END_SRC
 
