@@ -11,25 +11,26 @@
 * Use-packages
 
 #+BEGIN_SRC emacs-lisp 
-        (setq use-package-always-ensure t)
-        ;; rainbows
-        (use-package rainbow-delimiters
-        :defer t)
-        ;; s package
-        (use-package s)
+  ;; rainbows
+  (use-package rainbow-delimiters
+    :defer t)
+  ;; s package
+  (use-package s
+    :defer t)
 
-        (use-package projectile
-          :commands (projectile-global-mode
-                     projectile-mode)
-          :init
-          (projectile-global-mode))
+  (use-package projectile
+    :commands (projectile-global-mode
+               projectile-mode)
+    :defer t
+    :init
+    (projectile-global-mode))
   (setq projectile-indexing-method 'native)
-      ;; for some reason, org is giving me the problems listed here https://lists.gnu.org/archive/html/emacs-orgmode/2016-02/msg00424.html
-      ;; I had to M-x install-package org-plus-contrib to fix it. I havent tried from scratch yet, but hopefully this will work in the future. 
-      ;; tried the fix here https://emacs.stackexchange.com/questions/7890/org-plus-contrib-and-org-with-require-or-use-package
+  ;; for some reason, org is giving me the problems listed here https://lists.gnu.org/archive/html/emacs-orgmode/2016-02/msg00424.html
+  ;; I had to M-x install-package org-plus-contrib to fix it. I havent tried from scratch yet, but hopefully this will work in the future. 
+  ;; tried the fix here https://emacs.stackexchange.com/questions/7890/org-plus-contrib-and-org-with-require-or-use-package
   ;; (use-package org
   ;;       :ensure org-plus-contrib)
-
+  (message "Test")
 #+END_SRC
 
 * Theme
@@ -53,7 +54,7 @@
 
 #+BEGIN_SRC emacs-lisp 
 (use-package solarized-theme
-  :defer 10
+  :defer t
   :init
   (setq solarized-use-variable-pitch nil)
   :ensure t)
@@ -116,14 +117,14 @@ Thank [[Daniel][Daniel!]]
 open some programs with the system default
 
 #+BEGIN_SRC emacs-lisp 
-    (use-package openwith
-      :defer t)
-    (require 'openwith)
-    (setq openwith-associations '(("\\.pptx?\\'" "open" (file))
-                                  ("\\.docx?\\'" "open" (file))
-                                  ("\\.xlsx?\\'" "open" (file))
-                                  ("\\.ods?\\'" "open" (file))))
-    (openwith-mode t)
+  (use-package openwith
+    :defer t)
+
+  (setq openwith-associations '(("\\.pptx?\\'" "open" (file))
+                                ("\\.docx?\\'" "open" (file))
+                                ("\\.xlsx?\\'" "open" (file))
+                                ("\\.ods?\\'" "open" (file))))
+  (openwith-mode t)
 #+END_SRC
 
 * Key bindings and shortcuts
@@ -170,122 +171,124 @@ Set up custom file thing so it writes to its own file
 ** UI file
 
 #+BEGIN_SRC emacs-lisp 
-;; Turn off the menu bar at the top of each frame because it's distracting
-(menu-bar-mode -1)
-;; Show line numbers
-(use-package nlinum)
-(global-nlinum-mode)
-;; You can uncomment this to remove the graphical toolbar at the top. After
-;; awhile, you won't need the toolbar.
-(when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
+  ;; Turn off the menu bar at the top of each frame because it's distracting
+  (menu-bar-mode -1)
+  ;; Show line numbers
+  (use-package nlinum
+    :defer t)
+  (global-nlinum-mode)
+  ;; You can uncomment this to remove the graphical toolbar at the top. After
+  ;; awhile, you won't need the toolbar.
+  (when (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
 
-;; Don't show native OS scroll bars for buffers because they're redundant
-(when (fboundp 'scroll-bar-mode)
-  (scroll-bar-mode -1))
+  ;; Don't show native OS scroll bars for buffers because they're redundant
+  (when (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
 
-;; increase font size for better readability
-(set-face-attribute 'default nil :height 140)
+  ;; increase font size for better readability
+  (set-face-attribute 'default nil :height 140)
 
-;; frame and window size 
-(setq initial-frame-alist '((top . 0) (left . 700) (width . 95) (height . 45)))
+  ;; frame and window size 
+  (setq initial-frame-alist '((top . 0) (left . 700) (width . 95) (height . 45)))
 
-;; These settings relate to how emacs interacts with your operating system
-(setq ;; makes killing/yanking interact with the clipboard
-      x-select-enable-clipboard t
+  ;; These settings relate to how emacs interacts with your operating system
+  (setq ;; makes killing/yanking interact with the clipboard
+        x-select-enable-clipboard t
 
-      ;; I'm actually not sure what this does but it's recommended?
-      x-select-enable-primary t
+        ;; I'm actually not sure what this does but it's recommended?
+        x-select-enable-primary t
 
-      ;; Save clipboard strings into kill ring before replacing them.
-      ;; When one selects something in another program to paste it into Emacs,
-      ;; but kills something in Emacs before actually pasting it,
-      ;; this selection is gone unless this variable is non-nil
-      save-interprogram-paste-before-kill t
+        ;; Save clipboard strings into kill ring before replacing them.
+        ;; When one selects something in another program to paste it into Emacs,
+        ;; but kills something in Emacs before actually pasting it,
+        ;; this selection is gone unless this variable is non-nil
+        save-interprogram-paste-before-kill t
 
-      ;; Shows all options when running apropos. For more info,
-      ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Apropos.html
-      apropos-do-all t
+        ;; Shows all options when running apropos. For more info,
+        ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Apropos.html
+        apropos-do-all t
 
-      ;; Mouse yank commands yank at point instead of at click.
-      mouse-yank-at-point t)
+        ;; Mouse yank commands yank at point instead of at click.
+        mouse-yank-at-point t)
 
-;; No cursor blinking, it's distracting
-(blink-cursor-mode 0)
+  ;; No cursor blinking, it's distracting
+  (blink-cursor-mode 0)
 
-;; full path in title bar
-(setq-default frame-title-format "%b (%f)")
+  ;; full path in title bar
+  (setq-default frame-title-format "%b (%f)")
 
-;; don't pop up font menu
-(global-set-key (kbd "s-t") '(lambda () (interactive)))
+  ;; don't pop up font menu
+  (global-set-key (kbd "s-t") '(lambda () (interactive)))
 
-;; no bell
-(setq ring-bell-function 'ignore)
+  ;; no bell
+  (setq ring-bell-function 'ignore)
 
 #+END_SRC
 ** editing file
 
 #+BEGIN_SRC emacs-lisp 
-    ;;    (require 'uniquify)
+  ;;    (require 'uniquify)
 
-    ;; (use-package uniquify
-    ;;       :ensure t
-    ;;       :config
-    ;;       (setq uniquify-buffer-name-style 'forward))
+  ;; (use-package uniquify
+  ;;       :ensure t
+  ;;       :config
+  ;;       (setq uniquify-buffer-name-style 'forward))
 
-    (setq uniquify-buffer-name-style 'forward)
-          ;; Highlights matching parenthesis
-          (show-paren-mode 1)
+  (setq uniquify-buffer-name-style 'forward)
+  ;; Highlights matching parenthesis
+  (show-paren-mode 1)
 
-          ;; Highlight current line
-          (global-hl-line-mode 1)
+  ;; Highlight current line
+  (global-hl-line-mode 1)
 
-          ;; Interactive search key bindings. By default, C-s runs
-          ;; isearch-forward, so this swaps the bindings.
-          (global-set-key (kbd "C-s") 'isearch-forward-regexp)
-          (global-set-key (kbd "C-r") 'isearch-backward-regexp)
-          (global-set-key (kbd "C-M-s") 'isearch-forward)
-          (global-set-key (kbd "C-M-r") 'isearch-backward)
+  ;; Interactive search key bindings. By default, C-s runs
+  ;; isearch-forward, so this swaps the bindings.
+  (global-set-key (kbd "C-s") 'isearch-forward-regexp)
+  (global-set-key (kbd "C-r") 'isearch-backward-regexp)
+  (global-set-key (kbd "C-M-s") 'isearch-forward)
+  (global-set-key (kbd "C-M-r") 'isearch-backward)
 
-          ;; Don't use hard tabs
-          (setq-default indent-tabs-mode nil)
-          ;; When you visit a file, point goes to the last place where it
-          ;; was when you previously visited the same file.
-          ;; http://www.emacswiki.org/emacs/SavePlace
+  ;; Don't use hard tabs
+  (setq-default indent-tabs-mode nil)
+  ;; When you visit a file, point goes to the last place where it
+  ;; was when you previously visited the same file.
+  ;; http://www.emacswiki.org/emacs/SavePlace
   ;;        (require 'saveplace)
-        (use-package saveplace
-          :config
-          (setq-default save-place t)  
-          (setq save-place-file (concat user-emacs-directory "places")))
-          ;; Emacs can automatically create backup files. This tells Emacs to
-          ;; put all backups in ~/.emacs.d/backups. More info:
-          ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
-          (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
-                                                         "backups"))))
-          (setq auto-save-default nil)
-          ;; comments
-          (defun toggle-comment-on-line ()
-            "comment or uncomment current line"
-            (interactive)
-            (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
-          (global-set-key (kbd "C-;") 'toggle-comment-on-line)
+  (use-package saveplace
+    :defer t
+    :config
+    (setq-default save-place t)  
+    (setq save-place-file (concat user-emacs-directory "places")))
+  ;; Emacs can automatically create backup files. This tells Emacs to
+  ;; put all backups in ~/.emacs.d/backups. More info:
+  ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
+  (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
+                                                 "backups"))))
+  (setq auto-save-default nil)
+  ;; comments
+  (defun toggle-comment-on-line ()
+    "comment or uncomment current line"
+    (interactive)
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position)))
+  (global-set-key (kbd "C-;") 'toggle-comment-on-line)
 
-          ;; use 2 spaces for tabs
-          (defun die-tabs ()
-            (interactive)
-            (set-variable 'tab-width 2)
-            (mark-whole-buffer)
-            (untabify (region-beginning) (region-end))
-            (keyboard-quit))
+  ;; use 2 spaces for tabs
+  (defun die-tabs ()
+    (interactive)
+    (set-variable 'tab-width 2)
+    (mark-whole-buffer)
+    (untabify (region-beginning) (region-end))
+    (keyboard-quit))
 
-          ;; fix weird os x kill error
-          (defun ns-get-pasteboard ()
-            "Returns the value of the pasteboard, or nil for unsupported formats."
-            (condition-case nil
-                (ns-get-selection-internal 'CLIPBOARD)
-              (quit nil)))
+  ;; fix weird os x kill error
+  (defun ns-get-pasteboard ()
+    "Returns the value of the pasteboard, or nil for unsupported formats."
+    (condition-case nil
+        (ns-get-selection-internal 'CLIPBOARD)
+      (quit nil)))
 
-          (setq electric-indent-mode nil)
+  (setq electric-indent-mode nil)
   ;; visual line!
   (global-visual-line-mode t)
 #+END_SRC
@@ -327,6 +330,7 @@ from my old navigation file
 
       ;; Shows a list of buffers
   (use-package ibuffer
+    :defer t
     :commands ibuffer
     :config
     (define-ibuffer-column size-h
@@ -338,23 +342,25 @@ from my old navigation file
     :bind
     ("C-x C-b" . ibuffer))
 
-      ;; Enhances M-x to allow easier execution of commands. Provides
-      ;; a filterable list of possible commands in the minibuffer
-      ;; http://www.emacswiki.org/emacs/Smex
-      (use-package smex
-        :bind 
-        ("M-x" . smex)
-        :config
-        (smex-initialize)
-        :init
-        (setq smex-save-file (concat user-emacs-directory ".smex-items")))
+  ;; Enhances M-x to allow easier execution of commands. Provides
+  ;; a filterable list of possible commands in the minibuffer
+  ;; http://www.emacswiki.org/emacs/Smex
+  (use-package smex
+    :defer t
+    :bind 
+    ("M-x" . smex)
+    :config
+    (smex-initialize)
+    :init
+    (setq smex-save-file (concat user-emacs-directory ".smex-items")))
 
 #+END_SRC
 
 * Interleave
 
 #+BEGIN_SRC emacs-lisp 
-  (use-package interleave)
+  (use-package interleave
+    :defer t)
 #+END_SRC
 
 * Helm
@@ -362,10 +368,11 @@ from my old navigation file
 #+BEGIN_SRC emacs-lisp
   (use-package helm
     :ensure t
+    :defer t
     :bind  (("M-a" . helm-M-x)
-           ("C-x C-f" . helm-find-files)
-           ("M-y" . helm-show-kill-ring)
-           ("C-x b" . helm-buffers-list))
+            ("C-x C-f" . helm-find-files)
+            ("M-y" . helm-show-kill-ring)
+            ("C-x b" . helm-buffers-list))
     :config (progn
               (setq helm-buffers-fuzzy-matching t)
               (helm-mode 1)))
@@ -373,14 +380,16 @@ from my old navigation file
 
 
 #+BEGIN_SRC emacs-lisp 
-  (use-package helm-projectile)
+  (use-package helm-projectile
+    :defer t)
   (helm-projectile-on)
 #+END_SRC
 
 * Kivy
 for kivy apps. 
 #+BEGIN_SRC emacs-lisp 
-  (use-package kivy-mode)
+  (use-package kivy-mode
+    :defer t)
   (add-to-list 'auto-mode-alist '("\\.kv$" . kivy-mode))
 
   (add-hook 'kivy-mode-hook
@@ -391,17 +400,18 @@ for kivy apps.
 * Recentf
 
 #+BEGIN_SRC emacs-lisp
-;;  use recent file stuff
+  ;;  use recent file stuff
   (use-package recentf
     :bind ("C-x C-r" . helm-recentf)
+    :defer t  
     :config
     (recentf-mode t)
     (setq recentf-max-saved-items 200))
 
-  ;; recommended from https://www.emacswiki.org/emacs/RecentFiles
+    ;; recommended from https://www.emacswiki.org/emacs/RecentFiles
 
-;;  (run-at-time nil (* 5 60) 'recentf-save-list)
-  (setq create-lockfiles nil) ;; see this https://github.com/syl20bnr/spacemacs/issues/5554
+  ;;  (run-at-time nil (* 5 60) 'recentf-save-list)
+    (setq create-lockfiles nil) ;; see this https://github.com/syl20bnr/spacemacs/issues/5554
 #+END_SRC
 
 * markdown
@@ -409,13 +419,14 @@ for kivy apps.
 [[https://jblevins.org/projects/markdown-mode/][markdown mode]]
 
   #+BEGIN_SRC emacs-lisp 
-(use-package markdown-mode
-  :ensure t
-  :commands (markdown-mode gfm-mode)
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+    (use-package markdown-mode
+      :ensure t
+      :defer t
+      :commands (markdown-mode gfm-mode)
+      :mode (("README\\.md\\'" . gfm-mode)
+             ("\\.md\\'" . markdown-mode)
+             ("\\.markdown\\'" . markdown-mode))
+      :init (setq markdown-command "multimarkdown"))
   #+END_SRC
 
 * python mode
@@ -432,6 +443,7 @@ emacs ipython and python mode.
   ;; python environment
   (use-package elpy
     :ensure t
+    :defer t
     ;;:config
     ;;(setenv "WORKON_HOME" "~/.ve")
     :init
@@ -448,9 +460,11 @@ emacs ipython and python mode.
 
   (use-package flycheck
     :ensure t
+    :defer t
     :init (global-flycheck-mode))
 
-  (use-package jedi)
+  (use-package jedi
+    :defer t)
   (add-hook 'python-mode-hook 'jedi:setup)
   (setq jedi:complete-on-dot t)
 #+END_SRC
@@ -584,7 +598,8 @@ Cool! [[https://github.com/xgarrido/emacs-starter-kit/blob/master/starter-kit-or
 ** org pomodoro
 https://github.com/lolownia/org-pomodoro Cool! 
 #+BEGIN_SRC emacs-lisp 
-  (use-package org-pomodoro)
+  (use-package org-pomodoro
+    :defer t)
 #+END_SRC
 
 ** org setup
@@ -620,10 +635,11 @@ https://github.com/lolownia/org-pomodoro Cool!
               (org-bullets-mode t)))
   ;; hook for org mode wrap paragraphs
   (add-hook 'org-mode-hook  (lambda () (setq truncate-lines nil)))
-  (setq org-agenda-files '("~/Dropbox/orgs/" "~/Dropbox/lab_notebook/"))
+  (setq org-agenda-files '("~/Dropbox/orgs/master_agenda.org"))
   ;; electric pairs rock!
   (add-hook 'org-mode-hook 'electric-pair-mode)
-  (use-package org-bullets)
+  (use-package org-bullets
+    :defer t)
 #+END_SRC
 
 ** org-export
@@ -703,36 +719,37 @@ Because I use pandoc for export, I often have to pass certain command line optio
 
  #+BEGIN_SRC emacs-lisp 
    ;; redundancies with org here...
-     (require 'ox-beamer)
-         (use-package auctex-latexmk
-           :ensure t
-           :defer t)
+   (require 'ox-beamer)
+   (use-package auctex-latexmk
+     :ensure t
+     :defer t)
 
-     ;; described here 
-       (use-package tex 
-         :ensure auctex-latexmk)
-       ;; emacs latex customizations
+   ;; described here 
+   (use-package tex 
+     :ensure auctex-latexmk
+     :defer t)
+   ;; emacs latex customizations
 
-       ;; https://tex.stackexchange.com/questions/21200/auctex-and-xetex
+   ;; https://tex.stackexchange.com/questions/21200/auctex-and-xetex
 
 
-            ;;(setq TeX-PDF-mode t)
-       ;; AUCTeX
-       (setq TeX-auto-save t)
-       (setq TeX-parse-self t)
-       (setq-default TeX-master nil)
+   ;;(setq TeX-PDF-mode t)
+   ;; AUCTeX
+   (setq TeX-auto-save t)
+   (setq TeX-parse-self t)
+   (setq-default TeX-master nil)
 
-       (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-       (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-       (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+   (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 
-       (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-       (setq reftex-plug-into-AUCTeX t)
+   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+   (setq reftex-plug-into-AUCTeX t)
 
-       (setq TeX-PDF-mode t)
+   (setq TeX-PDF-mode t)
 
-       ;; Automatically activate folding mode in auctex, use C-c C-o C-b to fold.
-       (add-hook 'TeX-mode-hook
+   ;; Automatically activate folding mode in auctex, use C-c C-o C-b to fold.
+   (add-hook 'TeX-mode-hook
              (lambda () (TeX-fold-mode 1))); Automatically activate TeX-fold-mode.
 
    ;; get rid of temporary files on export
@@ -789,26 +806,28 @@ For setting up references, I use org-ref combined with pandoc export. slight cha
 
 #+BEGIN_SRC emacs-lisp 
   ;; reftex
-   (use-package reftex
-                :commands turn-on-reftex
-                :init
-                (progn
-                  (setq reftex-default-bibliography '("/Users/Nick/Dropbox/bibliography/library.bib"))
-                  (setq reftex-plug-intoAUCTex t))
-                )
-     (use-package org-ref
-         :after org
-         :init
-         (setq reftex-default-bibliography '("~/Dropbox/bibliography/library.bib"))
-         (setq org-ref-default-bibliography '("~/Dropbox/bibliography/library.bib"))
-         (setq org-ref-pdf-directory '("~/PDFs")))
+  (use-package reftex
+    :commands turn-on-reftex
+    :init
+    (progn
+      (setq reftex-default-bibliography '("/Users/Nick/Dropbox/bibliography/library.bib"))
+      (setq reftex-plug-intoAUCTex t))
+    :defer t  
+    )
+  (use-package org-ref
+    :after org
+    :defer t
+    :init
+    (setq reftex-default-bibliography '("~/Dropbox/bibliography/library.bib"))
+    (setq org-ref-default-bibliography '("~/Dropbox/bibliography/library.bib"))
+    (setq org-ref-pdf-directory '("~/PDFs")))
 
-        (setq helm-bibtex-bibliography "~/Dropbox/bibliography/library.bib")
-        (setq helm-bibtex-library-path "~/PDFs/")
+  (setq helm-bibtex-bibliography "~/Dropbox/bibliography/library.bib")
+  (setq helm-bibtex-library-path "~/PDFs/")
 
-        (setq helm-bibtex-pdf-open-function
-              (lambda (fpath)
-                 (start-process "open" "*open*" "open" fpath)))
+  (setq helm-bibtex-pdf-open-function
+        (lambda (fpath)
+          (start-process "open" "*open*" "open" fpath)))
 
 #+END_SRC
 
@@ -914,7 +933,8 @@ This is how I will be giving presentations from now on. see [[https://github.com
 
 #+BEGIN_SRC emacs-lisp 
   (use-package ox-reveal
-    :ensure t)
+    :ensure t
+    :defer t)
   (setq org-reveal-title-slide "<h1>%t</h1><h4>%a</h4><h4>%e</h4>")
   (setq org-reveal-root "file:///Users/Nick/reveal.js")
 
@@ -926,16 +946,17 @@ for exporting to a certain directory (i.e. for your website, see "Exporting org 
 Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html][org publish]] tutorial
 
 #+BEGIN_SRC emacs-lisp 
-    (use-package tagedit
-      :ensure t)
-    (require 'ox-publish)
-    (use-package emmet-mode
-      :ensure t
-      :config
-      (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
-      (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
-      )
-     ;; for html output highlighting
+  (use-package tagedit
+    :ensure t
+    :defer t  )
+  (require 'ox-publish)
+  (use-package emmet-mode
+    :ensure t
+    :config
+    (add-hook 'sgml-mode-hook 'emmet-mode) ;; Auto-start on any markup modes
+    (add-hook 'css-mode-hook  'emmet-mode) ;; enable Emmet's css abbreviation.
+    :defer t)
+  ;; for html output highlighting
   (use-package htmlize)
 #+END_SRC
 
@@ -1022,8 +1043,10 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
 #+BEGIN_SRC emacs-lisp 
   ;; Automatically load paredit when editing a lisp file
   ;; More at http://www.emacswiki.org/emacs/ParEdit
-  (use-package paredit)
-  (use-package lispy)
+  (use-package paredit
+    :defer t)
+  (use-package lispy
+    :defer t)
   ;; indent AGGRESSIVE
   (use-package aggressive-indent)
   ;;(global-aggressive-indent-mode 1)
@@ -1097,11 +1120,15 @@ brew install mit-scheme
 For arduino
 
 #+BEGIN_SRC emacs-lisp 
-  (use-package irony-eldoc)
-  (use-package irony)
-  (use-package arduino-mode)
+  (use-package irony-eldoc
+    :defer t)
+  (use-package irony
+    :defer t)
+  (use-package arduino-mode
+    :defer t)
   (add-to-list 'auto-mode-alist '("\\.ino$" . arduino-mode))
-  (use-package platformio-mode)
+  (use-package platformio-mode
+    :defer t)
 
   ;; Enable irony for all c++ files, and platformio-mode only
   ;; when needed (platformio.ini present in project root).
@@ -1129,10 +1156,12 @@ keybindings in ESS:
 - "C-M-m" pipe character "%>%"
 - "C-=" assignment operator "<-"
 #+BEGIN_SRC emacs-lisp 
-  (use-package ess-site) 
+  (use-package ess-site
+    :defer t) 
   (use-package ess
     :ensure t
-    :init (require 'ess-site))
+    :init (require 'ess-site)
+    :defer t)
 
   (add-hook 'ess-mode-hook #'company-mode)
   (define-key ess-mode-map (kbd "C-<tab>") #'company-complete)
@@ -1223,7 +1252,8 @@ https://github.com/porterjamesj/virtualenvwrapper.el
 #+BEGIN_SRC emacs-lisp 
   ;; Sets up exec-path-from shell
   ;; https://github.com/purcell/exec-path-from-shell
-  (use-package exec-path-from-shell)
+  (use-package exec-path-from-shell
+    :defer t)
   (when (memq window-system '(mac ns))
     (exec-path-from-shell-initialize)
     (exec-path-from-shell-copy-envs
@@ -1309,35 +1339,37 @@ org babel clojure is not working. I have a hacky fix from [[http://fgiasson.com/
 
 #+BEGIN_SRC emacs-lisp 
     ;;;;
-    ;; Clojure
+  ;; Clojure
     ;;;;
-    (use-package clojure-mode
-      :ensure t
-      :config 
-      ;; Enable paredit for Clojure
-      (add-hook 'clojure-mode-hook 'enable-paredit-mode)
-      ;; This is useful for working with camel-case tokens, like names of
-      ;; Java classes (e.g. JavaClassName)
-      (add-hook 'clojure-mode-hook 'subword-mode)
-      (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-      ;; A little more syntax highlighting
-      ;; syntax hilighting for midje
-      (add-hook 'clojure-mode-hook
-                (lambda ()
-                  (setq inferior-lisp-program "lein repl")
-                  (font-lock-add-keywords
-                   nil
-                   '(("(\\(facts?\\)"
-                      (1 font-lock-keyword-face))
-                     ("(\\(background?\\)"
-                      (1 font-lock-keyword-face))))
-                  (define-clojure-indent (fact 1))
-                  (define-clojure-indent (facts 1))))
-      (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
-      (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
-      (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
-      (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
-  (use-package clojure-mode-extra-font-locking)
+  (use-package clojure-mode
+    :ensure t
+    :defer t  
+    :config 
+    ;; Enable paredit for Clojure
+    (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+    ;; This is useful for working with camel-case tokens, like names of
+    ;; Java classes (e.g. JavaClassName)
+    (add-hook 'clojure-mode-hook 'subword-mode)
+    (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+    ;; A little more syntax highlighting
+    ;; syntax hilighting for midje
+    (add-hook 'clojure-mode-hook
+              (lambda ()
+                (setq inferior-lisp-program "lein repl")
+                (font-lock-add-keywords
+                 nil
+                 '(("(\\(facts?\\)"
+                    (1 font-lock-keyword-face))
+                   ("(\\(background?\\)"
+                    (1 font-lock-keyword-face))))
+                (define-clojure-indent (fact 1))
+                (define-clojure-indent (facts 1))))
+    (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
+    (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
+    (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
+    (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
+  (use-package clojure-mode-extra-font-locking
+    :defer t)
 
 #+END_SRC
 ** cider
@@ -1430,7 +1462,8 @@ AWESOME! check [[http://emacsrocks.com/e10.html][this]] out
   
 #+BEGIN_SRC emacs-lisp 
   (use-package yasnippet
-    :ensure t)
+    :ensure t
+    :defer t)
 
   (yas-global-mode t)
   (setq yas-trigger-key "<tab>")
