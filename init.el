@@ -58,7 +58,8 @@
 (server-start)
 ;; load the org config file
 
-(org-babel-load-file (concat user-emacs-directory "config.org"))
+(load-file "~/.emacs.d/init-org.elc")
+;;(org-babel-load-file (concat user-emacs-directory "config.org"))
 
 (setq gc-cons-threshold 800000)
 (custom-set-variables

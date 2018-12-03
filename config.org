@@ -8,6 +8,23 @@
         user-mail-address "nicholas.m.george@ucdenver.edu")
 #+END_SRC
 
+* 
+https://emacs.stackexchange.com/questions/29214/org-based-init-method-slows-down-emacs-startup-dramaticlly-6-minute-startup-h
+#+BEGIN_SRC emacs-lisp 
+(defun my/tangle-dotfiles ()
+   "If the current file is this file, the code blocks are tangled"
+   (when (equal (buffer-file-name) (expand-file-name "~/.emacs.d/config.org"))
+     (org-babel-tangle nil "~/.emacs.d/init-org.el")
+     (byte-compile-file "~/.emacs.d/init-org.el")))
+
+(add-hook 'after-save-hook #'my/tangle-dotfiles)
+;;(my/tangle-dotfiles)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+
 * Use-packages
 
 #+BEGIN_SRC emacs-lisp 
@@ -705,6 +722,8 @@ tags
 
 Requires homebrew
 
+#+BEGIN_EXAMPLE
+
 #+BEGIN_SRC bash :results verbatim 
 brew install basictex
 sudo tlmgr --update self
@@ -716,6 +735,8 @@ sudo tlmgr install xstring
 sudo tlmgr install framed
 sudo tlmgr install dvipng # for anki flash card LaTeX rendering
 #+END_SRC
+
+#+END_EXAMPLE
 
 *** setup
 
@@ -1088,11 +1109,11 @@ Also, this [[http://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.htm
 
 ** MIT Scheme
 MIT Scheme installed with 
-
+#+BEGIN_EXAMPLE
 #+BEGIN_SRC bash :results verbatim 
 brew install mit-scheme
 #+END_SRC
-
+#+END_EXAMPLE
 
  #+BEGIN_SRC emacs-lisp 
    ;; scheme
@@ -1289,11 +1310,14 @@ https://github.com/porterjamesj/virtualenvwrapper.el
 
 Shell scripts to setup basics
 
+#+BEGIN_EXAMPLE
+
 #+BEGIN_SRC bash :results verbatim 
 brew install leiningen
 brew cask install java # need the JDK
 #+END_SRC
 
+#+END_EXAMPLE
 
 #+BEGIN_SRC emacs-lisp 
   ;; key bindings
@@ -1414,9 +1438,12 @@ Old. I already set up cider above.
 
 shell script for installing ispell dictionary with homebrew:
 
+#+BEGIN_EXAMPLE
 #+BEGIN_SRC bash :results verbatim 
 brew install aspell
 #+END_SRC
+#+END_EXAMPLE
+
 
 #+BEGIN_SRC emacs-lisp 
 (setq ispell-program-name "/usr/local/bin/aspell")
