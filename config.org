@@ -619,7 +619,7 @@ https://github.com/lolownia/org-pomodoro Cool!
   ;;       (quote ((sequence "TODO(t)" "NEXT(n)" "In-progress(ip)" "|" "DONE(d)" "CANCELLED(c)"))))
 
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "NEXT(n)" "In-progress(ip)" "|" "DONE(d)" "CANCELLED(c)"))))
+        (quote ((sequence "TODO(t)" "NEXT(n)" "In-progress(ip)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)" ))))
   ;; log time on finish
   (setq org-log-done 'time)
 
@@ -627,6 +627,7 @@ https://github.com/lolownia/org-pomodoro Cool!
         '(("TODO" :foreground "red" :weight bold)
           ("NEXT" :foreground "yellow" :weight bold)
           ("In-progress" :foreground "orange" :weight bold)
+          ("WAITING" :foreground "black" :background "grey" :weight bold)
           ("DONE" :foreground "#2D6B2D" :weight bold)
           ("CANCELLED" :foreground "#2D6B2D")))
 
@@ -635,7 +636,11 @@ https://github.com/lolownia/org-pomodoro Cool!
               (org-bullets-mode t)))
   ;; hook for org mode wrap paragraphs
   (add-hook 'org-mode-hook  (lambda () (setq truncate-lines nil)))
-  (setq org-agenda-files '("~/Dropbox/orgs/master_agenda.org"))
+  (setq org-agenda-files
+        '("~/Dropbox/orgs/master_agenda.org"
+          "~/Dropbox/orgs/myelin-neuron-communication.org"
+          "~/Dropbox/orgs/samplej.org"
+          "~/Dropbox/orgs/smaller-projects.org"))
   ;; electric pairs rock!
   (add-hook 'org-mode-hook 'electric-pair-mode)
   (use-package org-bullets

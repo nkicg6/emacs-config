@@ -10,6 +10,7 @@
 #+LATEX_HEADER: \hypersetup{colorlinks=true,citecolor=black,linkcolor=black,urlcolor=blue,linkbordercolor=blue,pdfborderstyle={/S/U/W 1}}
 #+LATEX_HEADER: \usepackage[round]{natbib}
 #+LATEX_HEADER: \renewcommand{\bibsection}
+#+ARCHIVE: daily_archive.org::datetree/* From master todo
 * $0
 
 

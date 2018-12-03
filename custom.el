@@ -22,7 +22,7 @@
       (file "~/.emacs.d/templates/paper.orgtmpl")
       :empty-lines-after 1)
      ("t" "todo" entry
-      (file+headline "~/Dropbox/orgs/master_agenda.org" "Agenda")
+      (file+headline "~/Dropbox/orgs/master_agenda.org" "Unfiled todos")
       (file "~/.emacs.d/templates/todo.orgtmpl")
       :empty-lines-after 1)
      ("b" "book" entry
@@ -41,23 +41,13 @@
       (file+headline "~/Dropbox/orgs/master_agenda.org" "Uncategorized links")
       (file "~/.emacs.d/templates/link.orgtmpl")
       :empty-lines-after 1)
-     ("n" "lab notebook")
-     ("no" "odor training" entry
-      (file+datetree "~/Dropbox/lab_notebook/notebook/lab_notebook.org")
-      (file "~/.emacs.d/templates/training_notebook.orgtmpl")
-      :empty-lines-after 1)
      ("q" "quick note" entry
       (file+headline "~/Dropbox/orgs/master_agenda.org" "Uncategorized notes")
       (file "~/.emacs.d/templates/note.orgtmpl")
       :empty-lines-after 1)
      ("w" "workout" entry
       (file+datetree "~/Dropbox/orgs/workout.org")
-      (file "~/.emacs.d/templates/workout.orgtmpl"))
-     ("n" "notebook")
-     ("ng" "General lab notebook entry" entry
-      (file+datetree "~/Dropbox/lab_notebook/notebook/lab_notebook.org")
-      (file "~/.emacs.d/templates/general-lab.orgtmpl")
-      :jump-to-captured t :empty-lines-after 1))))
+      (file "~/.emacs.d/templates/workout.orgtmpl")))))
  '(package-selected-packages
    (quote
     (leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
