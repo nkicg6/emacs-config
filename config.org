@@ -8,7 +8,8 @@
         user-mail-address "nicholas.m.george@ucdenver.edu")
 #+END_SRC
 
-* 
+* tangle and byte compile org-mode init
+My load time was really high, sometimes up to 2 minutes to start emacs with my init. After looking around, I came across this post, and one of the answers gave me this function. I changed my init.el to load my compiled and tangled file instead and emacs load times were cut in half. This function will tangle and compile this file whenever I edit and save it. Then, my init.el just loads the compiled file rather than tangling and compiling it from here every time. Awesome!
 https://emacs.stackexchange.com/questions/29214/org-based-init-method-slows-down-emacs-startup-dramaticlly-6-minute-startup-h
 #+BEGIN_SRC emacs-lisp 
 (defun my/tangle-dotfiles ()
@@ -18,11 +19,7 @@ https://emacs.stackexchange.com/questions/29214/org-based-init-method-slows-down
      (byte-compile-file "~/.emacs.d/init-org.el")))
 
 (add-hook 'after-save-hook #'my/tangle-dotfiles)
-;;(my/tangle-dotfiles)
 #+END_SRC
-
-#+RESULTS:
-: t
 
 
 * Use-packages
@@ -36,18 +33,16 @@ https://emacs.stackexchange.com/questions/29214/org-based-init-method-slows-down
     :defer t)
 
   (use-package projectile
-    :commands (projectile-global-mode
-               projectile-mode)
+    :commands (projectile-mode)
     :defer t
     :init
-    (projectile-global-mode))
+    (projectile-mode))
   (setq projectile-indexing-method 'native)
   ;; for some reason, org is giving me the problems listed here https://lists.gnu.org/archive/html/emacs-orgmode/2016-02/msg00424.html
   ;; I had to M-x install-package org-plus-contrib to fix it. I havent tried from scratch yet, but hopefully this will work in the future. 
   ;; tried the fix here https://emacs.stackexchange.com/questions/7890/org-plus-contrib-and-org-with-require-or-use-package
   ;; (use-package org
   ;;       :ensure org-plus-contrib)
-  (message "Test")
 #+END_SRC
 
 * Theme
@@ -211,10 +206,10 @@ Set up custom file thing so it writes to its own file
 
   ;; These settings relate to how emacs interacts with your operating system
   (setq ;; makes killing/yanking interact with the clipboard
-        x-select-enable-clipboard t
+        select-enable-clipboard t
 
         ;; I'm actually not sure what this does but it's recommended?
-        x-select-enable-primary t
+        select-enable-primary t
 
         ;; Save clipboard strings into kill ring before replacing them.
         ;; When one selects something in another program to paste it into Emacs,
@@ -848,10 +843,10 @@ For setting up references, I use org-ref combined with pandoc export. slight cha
     (setq org-ref-default-bibliography '("~/Dropbox/bibliography/library.bib"))
     (setq org-ref-pdf-directory '("~/PDFs")))
 
-  (setq helm-bibtex-bibliography "~/Dropbox/bibliography/library.bib")
-  (setq helm-bibtex-library-path "~/PDFs/")
+  (setq bibtex-completion-bibliography "~/Dropbox/bibliography/library.bib")
+  (setq bibtex-completion-library-path "~/PDFs/")
 
-  (setq helm-bibtex-pdf-open-function
+  (setq bibtex-completion-pdf-open-function
         (lambda (fpath)
           (start-process "open" "*open*" "open" fpath)))
 
@@ -1230,18 +1225,6 @@ keybindings in ESS:
      (tagedit-add-paredit-like-keybindings)
      (add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))))
 
-
-;; coffeescript
-(add-to-list 'auto-mode-alist '("\\.coffee.erb$" . coffee-mode))
-(add-hook 'coffee-mode-hook 'subword-mode)
-(add-hook 'coffee-mode-hook 'highlight-indentation-current-column-mode)
-(add-hook 'coffee-mode-hook
-          (defun coffee-mode-newline-and-indent ()
-            (define-key coffee-mode-map "\C-j" 'coffee-newline-and-indent)
-            (setq coffee-cleanup-whitespace nil)))
-(custom-set-variables
- '(coffee-tab-width 2))
-
 #+END_SRC
 
 * Magit for git
@@ -1461,7 +1444,7 @@ mode is explained [[https://www.emacswiki.org/emacs/AbbrevMode][here]]
             "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
     (setq save-abbrevs t)
-    (setq default-abbrev-mode t)
+    (setq abbrev-mode t)
 #+END_SRC
 
 * TODO Ace

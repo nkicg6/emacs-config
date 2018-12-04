@@ -8,7 +8,6 @@
      (byte-compile-file "~/.emacs.d/init-org.el")))
 
 (add-hook 'after-save-hook #'my/tangle-dotfiles)
-;;(my/tangle-dotfiles)
 
 ;; rainbows
 (use-package rainbow-delimiters
@@ -18,18 +17,16 @@
   :defer t)
 
 (use-package projectile
-  :commands (projectile-global-mode
-             projectile-mode)
+  :commands (projectile-mode)
   :defer t
   :init
-  (projectile-global-mode))
+  (projectile-mode))
 (setq projectile-indexing-method 'native)
 ;; for some reason, org is giving me the problems listed here https://lists.gnu.org/archive/html/emacs-orgmode/2016-02/msg00424.html
 ;; I had to M-x install-package org-plus-contrib to fix it. I havent tried from scratch yet, but hopefully this will work in the future. 
 ;; tried the fix here https://emacs.stackexchange.com/questions/7890/org-plus-contrib-and-org-with-require-or-use-package
 ;; (use-package org
 ;;       :ensure org-plus-contrib)
-(message "Test")
 
 (use-package material-theme
   :ensure t
@@ -137,10 +134,10 @@
 
 ;; These settings relate to how emacs interacts with your operating system
 (setq ;; makes killing/yanking interact with the clipboard
-      x-select-enable-clipboard t
+      select-enable-clipboard t
 
       ;; I'm actually not sure what this does but it's recommended?
-      x-select-enable-primary t
+      select-enable-primary t
 
       ;; Save clipboard strings into kill ring before replacing them.
       ;; When one selects something in another program to paste it into Emacs,
@@ -609,10 +606,10 @@
   (setq org-ref-default-bibliography '("~/Dropbox/bibliography/library.bib"))
   (setq org-ref-pdf-directory '("~/PDFs")))
 
-(setq helm-bibtex-bibliography "~/Dropbox/bibliography/library.bib")
-(setq helm-bibtex-library-path "~/PDFs/")
+(setq bibtex-completion-bibliography "~/Dropbox/bibliography/library.bib")
+(setq bibtex-completion-library-path "~/PDFs/")
 
-(setq helm-bibtex-pdf-open-function
+(setq bibtex-completion-pdf-open-function
       (lambda (fpath)
         (start-process "open" "*open*" "open" fpath)))
 
@@ -904,18 +901,6 @@
      (tagedit-add-paredit-like-keybindings)
      (add-hook 'html-mode-hook (lambda () (tagedit-mode 1)))))
 
-
-;; coffeescript
-(add-to-list 'auto-mode-alist '("\\.coffee.erb$" . coffee-mode))
-(add-hook 'coffee-mode-hook 'subword-mode)
-(add-hook 'coffee-mode-hook 'highlight-indentation-current-column-mode)
-(add-hook 'coffee-mode-hook
-          (defun coffee-mode-newline-and-indent ()
-            (define-key coffee-mode-map "\C-j" 'coffee-newline-and-indent)
-            (setq coffee-cleanup-whitespace nil)))
-(custom-set-variables
- '(coffee-tab-width 2))
-
 (use-package magit
   :ensure t
   :defer t
@@ -1071,7 +1056,7 @@
         "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
 (setq save-abbrevs t)
-(setq default-abbrev-mode t)
+(setq abbrev-mode t)
 
 ;; (use-package ace-jump-mode
 ;;   :ensure t
