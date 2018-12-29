@@ -1,5 +1,5 @@
-** TODO %^{Description} %^g
-Created: %T
+** TODO %^{Description}
+SCHEDULED: %t
 :LOGBOOK:
 - Added: %U
 :END:

@@ -11,6 +11,12 @@
 * tangle and byte compile org-mode init
 My load time was really high, sometimes up to 2 minutes to start emacs with my init. After looking around, I came across this post, and one of the answers gave me this function. I changed my init.el to load my compiled and tangled file instead and emacs load times were cut in half. This function will tangle and compile this file whenever I edit and save it. Then, my init.el just loads the compiled file rather than tangling and compiling it from here every time. Awesome!
 https://emacs.stackexchange.com/questions/29214/org-based-init-method-slows-down-emacs-startup-dramaticlly-6-minute-startup-h
+A nice way to test is with this shell command
+#+BEGIN_EXAMPLE
+time -p emacs -e kill-emacs
+#+END_EXAMPLE
+Add a -q for without the config testing. 
+
 #+BEGIN_SRC emacs-lisp 
 (defun my/tangle-dotfiles ()
    "If the current file is this file, the code blocks are tangled"
@@ -170,6 +176,11 @@ open some programs with the system default
 #+END_SRC
 From init.el, install the defvar my-packages
 
+** org-agenda
+Below will make the agenda take up the whole page.
+#+BEGIN_SRC emacs-lisp 
+(advice-add 'org-agenda :after #'delete-other-windows)
+#+END_SRC
 * Customize settings 
 
 Set up custom file thing so it writes to its own file
@@ -504,7 +515,7 @@ For python repl support
   ;;    pipenv-projectile-after-switch-function
   ;;    #'pipenv-projectile-after-switch-extended))
   ;; not installing from melpa, I'll do manual
-  (load "~/.emacs.d/manual-packages/pipenv.el-master/pipenv.el")
+  (load "~/.emacs.d/manual-packages/pipenv.el-master/pipenv.elc")
   (add-hook 'python-mode-hook #'pipenv-mode)
   (setq pipenv-projectile-after-switch-function
         #'pipenv-projectile-after-switch-extended)
@@ -652,7 +663,8 @@ https://github.com/lolownia/org-pomodoro Cool!
         '("~/Dropbox/orgs/master_agenda.org"
           "~/Dropbox/orgs/myelin-neuron-communication.org"
           "~/Dropbox/orgs/samplej.org"
-          "~/Dropbox/orgs/smaller-projects.org"))
+          "~/Dropbox/orgs/smaller-projects.org"
+          "~/Dropbox/orgs/recurring-reminders-and-tasks.org"))
   ;; electric pairs rock!
   (add-hook 'org-mode-hook 'electric-pair-mode)
   (use-package org-bullets
@@ -933,9 +945,9 @@ Then evaluate with C-x C-e
 *** matlab mode
 
 #+BEGIN_SRC emacs-lisp 
-  (use-package matlab-mode
-    :ensure t
-    :defer t)
+  ;;(use-package matlab-mode
+  ;;  :ensure t
+  ;;  :defer t)
 #+END_SRC
 
 ** org python

@@ -108,6 +108,8 @@
 (bind-key "C-c c" 'org-capture)
 (bind-key "C-c a" 'org-agenda)
 
+(advice-add 'org-agenda :after #'delete-other-windows)
+
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
@@ -372,7 +374,7 @@
 ;;    pipenv-projectile-after-switch-function
 ;;    #'pipenv-projectile-after-switch-extended))
 ;; not installing from melpa, I'll do manual
-(load "~/.emacs.d/manual-packages/pipenv.el-master/pipenv.el")
+(load "~/.emacs.d/manual-packages/pipenv.el-master/pipenv.elc")
 (add-hook 'python-mode-hook #'pipenv-mode)
 (setq pipenv-projectile-after-switch-function
       #'pipenv-projectile-after-switch-extended)
@@ -480,7 +482,8 @@
       '("~/Dropbox/orgs/master_agenda.org"
         "~/Dropbox/orgs/myelin-neuron-communication.org"
         "~/Dropbox/orgs/samplej.org"
-        "~/Dropbox/orgs/smaller-projects.org"))
+        "~/Dropbox/orgs/smaller-projects.org"
+        "~/Dropbox/orgs/recurring-reminders-and-tasks.org"))
 ;; electric pairs rock!
 (add-hook 'org-mode-hook 'electric-pair-mode)
 (use-package org-bullets
@@ -671,9 +674,9 @@
 (setq company-idle-delay nil) ; never start completions automatically
 ;;(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 
-(use-package matlab-mode
-  :ensure t
-  :defer t)
+;;(use-package matlab-mode
+;;  :ensure t
+;;  :defer t)
 
 ;; (setq org-babel-default-header-args:python
 ;;       (cons '(:results . "output org drawer replace")
