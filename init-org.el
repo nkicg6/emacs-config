@@ -597,20 +597,29 @@
   :commands turn-on-reftex
   :init
   (progn
-    (setq reftex-default-bibliography '("/Users/Nick/Dropbox/bibliography/library.bib"))
+    (setq reftex-default-bibliography '("/Users/Nick/Dropbox/bibliography/zotero-library.bib"))
     (setq reftex-plug-intoAUCTex t))
   :defer t  
   )
+(use-package helm-bibtex)
+
 (use-package org-ref
   :after org
   :defer t
   :init
-  (setq reftex-default-bibliography '("~/Dropbox/bibliography/library.bib"))
-  (setq org-ref-default-bibliography '("~/Dropbox/bibliography/library.bib"))
+  (setq reftex-default-bibliography '("~/Dropbox/bibliography/zotero-library.bib"))
+  (setq org-ref-default-bibliography '("~/Dropbox/bibliography/zotero-library.bib"))
   (setq org-ref-pdf-directory '("~/PDFs")))
 
-(setq bibtex-completion-bibliography "~/Dropbox/bibliography/library.bib")
 (setq bibtex-completion-library-path "~/PDFs/")
+
+
+(setq bibtex-completion-bibliography "~/Dropbox/bibliography/zotero-library.bib")
+(setq bibtex-completion-additional-search-fields '(keywords journal doi))
+(setq bibtex-completion-display-formats
+      '((t . "${author:36} ${year:4} ${title:*}")))
+
+
 
 (setq bibtex-completion-pdf-open-function
       (lambda (fpath)
