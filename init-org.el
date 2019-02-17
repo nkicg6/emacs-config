@@ -212,12 +212,12 @@
 (global-set-key (kbd "C-;") 'toggle-comment-on-line)
 
 ;; use 2 spaces for tabs
-(defun die-tabs ()
-  (interactive)
-  (set-variable 'tab-width 2)
-  (mark-whole-buffer)
-  (untabify (region-beginning) (region-end))
-  (keyboard-quit))
+;; (defun die-tabs ()
+;;   (interactive)
+;;   (set-variable 'tab-width 2)
+;;   (mark-whole-buffer)
+;;   (untabify (region-beginning) (region-end))
+;;   (keyboard-quit))
 
 ;; fix weird os x kill error
 (defun ns-get-pasteboard ()
@@ -853,10 +853,10 @@
 
 ;; Enable irony for all c++ files, and platformio-mode only
 ;; when needed (platformio.ini present in project root).
-(add-hook 'c++-mode-hook (lambda ()
-                           (irony-mode)
-                           (irony-eldoc)
-                           (platformio-conditionally-enable)))
+;; (add-hook 'c++-mode-hook (lambda ()
+;;                            (irony-mode)
+;;                            (irony-eldoc)
+;;                            (platformio-conditionally-enable)))
 
 ;; Use irony's completion functions.
 (add-hook 'irony-mode-hook
@@ -1015,7 +1015,7 @@
   ;; syntax hilighting for midje
   (add-hook 'clojure-mode-hook
             (lambda ()
-              (setq inferior-lisp-program "lein repl")
+              ;;(setq inferior-lisp-program "lein repl")
               (font-lock-add-keywords
                nil
                '(("(\\(facts?\\)"
@@ -1068,7 +1068,7 @@
         "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
 (setq save-abbrevs t)
-(setq abbrev-mode t)
+(setq-default abbrev-mode t)
 
 ;; (use-package ace-jump-mode
 ;;   :ensure t
