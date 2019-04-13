@@ -689,8 +689,7 @@
   (interactive)
   (inf-clojure "lein trampoline repl"))
 
-(add-hook 'inf-clojure-mode 'paredit-mode)
-(add-hook 'clojure-mode-hook #'lein-tramp)
+(add-hook 'inf-clojure-mode #'paredit-mode)
 
 ;;(use-package matlab-mode
 ;;  :ensure t
