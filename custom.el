@@ -49,7 +49,7 @@
       (file "~/.emacs.d/templates/workout.orgtmpl")))))
  '(package-selected-packages
    (quote
-    (ess-site leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode))))
+    (ess-site company-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

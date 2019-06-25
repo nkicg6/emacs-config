@@ -514,7 +514,9 @@ For python repl support
   ;;    pipenv-projectile-after-switch-function
   ;;    #'pipenv-projectile-after-switch-extended))
   ;; not installing from melpa, I'll do manual
-  (load "~/.emacs.d/manual-packages/pipenv.el-master/pipenv.elc")
+
+
+  (add-hook 'python-mode-hook (load "~/.emacs.d/manual-packages/pipenv.el-master/pipenv.elc"))
   (add-hook 'python-mode-hook #'pipenv-mode)
   (setq pipenv-projectile-after-switch-function
         #'pipenv-projectile-after-switch-extended)
@@ -936,28 +938,34 @@ Setup is that I have to M-x cider-jack-in
 Then evaluate with C-x C-e
 
 #+BEGIN_SRC emacs-lisp 
-  ;; (use-package cider)
-  ;; (setq org-babel-clojure-backend 'cider)
-
-  ;; (org-defkey org-mode-map "\C-c\C-x\C-e" 'cider-eval-last-sexp)
-  ;; (setq cider-repl-display-help-banner nil)
-  ;; ;; autocompletion from cider https://github.com/clojure-emacs/cider/blob/master/doc/code_completion.md
-  ;; (use-package company-mode) ;; autocompletion
-  ;; (add-hook 'cider-mode-hook #'company-mode)
-  ;; (add-hook 'cider-repl-mode-hook #'company-mode)
-  ;;(define-key cider-mode-map (kbd "C-<tab>") #'company-complete)
-  (setq company-idle-delay nil) ; never start completions automatically
-  ;;(global-set-key (kbd "TAB") #'company-indent-or-complete-common) 
+  (use-package cider)
+  (setq org-babel-clojure-backend 'cider)
+  (org-defkey org-mode-map "\C-c\C-x\C-e" 'cider-eval-last-sexp)
+  (setq cider-repl-display-help-banner nil)
+  ;; autocompletion from cider https://github.com/clojure-emacs/cider/blob/master/doc/code_completion.md
+  (use-package company-mode) ;; autocompletion
+  (add-hook 'cider-mode-hook #'company-mode)
+  (add-hook 'cider-repl-mode-hook #'company-mode)
+  (define-key cider-mode-map (kbd "C-<tab>") #'company-complete)
+  (setq company-idle-delay nil) never start completions automatically
+  (global-set-key (kbd "TAB") #'company-indent-or-complete-common) 
 #+END_SRC
 *** inferior list clojure 
 #+BEGIN_SRC emacs-lisp 
   (use-package inf-clojure)
-  (add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
+  ;;(add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
   (defun lein-tramp ()
     (interactive)
     (inf-clojure "lein trampoline repl"))
 
   (add-hook 'inf-clojure-mode #'paredit-mode)
+  (add-hook 'inf-clojure-mode-hook #'paredit-mode)
+  (add-hook 'clojure-mode-hook #'eldoc-mode)
+  (add-hook 'inf-clojure-mode-hook #'eldoc-mode)
+  (add-hook 'inf-clojure-mode #'company-mode)
+  (add-hook 'inf-clojure-mode-hook #'company-mode)
+  (setq company-idle-delay nil) ; never start completions automatically
+  ;;(global-set-key (kbd "C-<tab>") #'company-complete)
 #+END_SRC
 *** matlab mode
 
@@ -1143,6 +1151,7 @@ brew install mit-scheme
    ;; scheme
    (setq scheme-program-name "/usr/local/bin/mit-scheme")
    (add-hook 'scheme-mode-hook #'aggressive-indent-mode)
+   (add-hook 'scheme-mode hook #'paredit-mode)
  #+END_SRC
 
 * html
