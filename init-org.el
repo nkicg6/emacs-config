@@ -42,11 +42,10 @@
   (setq solarized-use-variable-pitch nil)
   :ensure t)
 
-(require 'material-theme)
-      (use-package leuven-theme
-        :ensure t
-        :config
-        (load-theme 'leuven t))
+(use-package leuven-theme
+  :ensure t
+  :config
+  (load-theme 'leuven t))
 
 ;; fix these in the future. So it switches upon programming mode entry
 ;; (add-hook 'prog-mode-hook
@@ -220,11 +219,11 @@
 ;;   (keyboard-quit))
 
 ;; fix weird os x kill error
-(defun ns-get-pasteboard ()
-  "Returns the value of the pasteboard, or nil for unsupported formats."
-  (condition-case nil
-      (ns-get-selection-internal 'CLIPBOARD)
-    (quit nil)))
+;; (defun ns-get-pasteboard ()
+;;   "Returns the value of the pasteboard, or nil for unsupported formats."
+;;   (condition-case nil
+;;       (ns-get-selection-internal 'CLIPBOARD)
+;;     (quit nil)))
 
 (setq electric-indent-mode nil)
 ;; visual line!
@@ -839,9 +838,12 @@
 ;;     (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
 ;; scheme
-(setq scheme-program-name "/usr/local/bin/mit-scheme")
+(setq scheme-program-name "/usr/local/bin/chez")
 (add-hook 'scheme-mode-hook #'aggressive-indent-mode)
-(add-hook 'scheme-mode hook #'paredit-mode)
+(add-hook 'scheme-mode-hook #'paredit-mode)
+
+(add-hook 'inferior-scheme-mode-hook #'aggressive-indent-mode)
+(add-hook 'inferior-scheme-mode-hook #'paredit-mode)
 
 ;; setup file for html mode. 
 ;; added 2017-4-02

@@ -80,11 +80,10 @@ Add a -q for without the config testing.
 ** Leuven theme
 
 #+BEGIN_SRC emacs-lisp 
-    (require 'material-theme)
-        (use-package leuven-theme
-          :ensure t
-          :config
-          (load-theme 'leuven t))
+  (use-package leuven-theme
+    :ensure t
+    :config
+    (load-theme 'leuven t))
 
   ;; fix these in the future. So it switches upon programming mode entry
   ;; (add-hook 'prog-mode-hook
@@ -304,11 +303,11 @@ Set up custom file thing so it writes to its own file
   ;;   (keyboard-quit))
 
   ;; fix weird os x kill error
-  (defun ns-get-pasteboard ()
-    "Returns the value of the pasteboard, or nil for unsupported formats."
-    (condition-case nil
-        (ns-get-selection-internal 'CLIPBOARD)
-      (quit nil)))
+  ;; (defun ns-get-pasteboard ()
+  ;;   "Returns the value of the pasteboard, or nil for unsupported formats."
+  ;;   (condition-case nil
+  ;;       (ns-get-selection-internal 'CLIPBOARD)
+  ;;     (quit nil)))
 
   (setq electric-indent-mode nil)
   ;; visual line!
@@ -1149,9 +1148,12 @@ brew install mit-scheme
 
  #+BEGIN_SRC emacs-lisp 
    ;; scheme
-   (setq scheme-program-name "/usr/local/bin/mit-scheme")
+   (setq scheme-program-name "/usr/local/bin/chez")
    (add-hook 'scheme-mode-hook #'aggressive-indent-mode)
-   (add-hook 'scheme-mode hook #'paredit-mode)
+   (add-hook 'scheme-mode-hook #'paredit-mode)
+
+   (add-hook 'inferior-scheme-mode-hook #'aggressive-indent-mode)
+   (add-hook 'inferior-scheme-mode-hook #'paredit-mode)
  #+END_SRC
 
 * html
