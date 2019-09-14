@@ -33,7 +33,7 @@
 (server-start)
 
 ;; load the org config file
-
+(use-package cider)
 (load-file "~/.emacs.d/init-org.elc")
 
 (setq gc-cons-threshold 800000)

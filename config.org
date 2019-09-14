@@ -311,7 +311,7 @@ Set up custom file thing so it writes to its own file
 
   (setq electric-indent-mode nil)
   ;; visual line!
-  (global-visual-line-mode t)
+  ;;(global-visual-line-mode t)
 #+END_SRC
 
 * Don't prompt to quit
@@ -331,37 +331,71 @@ from my old navigation file
 
 #+BEGIN_SRC emacs-lisp 
 
-      ;; ido-mode allows you to more easily navigate choices. For example,
-      ;; when you want to switch buffers, ido presents you with a list
-      ;; of buffers in the the mini-buffer. As you start to type a buffer's
-      ;; name, ido will narrow down the list of buffers to match the text
-      ;; you've typed in
-      ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
+  ;; ido-mode allows you to more easily navigate choices. For example,
+  ;; when you want to switch buffers, ido presents you with a list
+  ;; of buffers in the the mini-buffer. As you start to type a buffer's
+  ;; name, ido will narrow down the list of buffers to match the text
+  ;; you've typed in
+  ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
   ;; use helm
-    ;; (use-package ido
-    ;;   :config
-    ;;   (ido-mode t)
-    ;;   :init  
-    ;;   (setq 
-    ;;    ido-enable-flex-matching t
-    ;;    ido-use-filename-at-point nil
-    ;;    ido-auto-merge-work-directories-length -1
-    ;;    ido-use-virtual-buffers t
-    ;;    ido-ubiquitous-mode 1))
+  ;; (use-package ido
+  ;;   :config
+  ;;   (ido-mode t)
+  ;;   :init  
+  ;;   (setq 
+  ;;    ido-enable-flex-matching t
+  ;;    ido-use-filename-at-point nil
+  ;;    ido-auto-merge-work-directories-length -1
+  ;;    ido-use-virtual-buffers t
+  ;;    ido-ubiquitous-mode 1))
 
-      ;; Shows a list of buffers
+  ;; Shows a list of buffers
+  ;; (use-package ibuffer
+  ;;   :defer t
+  ;;   :commands ibuffer
+  ;;   :config 
+  ;;   (define-ibuffer-column size-h
+  ;;     (:name "Size" :inline t)
+  ;;     (cond
+  ;;      ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
+  ;;      ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
+  ;;      (t (format "%8d" (buffer-size)))))
+  ;;   :bind
+  ;;   ("C-x C-b" . ibuffer))
+
   (use-package ibuffer
-    :defer t
     :commands ibuffer
-    :config
-    (define-ibuffer-column size-h
-      (:name "Size" :inline t)
-      (cond
-       ((> (buffer-size) 1000000) (format "%7.1fM" (/ (buffer-size) 1000000.0)))
-       ((> (buffer-size) 1000) (format "%7.1fk" (/ (buffer-size) 1000.0)))
-       (t (format "%8d" (buffer-size)))))
-    :bind
-    ("C-x C-b" . ibuffer))
+    :bind ("C-x C-b" . ibuffer))
+
+  (define-ibuffer-column size-h
+    (:name "Size" :inline t)
+    (cond
+     ((> (buffer-size) 1000000) (format "%7.3fM" (/ (buffer-size) 1000000.0)))
+     ((> (buffer-size) 1000) (format "%7.3fk" (/ (buffer-size) 1000.0)))
+     (t (format "%8d" (buffer-size)))))
+
+  (setq ibuffer-default-sorting-mode 'recency)
+
+  (setq ibuffer-saved-filter-groups
+        '(("home"
+           ("emacs-config" (or (filename . ".emacs.d")
+                               (filename . "emacs-config")))
+           ("Org" (or (mode . org-mode)
+                      (filename . "OrgMode")))
+           ("code" (or (mode . python-mode)
+                       (mode . inferior-lisp-mode)
+                       (mode . ess-mode)
+                       (mode . scheme-mode)
+                       (mode . clojure-mode)
+                       (mode . clojurescript-mode)
+                       (mode . prog-mode)))
+           ("shell/REPL" (or (mode . eshell-mode)
+                             (mode . cider-repl-mode)
+                             (mode . comint-mode))))))
+  (add-hook 'ibuffer-mode-hook
+            '(lambda ()
+               (ibuffer-switch-to-saved-filter-groups "home")))
+  (setq ibuffer-truncate-lines t)
 
   ;; Enhances M-x to allow easier execution of commands. Provides
   ;; a filterable list of possible commands in the minibuffer
@@ -659,6 +693,7 @@ https://github.com/lolownia/org-pomodoro Cool!
               (org-bullets-mode t)))
   ;; hook for org mode wrap paragraphs
   (add-hook 'org-mode-hook  (lambda () (setq truncate-lines nil)))
+  (add-hook 'org-mode-hook 'visual-line-mode)
   (setq org-agenda-files
         '("~/Dropbox/orgs/master_agenda.org"
           "~/Dropbox/orgs/myelin-neuron-communication.org"
@@ -1419,7 +1454,9 @@ org babel clojure is not working. I have a hacky fix from [[http://fgiasson.com/
                 (define-clojure-indent (facts 1))))
     (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
     (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
-    (add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
+    ;;(add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
+    (add-to-list 'auto-mode-alist '("\\.clj.*$" . clojure-mode))
+    (add-to-list 'auto-mode-alist '("\\.cljs" . clojurescript-mode))
     (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
   (use-package clojure-mode-extra-font-locking
     :defer t)
@@ -1486,6 +1523,25 @@ mode is explained [[https://www.emacswiki.org/emacs/AbbrevMode][here]]
 
   (setq save-abbrevs t)
   (setq-default abbrev-mode t)
+#+END_SRC
+
+* pretty lambda symbols
+#+BEGIN_SRC emacs-lisp 
+  ;; http://ergoemacs.org/emacs/emacs_pretty_lambda.html
+  (defun pretty-lambda ()
+    (setq prettify-symbols-alist
+          '(
+            ("lambda" . 955))))
+  (add-hook 'scheme-mode-hook 'prettify-symbols-mode)
+  (add-hook 'scheme-mode-hook 'pretty-lambda)
+  (add-hook 'clojure-mode-hook 'prettify-symbols-mode)
+  (add-hook 'clojure-mode-hook 'pretty-lambda)
+  (add-hook 'emacs-lisp-mode-hook 'pretty-lambda)
+  (add-hook 'emacs-lisp-mode-hook 'prettify-symbols-mode)
+  (add-hook 'lisp-mode-hook 'pretty-lambda)
+  (add-hook 'lisp-mode-hook 'prettify-symbols-mode)
+  (add-hook 'prog-mode-hook 'pretty-lambda )
+  (add-hook 'prog-mode-hook 'prettify-symbols-mode)
 #+END_SRC
 
 * TODO Ace
