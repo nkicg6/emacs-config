@@ -16,3 +16,6 @@ config.el
 /ac-comphist.dat
 /.python-environments/*
 /.DS_Store
+transient/*
+.org-id-locations
+recentf
