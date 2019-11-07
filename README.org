@@ -1,25 +1,25 @@
 #+TITLE: My org more config
 #+AUTHOR: Nick George
 
-This works by reading =init.el= which then uses org-babel to tangle =config.org= into =config.el= to finish setting up my mac OSX Emacs environment. 
+This has been updated to use the normal emacs =init.el= file which loads a file (byte-compiled) called =revised-init.el= to initialize. I previously organized my init file as an =org-mode= document then tangled and loaded it, but my emacs startup times were very slow. My current method is much faster. The =config.org= file is here only as a record.
+
 * Nick's Emacs config
+
 I started using emacs when I started learning Clojure using Daniel Higginbotham's book [[http://www.braveclojure.com/][Clojure for the brave and true]].
-Initially, I used his stock emacs config file which was great to get started. 
-Now, I am obsessed with Emacs and org-mode and am trying to learn more emacs-lisp so I can customize more intelligently and make this thing my own.
-This is heavily based on this [[https://www.youtube.com/watch?v=gRb3bq0NiXY][video]] and the [[https://github.com/danielmai/.emacs.d/blob/master/config.org][github repo]]
-Other files I found useful and continue to refer to:
+
+_Original influences and cool tools:_
+
+- This is heavily based on this [[https://www.youtube.com/watch?v=gRb3bq0NiXY][video]] and the [[https://github.com/danielmai/.emacs.d/blob/master/config.org][github repo]]
 - [[https://github.com/jcf/emacs.d/blob/master/init-packages.org][JCF]]
 - [[https://github.com/dvb-industries/.emacs.d/blob/master/package-configuration/clojure.org][Daan van Berkel]]
 - [[http://orgmode.org/elpa.html][org plus contrib]] 
 - [[https://github.com/danielmai/.emacs.d/blob/master/config.org][Daniel Mai]]
-This one is what started my obsession with the org config. Still working on the shell scripts to set up the environment. 
 - [[https://www.youtube.com/watch?v=2TSKxxYEbII][use-package]]
 - [[https://github.com/jkitchin/org-ref][org-ref]]
 For research
 - [[https://github.com/vikasrawal/orgpaper/blob/master/orgpapers.org][org papers]]
 research toolkit, very useful
 - [[http://www.i3s.unice.fr/~malapert/org/tips/emacs_orgmode.html][great org init]]
-- /help/
-In the past I have had trouble with weird library errors. I have found that often this is due to byte compilation errors and removing all .elc files seems to fix the problem.
 
-Click my =config.org= to see my config. 
+
+My config is located in =init.el= which then loads =revised-init.el=.
