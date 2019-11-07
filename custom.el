@@ -37,7 +37,7 @@
    (quote
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(magit-diff-use-overlays nil)
- '(markdown-command "/usr/local/bin/pandoc")
+ '(markdown-command "/usr/local/bin/pandoc" t)
  '(org-agenda-files
    (quote
     ("~/Dropbox/CV_biosketch/cv.org" "/Users/Nick/Dropbox/orgs/Expanding-orgmode.py-to-get-better-org-python-integration.org" "/Users/Nick/Dropbox/orgs/books.org" "/Users/Nick/Dropbox/orgs/class_2017.org" "/Users/Nick/Dropbox/orgs/daily_archive.org" "/Users/Nick/Dropbox/orgs/electrophysiology.org" "/Users/Nick/Dropbox/orgs/image_analysis.org" "/Users/Nick/Dropbox/orgs/journal.org" "/Users/Nick/Dropbox/orgs/master_agenda.org" "/Users/Nick/Dropbox/orgs/papers.org" "/Users/Nick/Dropbox/orgs/projects.org" "/Users/Nick/Dropbox/orgs/reference_texts.org" "/Users/Nick/Dropbox/orgs/sanfrancisco.org" "/Users/Nick/Dropbox/orgs/seminars_and_notes.org" "/Users/Nick/Dropbox/orgs/snakeSnap.org" "/Users/Nick/Dropbox/orgs/statistics.org" "/Users/Nick/Dropbox/orgs/workout.org" "/Users/Nick/Dropbox/lab_notebook/analysis_statistics.org" "/Users/Nick/Dropbox/lab_notebook/data_analysis.org" "/Users/Nick/Dropbox/lab_notebook/git_instructions.org" "/Users/Nick/Dropbox/lab_notebook/myelin_oscillations.org")))
@@ -76,7 +76,7 @@
       (file "~/.emacs.d/templates/workout.orgtmpl")))))
  '(package-selected-packages
    (quote
-    (ess-site company-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
+    (leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))

@@ -28,13 +28,14 @@
 (eval-when-compile
   (require 'use-package))
 
-(require 'diminish)                ;; if you use :diminish
-(require 'bind-key)                ;; if you use any :bind variant
+;;(require 'diminish)                ;; if you use :diminish
+;;(require 'bind-key)                ;; if you use any :bind variant
 (server-start)
 
 ;; load the org config file
 (use-package cider)
-(load-file "~/.emacs.d/init-org.elc")
+
+(load-file "~/.emacs.d/revised-init.elc")
 
 (setq gc-cons-threshold 800000)
 (custom-set-variables
