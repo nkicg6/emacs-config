@@ -63,6 +63,8 @@
 
 ;; (setq x-select-enable-clipboard t)
 
+(use-package paredit)
+
 (use-package openwith
   :defer t)
 
@@ -132,6 +134,9 @@
 
 ;; full path in title bar
 (setq-default frame-title-format "%b (%f)")
+
+;; frame size
+(if (window-system) (set-frame-size (selected-frame) 100 50))
 
 ;; don't pop up font menu
 (global-set-key (kbd "s-t") '(lambda () (interactive)))
@@ -590,3 +595,11 @@
 
 (yas-global-mode t)
 (setq yas-trigger-key "<tab>")
+
+
+;; helm customizations
+(define-key helm-map (kbd "<left>") 'helm-find-files-up-one-level)
+(define-key helm-map (kbd "<right>") 'helm-execute-persistent-action)
+
+
+(add-hook 'emacs-lisp-mode-hook 'paredit-mode)
