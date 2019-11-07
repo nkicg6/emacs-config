@@ -313,14 +313,14 @@
 
 (setq ansi-color-for-comint-mode t)
 
+;; python
 
-
-
-;; (add-hook 'python-mode-hook (load "~/.emacs.d/manual-packages/pipenv.el-master/pipenv.el"))
-;; (add-hook 'python-mode-hook #'pipenv-mode)
-;; (setq pipenv-projectile-after-switch-function
-;;       #'pipenv-projectile-after-switch-extended)
-
+(use-package pipenv
+  :hook (python-mode . pipenv-mode)
+  :init
+  (setq
+   pipenv-projectile-after-switch-function
+   #'pipenv-projectile-after-switch-extended))
 (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'python-mode-hook 'electric-pair-mode)
 
