@@ -292,10 +292,14 @@
                      (mode . scheme-mode)
                      (mode . clojure-mode)
                      (mode . clojurescript-mode)
-                     (mode . prog-mode)))
+                     (mode . prog-mode)
+                     (mode . sh-mode)))
          ("shell/REPL" (or (mode . eshell-mode)
                            (mode . cider-repl-mode)
-                           (mode . comint-mode))))))
+                           (mode . comint-mode)))
+         ("web" (or (mode . html-mode)
+                    (mode . css-mode)))
+         ("dired" (mode . dired-mode)))))
 (add-hook 'ibuffer-mode-hook
           '(lambda ()
              (ibuffer-switch-to-saved-filter-groups "home")))
@@ -478,6 +482,86 @@
 ;; around the cursor to one empty line. Useful for deleting all but
 ;; one blank line at end of file. To do this go to end of file (M->)
 ;; and type C-x C-o.
+
+;;;;
+;; Clojure
+  ;;;;
+(use-package clojure-mode
+  :ensure t
+  :defer t  
+  :config 
+  ;; Enable paredit for Clojure
+  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
+  ;; This is useful for working with camel-case tokens, like names of
+  ;; Java classes (e.g. JavaClassName)
+  (add-hook 'clojure-mode-hook 'subword-mode)
+  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+  ;; A little more syntax highlighting
+  ;; syntax hilighting for midje
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              ;;(setq inferior-lisp-program "lein repl")
+              (font-lock-add-keywords
+               nil
+               '(("(\\(facts?\\)"
+                  (1 font-lock-keyword-face))
+                 ("(\\(background?\\)"
+                  (1 font-lock-keyword-face))))
+              (define-clojure-indent (fact 1))
+              (define-clojure-indent (facts 1))))
+  (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
+  ;;(add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.clj.*$" . clojure-mode))
+  (add-to-list 'auto-mode-alist '("\\.cljs" . clojurescript-mode))
+  (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
+(use-package clojure-mode-extra-font-locking
+  :defer t)
+
+;; Automatically load paredit when editing a lisp file
+;; More at http://www.emacswiki.org/emacs/ParEdit
+(use-package paredit
+  :defer t)
+(use-package lispy
+  :defer t)
+;; indent AGGRESSIVE
+(use-package aggressive-indent)
+;;(global-aggressive-indent-mode 1)
+;;(add-to-list 'aggressive-indent-excluded-modes 'clojure-mode)
+(add-to-list 'aggressive-indent-excluded-modes 'html-mode 'org-mode)
+(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+(add-hook 'lisp-mode-hook #'aggressive-indent-mode)
+(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+;; sadly, I tried parinfer but as a beginner I found it difficult to work with based on 
+;; a lot of the reasons summarized ehre https://github.com/noctuid/parinfer-notes
+;; (use-package parinfer
+;;   :ensure t
+;;   :bind
+;;   (("C-," . parinfer-toggle-mode))
+;;   :init
+;;   (progn
+;;     (setq parinfer-extensions
+;;           '(defaults       ; should be included.
+;;              pretty-parens  ; different paren styles for different modes.
+;;              evil           ; If you use Evil.
+;;              lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
+;;              paredit        ; Introduce some paredit commands.
+;;              smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+;;              smart-yank))   ; Yank behavior depend on mode.
+;;     (add-hook 'clojure-mode-hook #'parinfer-mode)
+;;     (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+;;     (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+;;     (add-hook 'scheme-mode-hook #'parinfer-mode)
+;;     (add-hook 'lisp-mode-hook #'parinfer-mode)))
+
+;; scheme
+(setq scheme-program-name "/usr/local/bin/chez")
+(add-hook 'scheme-mode-hook #'aggressive-indent-mode)
+(add-hook 'scheme-mode-hook #'paredit-mode)
+
+(add-hook 'inferior-scheme-mode-hook #'aggressive-indent-mode)
+(add-hook 'inferior-scheme-mode-hook #'paredit-mode)
 
 (use-package org-pomodoro
   :defer t)
@@ -714,11 +798,12 @@
 (use-package company-mode) ;; autocompletion
 (add-hook 'cider-mode-hook #'company-mode)
 (add-hook 'cider-repl-mode-hook #'company-mode)
+(add-hook 'cider-repl-mode-hook 'paredit-mode)
 (define-key cider-mode-map (kbd "C-<tab>") #'company-complete)
 (setq company-idle-delay nil) never start completions automatically
 (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 
-(use-package inf-clojure)
+;;(use-package inf-clojure)
 ;;(add-hook 'clojure-mode-hook #'inf-clojure-minor-mode)
 (defun lein-tramp ()
   (interactive)
@@ -834,51 +919,6 @@
          :html-extension "html"
          :body-only t)
         ("clj-site" :components ("programming" "science"))))
-
-;; Automatically load paredit when editing a lisp file
-;; More at http://www.emacswiki.org/emacs/ParEdit
-(use-package paredit
-  :defer t)
-(use-package lispy
-  :defer t)
-;; indent AGGRESSIVE
-(use-package aggressive-indent)
-;;(global-aggressive-indent-mode 1)
-;;(add-to-list 'aggressive-indent-excluded-modes 'clojure-mode)
-(add-to-list 'aggressive-indent-excluded-modes 'html-mode 'org-mode)
-(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
-(add-hook 'lisp-mode-hook #'aggressive-indent-mode)
-(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-(add-hook 'emacs-lisp-mode-hook #'paredit-mode)
-;; sadly, I tried parinfer but as a beginner I found it difficult to work with based on 
-;; a lot of the reasons summarized ehre https://github.com/noctuid/parinfer-notes
-;; (use-package parinfer
-;;   :ensure t
-;;   :bind
-;;   (("C-," . parinfer-toggle-mode))
-;;   :init
-;;   (progn
-;;     (setq parinfer-extensions
-;;           '(defaults       ; should be included.
-;;              pretty-parens  ; different paren styles for different modes.
-;;              evil           ; If you use Evil.
-;;              lispy          ; If you use Lispy. With this extension, you should install Lispy and do not enable lispy-mode directly.
-;;              paredit        ; Introduce some paredit commands.
-;;              smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-;;              smart-yank))   ; Yank behavior depend on mode.
-;;     (add-hook 'clojure-mode-hook #'parinfer-mode)
-;;     (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-;;     (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-;;     (add-hook 'scheme-mode-hook #'parinfer-mode)
-;;     (add-hook 'lisp-mode-hook #'parinfer-mode)))
-
-;; scheme
-(setq scheme-program-name "/usr/local/bin/chez")
-(add-hook 'scheme-mode-hook #'aggressive-indent-mode)
-(add-hook 'scheme-mode-hook #'paredit-mode)
-
-(add-hook 'inferior-scheme-mode-hook #'aggressive-indent-mode)
-(add-hook 'inferior-scheme-mode-hook #'paredit-mode)
 
 ;; setup file for html mode. 
 ;; added 2017-4-02
@@ -1008,112 +1048,6 @@
            (propertize (eshell/basename (eshell/pwd)) 'face '(:foreground "blue"))) 
          (if (= (user-uid) 0) "# "
            (concat  " $ " )))))
-
-;; key bindings
-;; these help me out with the way I usually develop web apps
-;; (defun cider-start-http-server ()
-;;   (interactive)
-;;   (cider-load-current-buffer)
-;;   (let ((ns (cider-current-ns)))
-;;     (cider-repl-set-ns ns)
-;;     (cider-interactive-eval (format "(println '(def server (%s/start))) (println 'server)" ns))
-;;     (cider-interactive-eval (format "(def server (%s/start)) (println server)" ns))))
-
-
-;; (defun cider-refresh ()
-;;   (interactive)
-;;   (cider-interactive-eval (format "(user/reset)")))
-
-;; (defun cider-user-ns ()
-;;   (interactive)
-;;   (cider-repl-set-ns "user"))
-
-;; (eval-after-load 'cider
-;;   '(progn
-;;      (define-key clojure-mode-map (kbd "C-c C-v") 'cider-start-http-server)
-;;      (define-key clojure-mode-map (kbd "C-M-r") 'cider-refresh)
-;;      (define-key clojure-mode-map (kbd "C-c u") 'cider-user-ns)
-;;      (define-key cider-mode-map (kbd "C-c u") 'cider-user-ns)))
-
-
-;; ;; reference https://github.com/cloju
-re-emacs/squiggly-clojure/issues/29
-;; (use-package flycheck-clojure
-;;   :commands (flycheck-clojure-setup)
-;;   :init
-;;   (add-hook 'clojure-mode-hook
-;;             (lambda ()
-;;               (eval-after-load 'flycheck
-;;                 '(flycheck-clojure-setup)))))
-
-;; (use-package flycheck-clojure)
-;;(use-package flycheck-pos-tip)
-;; (eval-after-load 'flycheck '(flycheck-clojure-setup))
-;; (add-hook 'after-init-hook #'global-flycheck-mode)
-;; (eval-after-load 'flycheck
-;;   '(setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
-
-;;;;
-;; Clojure
-  ;;;;
-(use-package clojure-mode
-  :ensure t
-  :defer t  
-  :config 
-  ;; Enable paredit for Clojure
-  (add-hook 'clojure-mode-hook 'enable-paredit-mode)
-  ;; This is useful for working with camel-case tokens, like names of
-  ;; Java classes (e.g. JavaClassName)
-  (add-hook 'clojure-mode-hook 'subword-mode)
-  (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-  ;; A little more syntax highlighting
-  ;; syntax hilighting for midje
-  (add-hook 'clojure-mode-hook
-            (lambda ()
-              ;;(setq inferior-lisp-program "lein repl")
-              (font-lock-add-keywords
-               nil
-               '(("(\\(facts?\\)"
-                  (1 font-lock-keyword-face))
-                 ("(\\(background?\\)"
-                  (1 font-lock-keyword-face))))
-              (define-clojure-indent (fact 1))
-              (define-clojure-indent (facts 1))))
-  (add-to-list 'auto-mode-alist '("\\.edn$" . clojure-mode))
-  (add-to-list 'auto-mode-alist '("\\.boot$" . clojure-mode))
-  ;;(add-to-list 'auto-mode-alist '("\\.cljs.*$" . clojure-mode))
-  (add-to-list 'auto-mode-alist '("\\.clj.*$" . clojure-mode))
-  (add-to-list 'auto-mode-alist '("\\.cljs" . clojurescript-mode))
-  (add-to-list 'auto-mode-alist '("lein-env" . enh-ruby-mode)))
-(use-package clojure-mode-extra-font-locking
-  :defer t)
-
-;;;;
-;; ;; Cider
-;; ;;;;
-;; (use-package cider
-;;   :ensure t
-;;   :defer t
-;;   )
-
-;;   ;; provides minibuffer documentation for the code you're typing into the repl
-;;   (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
-
-;;   ;; go right to the REPL buffer when it's finished connecting
-;;   (setq cider-repl-pop-to-buffer-on-connect t)
-
-;;   ;; When there's a cider error, show its buffer and switch to it
-;;   (setq cider-show-error-buffer t)
-;;   (setq cider-auto-select-error-buffer t)
-
-;;   ;; Where to store the cider history.
-;;   (setq cider-repl-history-file "~/.emacs.d/cider-history")
-
-;;   ;; Wrap when navigating history.
-;;   (setq cider-repl-wrap-history t)
-
-;;   ;; enable paredit in your REPL
-   (add-hook 'cider-repl-mode-hook 'paredit-mode)
 
 (setq ispell-program-name "/usr/local/bin/aspell")
 (global-set-key (kbd "<f2>")'flyspell-auto-correct-word)
