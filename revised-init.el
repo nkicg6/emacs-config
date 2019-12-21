@@ -213,9 +213,11 @@
          ("code" (or (mode . python-mode)
                      (mode . inferior-lisp-mode)
                      (mode . ess-mode)
+                     (mode . ess-r-mode)
                      (mode . scheme-mode)
                      (mode . clojure-mode)
                      (mode . clojurescript-mode)
+                     (mode . emacs-lisp-mode)
                      (mode . prog-mode)))
          ("shell/REPL" (or (mode . eshell-mode)
                            (mode . cider-repl-mode)
@@ -292,6 +294,16 @@
   )
 (elpy-enable)
 
+(defun hs-mode-and-hide ()
+  "Turn on code folding and folds all"
+  (interactive)
+  (hs-minor-mode)
+  (hs-hide-all))
+
+(add-hook 'python-mode-hook 'hs-mode-and-hide)
+(define-key python-mode-map (kbd "C-c h") 'hs-hide-all)
+(define-key python-mode-map (kbd "C-c s") 'hs-show-all)
+(define-key python-mode-map (kbd "C-<tab>") 'hs-toggle-hiding)
 
 ;; highlight indentation off, only use current column
 (highlight-indentation-mode nil)
@@ -331,6 +343,8 @@
               '(lambda()
                  (save-excursion
                    (delete-trailing-whitespace))))))
+
+(setq flycheck-python-pycompile-executable "/usr/local/bin/python3")
 
 
 (use-package org-pomodoro
@@ -467,6 +481,7 @@
 
  ;;autocompletion from cider https://github.com/clojure-emacs/cider/blob/master/doc/code_completion.md
 (use-package company) ;; autocompletion
+(add-hook 'clojure-mode-hook #'paredit-mode)
 (add-hook 'cider-mode-hook #'company-mode)
 (add-hook 'cider-repl-mode-hook #'company-mode)
 (add-hook 'cider-repl-mode-hook 'paredit-mode)

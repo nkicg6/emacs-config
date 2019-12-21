@@ -19,3 +19,5 @@ config.el
 transient/*
 .org-id-locations
 recentf
+/elpy/
+/manual-packages/
