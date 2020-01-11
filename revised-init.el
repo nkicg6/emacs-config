@@ -315,10 +315,11 @@
   :defer t
   :init (global-flycheck-mode))
 
-(use-package jedi
-  :defer t)
-(add-hook 'python-mode-hook 'jedi:setup)
-(setq jedi:complete-on-dot t)
+(use-package company-jedi)
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+
+(add-hook 'python-mode-hook 'my/python-mode-hook)
 
 ;; for org babel
 (setq org-babel-python-command "python3")
