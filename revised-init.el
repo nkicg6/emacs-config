@@ -80,6 +80,7 @@
 (global-set-key (kbd "C-c y") 'kill-buffer-and-window) ;; kill buffer and window is C-c C-k
 (global-set-key (kbd "C-c c")'org-capture) ;; start org capture.
 (global-set-key (kbd "C-c m") (lambda () (interactive) (find-file "~/Dropbox/orgs/master_agenda.org"))) ;; master agenda in org.
+(global-set-key (kbd "C-c p") (lambda () (interactive) (find-file "~/Dropbox/orgs/planner.org")))
 (global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/revised-init.el"))) ;; config file
 (global-set-key (kbd "C-c l") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/lab_notebook.org"))) ;; lab notebook in org.
 (global-set-key (kbd "C-c d") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/data_analysis.org"))) ;; go to data analysis
@@ -87,8 +88,20 @@
 
 (bind-key "C-c l" 'org-store-link)
 (bind-key "C-c c" 'org-capture)
+
+;; org agenda setup
+(setq org-agenda-files
+      '("~/Dropbox/orgs/planner.org"))
+
+(setq org-agenda-custom-commands
+      '(("c" "Simple agenda view"
+         ((agenda "")
+          (alltodo "")))))
+
 (bind-key "C-c a" 'org-agenda)
 (advice-add 'org-agenda :after #'delete-other-windows)
+
+;; end agenda setup
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
@@ -377,12 +390,7 @@
 ;; hook for org mode wrap paragraphs
 (add-hook 'org-mode-hook  (lambda () (setq truncate-lines nil)))
 (add-hook 'org-mode-hook 'visual-line-mode)
-(setq org-agenda-files
-      '("~/Dropbox/orgs/master_agenda.org"
-        "~/Dropbox/orgs/myelin-neuron-communication.org"
-        "~/Dropbox/orgs/samplej.org"
-        "~/Dropbox/orgs/smaller-projects.org"
-        "~/Dropbox/orgs/recurring-reminders-and-tasks.org"))
+
 ;; electric pairs rock!
 (add-hook 'org-mode-hook 'electric-pair-mode)
 (use-package org-bullets

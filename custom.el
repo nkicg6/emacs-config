@@ -39,13 +39,10 @@
     ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
  '(magit-diff-use-overlays nil)
- '(markdown-command "/usr/local/bin/pandoc" t)
+ '(markdown-command "/usr/local/bin/pandoc")
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4")))
- '(org-agenda-files
-   (quote
-    ("~/Dropbox/CV_biosketch/cv.org" "/Users/Nick/Dropbox/orgs/Expanding-orgmode.py-to-get-better-org-python-integration.org" "/Users/Nick/Dropbox/orgs/books.org" "/Users/Nick/Dropbox/orgs/class_2017.org" "/Users/Nick/Dropbox/orgs/daily_archive.org" "/Users/Nick/Dropbox/orgs/electrophysiology.org" "/Users/Nick/Dropbox/orgs/image_analysis.org" "/Users/Nick/Dropbox/orgs/journal.org" "/Users/Nick/Dropbox/orgs/master_agenda.org" "/Users/Nick/Dropbox/orgs/papers.org" "/Users/Nick/Dropbox/orgs/projects.org" "/Users/Nick/Dropbox/orgs/reference_texts.org" "/Users/Nick/Dropbox/orgs/sanfrancisco.org" "/Users/Nick/Dropbox/orgs/seminars_and_notes.org" "/Users/Nick/Dropbox/orgs/snakeSnap.org" "/Users/Nick/Dropbox/orgs/statistics.org" "/Users/Nick/Dropbox/orgs/workout.org" "/Users/Nick/Dropbox/lab_notebook/analysis_statistics.org" "/Users/Nick/Dropbox/lab_notebook/data_analysis.org" "/Users/Nick/Dropbox/lab_notebook/git_instructions.org" "/Users/Nick/Dropbox/lab_notebook/myelin_oscillations.org")))
  '(org-capture-templates
    (quote
     (("p" "paper" entry
