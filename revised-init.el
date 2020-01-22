@@ -23,44 +23,6 @@
   (projectile-mode))
 (setq projectile-indexing-method 'native)
 
-(use-package material-theme
-  :ensure t
-  :defer t)
-
-(use-package zenburn-theme
-  :ensure t
-  :defer t)
-
-(use-package solarized-theme
-  :defer t
-  :init
-  (setq solarized-use-variable-pitch nil)
-  :ensure t)
-
-(use-package leuven-theme
-  :ensure t
-  :config
-  (load-theme 'leuven t))
-
-(defun switch-theme (theme)
-  "Disables any currently active themes and loads THEME."
-  ;; This interactive call is taken from `load-theme'
-  (interactive
-   (list
-    (intern (completing-read "Load custom theme: "
-                             (mapc 'symbol-name
-                                   (custom-available-themes))))))
-  (let ((enabled-themes custom-enabled-themes))
-    (mapc #'disable-theme custom-enabled-themes)
-    (load-theme theme t)))
-
-(defun disable-active-themes ()
-  "Disables any currently active themes listed in `custom-enabled-themes'."
-  (interactive)
-  (mapc #'disable-theme custom-enabled-themes))
-
-(global-set-key (kbd "C-c t") 'switch-theme)
-
 ;; (setq x-select-enable-clipboard t)
 
 (use-package paredit)
@@ -85,20 +47,37 @@
 (global-set-key (kbd "C-c l") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/lab_notebook.org"))) ;; lab notebook in org.
 (global-set-key (kbd "C-c d") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/data_analysis.org"))) ;; go to data analysis
 
+;; quickly jump to mnc project in helm buffer
+(defun mnc ()
+  "Quickly jump to helm file view for mnc project."
+  (interactive)
+  (helm-find-files "Users/nick/Dropbox/lab_notebook/projects_and_data/mnc/"))
 
 (bind-key "C-c l" 'org-store-link)
 (bind-key "C-c c" 'org-capture)
 
 ;; org agenda setup
+
+;; utility fn to remove all scheduled tasks
+(defun org-clear-scheduled ()
+  "Remove the scheduled times for all tasks from buffer."
+    (interactive)
+  (save-excursion
+    (replace-regexp "SCHEDULED: <[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} \\w+>" "")))
+
 (setq org-agenda-files
-      '("~/Dropbox/orgs/planner.org"))
+      '("~/Dropbox/orgs/planner.org"
+        "~/Dropbox/orgs/master_agenda.org"
+        "~/Dropbox/orgs/daily_archive.org"))
 
 (setq org-agenda-custom-commands
       '(("c" "Simple agenda view"
          ((agenda "")
           (alltodo "")))))
+(setq org-agenda-include-diary t)
 
 (bind-key "C-c a" 'org-agenda)
+
 (advice-add 'org-agenda :after #'delete-other-windows)
 
 ;; end agenda setup
@@ -627,3 +606,42 @@
 
 
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+
+
+(use-package material-theme
+  :ensure t
+  :defer t)
+
+(use-package zenburn-theme
+  :ensure t
+  :defer t)
+
+(use-package solarized-theme
+  :defer t
+  :init
+  (setq solarized-use-variable-pitch nil)
+  :ensure t)
+
+(use-package leuven-theme
+  :ensure t
+  :config
+  (load-theme 'leuven t))
+
+(defun switch-theme (theme)
+  "Disables any currently active themes and loads THEME."
+  ;; This interactive call is taken from `load-theme'
+  (interactive
+   (list
+    (intern (completing-read "Load custom theme: "
+                             (mapc 'symbol-name
+                                   (custom-available-themes))))))
+  (let ((enabled-themes custom-enabled-themes))
+    (mapc #'disable-theme custom-enabled-themes)
+    (load-theme theme t)))
+
+(defun disable-active-themes ()
+  "Disables any currently active themes listed in `custom-enabled-themes'."
+  (interactive)
+  (mapc #'disable-theme custom-enabled-themes))
+
+(global-set-key (kbd "C-c t") 'switch-theme)
