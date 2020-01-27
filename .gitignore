@@ -21,3 +21,4 @@ transient/*
 recentf
 /elpy/
 /manual-packages/
+flycheck_*
