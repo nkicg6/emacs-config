@@ -38,7 +38,48 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Theme
 
+
+(use-package material-theme
+  :ensure t
+  :defer t)
+
+(use-package zenburn-theme
+  :ensure t
+  :defer t)
+
+(use-package solarized-theme
+  :defer t
+  :init
+  (setq solarized-use-variable-pitch nil)
+  :ensure t)
+
+(use-package leuven-theme
+  :ensure t
+  :config
+  (load-theme 'leuven t))
+
+(defun switch-theme (theme)
+  "Disables any currently active themes and loads THEME."
+  ;; This interactive call is taken from `load-theme'
+  (interactive
+   (list
+    (intern (completing-read "Load custom theme: "
+                             (mapc 'symbol-name
+                                   (custom-available-themes))))))
+  (let ((enabled-themes custom-enabled-themes))
+    (mapc #'disable-theme custom-enabled-themes)
+    (load-theme theme t)))
+
+(defun disable-active-themes ()
+  "Disable any currently active themes listed in `custom-enabled-themes'."
+  (interactive)
+  (mapc #'disable-theme custom-enabled-themes))
+
+(global-set-key (kbd "C-c t") 'switch-theme)
+
+;; global keyboard shortcuts
 (global-set-key (kbd "C-c y") 'kill-buffer-and-window) ;; kill buffer and window is C-c C-k
 (global-set-key (kbd "C-c c")'org-capture) ;; start org capture.
 (global-set-key (kbd "C-c m") (lambda () (interactive) (find-file "~/Dropbox/orgs/master_agenda.org"))) ;; master agenda in org.
@@ -51,7 +92,7 @@
 (defun mnc ()
   "Quickly jump to helm file view for mnc project."
   (interactive)
-  (helm-find-files "Users/nick/Dropbox/lab_notebook/projects_and_data/mnc/"))
+  (dired "~/Dropbox/lab_notebook/projects_and_data/mnc"))
 
 (bind-key "C-c l" 'org-store-link)
 (bind-key "C-c c" 'org-capture)
@@ -279,15 +320,17 @@
 (use-package elpy
   :ensure t
   :defer t
-  ;;:config
-  ;;(setenv "WORKON_HOME" "~/.ve")
+  :config
+  (setenv "WORKON_HOME" "~/.ve")
   :init
-  (add-hook 'python-mode-hook 'elpy-mode)
-  )
+  (add-hook 'python-mode-hook 'elpy-mode))
 (elpy-enable)
 
+(setq python-shell-prompt-detect-failure-warning nil)
+(setq python-shell-completion-native-enable nil) ; stop annoying warning. 
+
 (defun hs-mode-and-hide ()
-  "Turn on code folding and folds all"
+  "Turn on code folding and folds all code blocks."
   (interactive)
   (hs-minor-mode)
   (hs-hide-all))
@@ -320,12 +363,6 @@
 
 ;; python
 
-(use-package pipenv
-  :hook (python-mode . pipenv-mode)
-  :init
-  (setq
-   pipenv-projectile-after-switch-function
-   #'pipenv-projectile-after-switch-extended))
 (add-hook 'python-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'python-mode-hook 'electric-pair-mode)
 
@@ -606,42 +643,3 @@
 
 
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-
-
-(use-package material-theme
-  :ensure t
-  :defer t)
-
-(use-package zenburn-theme
-  :ensure t
-  :defer t)
-
-(use-package solarized-theme
-  :defer t
-  :init
-  (setq solarized-use-variable-pitch nil)
-  :ensure t)
-
-(use-package leuven-theme
-  :ensure t
-  :config
-  (load-theme 'leuven t))
-
-(defun switch-theme (theme)
-  "Disables any currently active themes and loads THEME."
-  ;; This interactive call is taken from `load-theme'
-  (interactive
-   (list
-    (intern (completing-read "Load custom theme: "
-                             (mapc 'symbol-name
-                                   (custom-available-themes))))))
-  (let ((enabled-themes custom-enabled-themes))
-    (mapc #'disable-theme custom-enabled-themes)
-    (load-theme theme t)))
-
-(defun disable-active-themes ()
-  "Disables any currently active themes listed in `custom-enabled-themes'."
-  (interactive)
-  (mapc #'disable-theme custom-enabled-themes))
-
-(global-set-key (kbd "C-c t") 'switch-theme)
