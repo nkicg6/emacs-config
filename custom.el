@@ -13,7 +13,9 @@
    (quote
     ("d5f17ae86464ef63c46ed4cb322703d91e8ed5e718bf5a7beb69dd63352b26b2" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" default)))
  '(electric-pair-mode t)
+ '(elpy-rpc-python-command "python3")
  '(fci-rule-color "#eee8d5")
+ '(flycheck-python-flake8-executable nil)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
    (--map
@@ -45,37 +47,11 @@
     ("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4")))
  '(org-capture-templates
    (quote
-    (("p" "paper" entry
-      (file+headline "~/Dropbox/orgs/papers.org" "Uncategorized")
-      (file "~/.emacs.d/templates/paper.orgtmpl")
-      :empty-lines-after 1)
+    (
      ("t" "todo" entry
-      (file+headline "~/Dropbox/orgs/master_agenda.org" "Unfiled todos")
+      (file+headline "~/Dropbox/orgs/planner.org" "refile")
       (file "~/.emacs.d/templates/todo.orgtmpl")
-      :empty-lines-after 1)
-     ("b" "book" entry
-      (file+headline "~/Dropbox/orgs/books.org" "Captured-uncategorized")
-      (file "~/.emacs.d/templates/books.orgtmpl")
-      :empty-lines-after 1)
-     ("a" "article" entry
-      (file+headline "~/Dropbox/orgs/master_agenda.org" "Uncategorized notes")
-      (file "~/.emacs.d/templates/articles.orgtmpl")
-      :empty-lines-after 1)
-     ("j" "journal" entry
-      (file+datetree "~/Dropbox/orgs/journal.org")
-      (file "~/.emacs.d/templates/journal.orgtmpl")
-      :empty-lines-after 1)
-     ("l" "link" entry
-      (file+headline "~/Dropbox/orgs/master_agenda.org" "Uncategorized links")
-      (file "~/.emacs.d/templates/link.orgtmpl")
-      :empty-lines-after 1)
-     ("q" "quick note" entry
-      (file+headline "~/Dropbox/orgs/master_agenda.org" "Uncategorized notes")
-      (file "~/.emacs.d/templates/note.orgtmpl")
-      :empty-lines-after 1)
-     ("w" "workout" entry
-      (file+datetree "~/Dropbox/orgs/workout.org")
-      (file "~/.emacs.d/templates/workout.orgtmpl")))))
+      :empty-lines-after 1))))
  '(package-selected-packages
    (quote
     (company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))

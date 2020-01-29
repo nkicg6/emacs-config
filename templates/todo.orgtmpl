@@ -1,6 +1,7 @@
-** TODO %^{Description}
+** TODO %^{Description} REFILE ME by 21:00
 SCHEDULED: %t
 :LOGBOOK:
 - Added: %U
+- Created when working on %a
 :END:
 %?
