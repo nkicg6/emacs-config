@@ -40,7 +40,6 @@
 
 ;; Theme
 
-
 (use-package material-theme
   :ensure t
   :defer t)
@@ -291,6 +290,10 @@
 (use-package helm-projectile
   :defer t)
 (helm-projectile-on)
+
+;; helm customizations
+(define-key helm-map (kbd "<left>") 'helm-find-files-up-one-level)
+(define-key helm-map (kbd "<right>") 'helm-execute-persistent-action)
 
 ;;  use recent file stuff
 (use-package recentf
@@ -645,10 +648,5 @@
 (add-hook 'c-mode-hook 'company-mode)
 (define-key c-mode-map (kbd "C-<tab>") #'company-complete)
 (add-hook 'c-mode-hook (lambda () (electric-indent-local-mode -1)))
-
-;; helm customizations
-(define-key helm-map (kbd "<left>") 'helm-find-files-up-one-level)
-(define-key helm-map (kbd "<right>") 'helm-execute-persistent-action)
-
 
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
