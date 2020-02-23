@@ -111,10 +111,13 @@
         "~/Dropbox/orgs/master_agenda.org"
         "~/Dropbox/orgs/daily_archive.org"))
 
+;; https://orgmode.org/worg/doc.html
 (setq org-agenda-custom-commands
-      '(("c" "Simple agenda view"
-         ((agenda "")
-          (alltodo "")))))
+      '(("c" "simple agenda view"
+         agenda ""  ((org-agenda-span 1))
+         ((org-agenda-overriding-header "\nDaily todos")
+          (org-agenda-sorting-strategy '(todo-state-up scheduled-up deadline-up priority-down))))))
+
 (setq org-agenda-include-diary t)
 
 (bind-key "C-c a" 'org-agenda)
@@ -251,7 +254,8 @@
                      (mode . clojure-mode)
                      (mode . clojurescript-mode)
                      (mode . emacs-lisp-mode)
-                     (mode . prog-mode)))
+                     (mode . prog-mode)
+                     (mode . c-mode)))
          ("shell/REPL" (or (mode . eshell-mode)
                            (mode . cider-repl-mode)
                            (mode . comint-mode))))))
@@ -388,7 +392,7 @@
 
 
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEXT(n)" "In-progress(ip)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)" ))))
+      (quote ((sequence "TODO(t)" "In-progress(ip)" "|" "DONE(d)" "CANCELLED(c)" ))))
 ;; log time on finish
 (setq org-log-done 'time)
 
@@ -635,7 +639,12 @@
 
 (yas-global-mode t)
 (setq yas-trigger-key "<tab>")
-
+;; NEURON settings
+(add-to-list 'auto-mode-alist '("\\.hoc$" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.ses$" . c-mode))
+(add-hook 'c-mode-hook 'company-mode)
+(define-key c-mode-map (kbd "C-<tab>") #'company-complete)
+(add-hook 'c-mode-hook (lambda () (electric-indent-local-mode -1)))
 
 ;; helm customizations
 (define-key helm-map (kbd "<left>") 'helm-find-files-up-one-level)
