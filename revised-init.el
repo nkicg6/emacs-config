@@ -16,6 +16,13 @@
 (use-package s
   :defer t)
 
+(use-package projectile
+  :commands (projectile-mode)
+  :defer t
+  :init
+  (projectile-mode))
+(setq projectile-indexing-method 'native)
+
 ;; (setq x-select-enable-clipboard t)
 
 (use-package paredit)
@@ -79,6 +86,7 @@
 (global-set-key (kbd "C-c p") (lambda () (interactive) (find-file "~/Dropbox/orgs/planner.org")))
 (global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/revised-init.el"))) ;; config file
 (global-set-key (kbd "C-c l") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/lab_notebook.org"))) ;; lab notebook in org.
+(global-set-key (kbd "C-c d") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/data_analysis.org"))) ;; go to data analysis
 
 ;; quickly jump to mnc project in helm buffer
 (defun mnc ()
@@ -172,9 +180,16 @@
 ;; no bell
 (setq ring-bell-function 'ignore)
 
-(setq uniquify-buffer-name-style 'forward)
+;;    (require 'uniquify)
 
-;;(show-paren-mode 1)
+;; (use-package uniquify
+;;       :ensure t
+;;       :config
+;;       (setq uniquify-buffer-name-style 'forward))
+
+(setq uniquify-buffer-name-style 'forward)
+;; Highlights matching parenthesis
+(show-paren-mode 1)
 
 ;; Highlight current line
 (global-hl-line-mode 1)
@@ -188,7 +203,15 @@
 
 ;; Don't use hard tabs
 (setq-default indent-tabs-mode nil)
-
+;; When you visit a file, point goes to the last place where it
+;; was when you previously visited the same file.
+;; http://www.emacswiki.org/emacs/SavePlace
+;;        (require 'saveplace)
+(use-package saveplace
+  :defer t
+  :config
+  (setq-default save-place t)  
+  (setq save-place-file (concat user-emacs-directory "places")))
 ;; Emacs can automatically create backup files. This tells Emacs to
 ;; put all backups in ~/.emacs.d/backups. More info:
 ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
@@ -197,22 +220,23 @@
 (setq auto-save-default nil)
 
 (require 'cl-lib)
-
 (defadvice save-buffers-kill-emacs (around no-query-kill-emacs activate)
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (cl-letf (((symbol-function #'process-list) (lambda ())))
     ad-do-it))
 
+
+
 (use-package ibuffer
   :commands ibuffer
   :bind ("C-x C-b" . ibuffer))
 
-;; (define-ibuffer-column size-h
-;;   (:name "Size" :inline t)
-;;   (cond
-;;    ((> (buffer-size) 1000000) (format "%7.3fM" (/ (buffer-size) 1000000.0)))
-;;    ((> (buffer-size) 1000) (format "%7.3fk" (/ (buffer-size) 1000.0)))
-;;    (t (format "%8d" (buffer-size)))))
+(define-ibuffer-column size-h
+  (:name "Size" :inline t)
+  (cond
+   ((> (buffer-size) 1000000) (format "%7.3fM" (/ (buffer-size) 1000000.0)))
+   ((> (buffer-size) 1000) (format "%7.3fk" (/ (buffer-size) 1000.0)))
+   (t (format "%8d" (buffer-size)))))
 
 (setq ibuffer-default-sorting-mode 'recency)
 
@@ -264,9 +288,9 @@
             (setq helm-buffers-fuzzy-matching t)
             (helm-mode 1)))
 
-;; helm customizations
-(define-key helm-map (kbd "<left>") 'helm-find-files-up-one-level)
-(define-key helm-map (kbd "<right>") 'helm-execute-persistent-action)
+(use-package helm-projectile
+  :defer t)
+(helm-projectile-on)
 
 ;;  use recent file stuff
 (use-package recentf
@@ -278,6 +302,7 @@
 
   ;; recommended from https://www.emacswiki.org/emacs/RecentFiles
 
+;;  (run-at-time nil (* 5 60) 'recentf-save-list)
   (setq create-lockfiles nil) ;; see this https://github.com/syl20bnr/spacemacs/issues/5554
 
 (use-package markdown-mode
@@ -293,6 +318,7 @@
    (use-package python-mode
      :defer t
      :ensure t)
+
 
 ;; python environment
 (use-package elpy
@@ -353,6 +379,7 @@
                    (delete-trailing-whitespace))))))
 
 (setq flycheck-python-pycompile-executable "/usr/local/bin/python3")
+
 
 (use-package org-pomodoro
   :defer t)
@@ -436,7 +463,9 @@
   (setq org-ref-default-bibliography '("~/Dropbox/bibliography/zotero-library.bib"))
   (setq org-ref-pdf-directory '("~/PDFs")))
 
+
 (setq org-export-cording-system 'utf-8)
+
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -452,10 +481,10 @@
    (org . t)
    (emacs-lisp . t)
    (dot .t)))
-
 ;; use python 3 default
 
 (setq org-babel-python-command "python3")
+
 
 ;; dont evaluate on export
 ;; this causes it to ignore header args and export anyways, so cancel it. 
@@ -545,6 +574,11 @@
   (interactive)
   (just-one-space 1)
   (insert " <- "))
+;;(define-key ess-mode-map (kbd "C-M-m") 'then_R_operator)
+;;(define-key inferior-ess-mode-map (kbd "C-M-m") 'then_R_operator)
+;;(define-key ess-mode-map (kbd "C-=") 'r_assignment_operator)
+;;(define-key inferior-ess-mode-map (kbd "C-=") 'r_assignment_operator)
+
 
 ;; also new YASnippet for assignment <- which is -<TAB>
 
@@ -563,8 +597,6 @@
   (exec-path-from-shell-initialize)
   (exec-path-from-shell-copy-envs
    '("PATH")))
-
-(setq display-buffer-alist '(("\\`\\*e?shell" display-buffer-pop-up-window)))
 
 (setq eshell-prompt-regexp "^[^#$\n]*[#$] "
       eshell-prompt-function
@@ -601,7 +633,6 @@
 (add-hook 'lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'prog-mode-hook 'pretty-lambda )
 (add-hook 'prog-mode-hook 'prettify-symbols-mode)
-
 (use-package yasnippet
   :ensure t
   :defer t)
@@ -614,5 +645,10 @@
 (add-hook 'c-mode-hook 'company-mode)
 (define-key c-mode-map (kbd "C-<tab>") #'company-complete)
 (add-hook 'c-mode-hook (lambda () (electric-indent-local-mode -1)))
+
+;; helm customizations
+(define-key helm-map (kbd "<left>") 'helm-find-files-up-one-level)
+(define-key helm-map (kbd "<right>") 'helm-execute-persistent-action)
+
 
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
