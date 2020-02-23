@@ -36,7 +36,8 @@
 
 (use-package cider)
 
-(load-file "~/.emacs.d/revised-init.elc")
+;;(load-file "~/.emacs.d/revised-init.elc")
+(load-file "~/.emacs.d/revised-init.el")
 
 (setq gc-cons-threshold 800000)
 ;; (custom-set-variables
