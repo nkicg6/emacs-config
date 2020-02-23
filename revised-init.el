@@ -85,7 +85,6 @@
 (global-set-key (kbd "C-c p") (lambda () (interactive) (find-file "~/Dropbox/orgs/planner.org")))
 (global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/revised-init.el"))) ;; config file
 (global-set-key (kbd "C-c l") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/lab_notebook.org"))) ;; lab notebook in org.
-(global-set-key (kbd "C-c d") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/data_analysis.org"))) ;; go to data analysis
 
 ;; quickly jump to mnc project in helm buffer
 (defun mnc ()
@@ -202,15 +201,7 @@
 
 ;; Don't use hard tabs
 (setq-default indent-tabs-mode nil)
-;; When you visit a file, point goes to the last place where it
-;; was when you previously visited the same file.
-;; http://www.emacswiki.org/emacs/SavePlace
-;;        (require 'saveplace)
-(use-package saveplace
-  :defer t
-  :config
-  (setq-default save-place t)  
-  (setq save-place-file (concat user-emacs-directory "places")))
+
 ;; Emacs can automatically create backup files. This tells Emacs to
 ;; put all backups in ~/.emacs.d/backups. More info:
 ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
@@ -223,8 +214,6 @@
   "Prevent annoying \"Active processes exist\" query when you quit Emacs."
   (cl-letf (((symbol-function #'process-list) (lambda ())))
     ad-do-it))
-
-
 
 (use-package ibuffer
   :commands ibuffer
@@ -262,7 +251,6 @@
           '(lambda ()
              (ibuffer-switch-to-saved-filter-groups "home")))
 (setq ibuffer-truncate-lines t)
-
 
 ;; Enhances M-x to allow easier execution of commands. Provides
 ;; a filterable list of possible commands in the minibuffer
@@ -321,7 +309,6 @@
    (use-package python-mode
      :defer t
      :ensure t)
-
 
 ;; python environment
 (use-package elpy
@@ -382,10 +369,6 @@
                    (delete-trailing-whitespace))))))
 
 (setq flycheck-python-pycompile-executable "/usr/local/bin/python3")
-
-
-(use-package org-pomodoro
-  :defer t)
 
 (setq org-src-window-setup (quote current-window))
 ;; auto open org files in org mode.
