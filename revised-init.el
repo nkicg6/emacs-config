@@ -178,13 +178,6 @@
 ;; no bell
 (setq ring-bell-function 'ignore)
 
-;;    (require 'uniquify)
-
-;; (use-package uniquify
-;;       :ensure t
-;;       :config
-;;       (setq uniquify-buffer-name-style 'forward))
-
 (setq uniquify-buffer-name-style 'forward)
 ;; Highlights matching parenthesis
 (show-paren-mode 1)
@@ -449,9 +442,7 @@
   (setq org-ref-default-bibliography '("~/Dropbox/bibliography/zotero-library.bib"))
   (setq org-ref-pdf-directory '("~/PDFs")))
 
-
 (setq org-export-cording-system 'utf-8)
-
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -470,7 +461,6 @@
 ;; use python 3 default
 
 (setq org-babel-python-command "python3")
-
 
 ;; dont evaluate on export
 ;; this causes it to ignore header args and export anyways, so cancel it. 
@@ -492,7 +482,6 @@
 (setq org-babel-clojure-backend 'cider)
 (org-defkey org-mode-map "\C-c\C-x\C-e" 'cider-eval-last-sexp)
 (setq cider-repl-display-help-banner nil)
-
 
  ;;autocompletion from cider https://github.com/clojure-emacs/cider/blob/master/doc/code_completion.md
 (use-package company) ;; autocompletion
@@ -539,9 +528,6 @@
          :body-only t)
         ("clj-site" :components ("programming" "science"))))
 
-
-;; (use-package ess-site
-;;   :defer t) 
 (use-package ess
   :ensure t
   :defer t)
@@ -560,11 +546,6 @@
   (interactive)
   (just-one-space 1)
   (insert " <- "))
-;;(define-key ess-mode-map (kbd "C-M-m") 'then_R_operator)
-;;(define-key inferior-ess-mode-map (kbd "C-M-m") 'then_R_operator)
-;;(define-key ess-mode-map (kbd "C-=") 'r_assignment_operator)
-;;(define-key inferior-ess-mode-map (kbd "C-=") 'r_assignment_operator)
-
 
 ;; also new YASnippet for assignment <- which is -<TAB>
 
@@ -595,6 +576,8 @@
            (propertize (eshell/basename (eshell/pwd)) 'face '(:foreground "blue"))) 
          (if (= (user-uid) 0) "# "
            (concat  " $ " )))))
+
+(setq display-buffer-alist '(("\\`\\*e?shell" display-buffer-pop-up-window)))
 
 (setq ispell-program-name "/usr/local/bin/aspell")
 (add-hook 'org-mode-hook 'flyspell-mode)
