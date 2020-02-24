@@ -613,6 +613,6 @@
 (add-to-list 'auto-mode-alist '("\\.ses$" . c-mode))
 (add-hook 'c-mode-hook 'company-mode)
 (define-key c-mode-map (kbd "C-<tab>") #'company-complete)
-(add-hook 'c-mode-hook (lambda () (electric-indent-local-mode -1)))
+;;(add-hook 'c-mode-hook (lambda () (electric-indent-local-mode -1)))
 
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
