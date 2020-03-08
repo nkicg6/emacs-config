@@ -616,3 +616,9 @@
 ;;(add-hook 'c-mode-hook (lambda () (electric-indent-local-mode -1)))
 
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+
+;; rust
+(use-package rust-mode)
+(setq rust-format-on-save t)
+(add-hook 'rust-mode-hook
+             (lambda () (setq indent-tabs-mode nil)))

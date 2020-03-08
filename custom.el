@@ -47,14 +47,13 @@
     ("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4")))
  '(org-capture-templates
    (quote
-    (
-     ("t" "todo" entry
+    (("t" "todo" entry
       (file+headline "~/Dropbox/orgs/planner.org" "refile")
       (file "~/.emacs.d/templates/todo.orgtmpl")
       :empty-lines-after 1))))
  '(package-selected-packages
    (quote
-    (company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
+    (rust-mode company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(python-shell-interpreter "python3")
