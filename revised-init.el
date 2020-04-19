@@ -236,7 +236,8 @@
                      (mode . clojurescript-mode)
                      (mode . emacs-lisp-mode)
                      (mode . prog-mode)
-                     (mode . c-mode)))
+                     (mode . c-mode)
+                      (mode . rust-mode)))
          ("shell/REPL" (or (mode . eshell-mode)
                            (mode . cider-repl-mode)
                            (mode . comint-mode))))))
@@ -610,6 +611,7 @@
 (setq yas-trigger-key "<tab>")
 ;; NEURON settings
 (add-to-list 'auto-mode-alist '("\\.hoc$" . c-mode))
+(add-to-list 'auto-mode-alist '("\\.mod$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.ses$" . c-mode))
 (add-hook 'c-mode-hook 'company-mode)
 (define-key c-mode-map (kbd "C-<tab>") #'company-complete)
@@ -618,7 +620,25 @@
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
 
 ;; rust
+;; http://julienblanchard.com/2016/fancy-rust-development-with-emacs/
 (use-package rust-mode)
+(use-package cargo)
+(use-package racer)
+(add-hook 'rust-mode-hook 'cargo-minor-mode)
 (setq rust-format-on-save t)
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+
+(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
 (add-hook 'rust-mode-hook
-             (lambda () (setq indent-tabs-mode nil)))
+          (lambda () (setq indent-tabs-mode nil)))
+(use-package flycheck-rust)
+
+(add-hook 'rust-mode-hook
+          (lambda ()
+            (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
+
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))

@@ -41,6 +41,10 @@
     ("`va" "\\value" nil 0)
    ))
 
+(define-abbrev-table 'Rd-mode-skeleton-abbrev-table
+  '(
+   ))
+
 (define-abbrev-table 'TeX-error-overview-mode-abbrev-table '())
 
 (define-abbrev-table 'TeX-output-mode-abbrev-table '())
@@ -127,7 +131,23 @@
 
 (define-abbrev-table 'eshell-mode-abbrev-table '())
 
+(define-abbrev-table 'ess-help-mode-abbrev-table '())
+
 (define-abbrev-table 'ess-julia-mode-abbrev-table '())
+
+(define-abbrev-table 'ess-mode-abbrev-table '())
+
+(define-abbrev-table 'ess-r-help-mode-abbrev-table '())
+
+(define-abbrev-table 'ess-r-mode-abbrev-table '())
+
+(define-abbrev-table 'ess-r-package-menu-mode-abbrev-table '())
+
+(define-abbrev-table 'ess-r-transcript-mode-abbrev-table '())
+
+(define-abbrev-table 'ess-transcript-mode-abbrev-table '())
+
+(define-abbrev-table 'ess-watch-mode-abbrev-table '())
 
 (define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
 
@@ -141,9 +161,11 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
-    ("BIV" "eta{}IV spectrin" nil 2)
+    ("BIV" "\\beta{}IV spectrin" nil 2)
+    ("adn" "and" nil 1)
     ("alpha" "\\alpha{}" nil 0)
     ("biv" "\\beta{}IV spectrin" nil 0)
+    ("eb" "be" nil 0)
     ("eta" "ta{}" nil 0)
     ("kv12" "K_{v}1.2" nil 0)
     ("nav12" "Na_{v}1.2" nil 0)
@@ -174,6 +196,10 @@
 (define-abbrev-table 'image-dired-display-image-mode-abbrev-table '())
 
 (define-abbrev-table 'image-dired-thumbnail-mode-abbrev-table '())
+
+(define-abbrev-table 'inferior-ess-mode-abbrev-table '())
+
+(define-abbrev-table 'inferior-ess-r-mode-abbrev-table '())
 
 (define-abbrev-table 'inferior-julia-mode-abbrev-table '())
 
@@ -277,6 +303,8 @@
   '(
    ))
 
+(define-abbrev-table 'rust-mode-abbrev-table '())
+
 (define-abbrev-table 'scss-mode-abbrev-table '())
 
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
@@ -309,11 +337,15 @@
 
 (define-abbrev-table 'use-package-statistics-mode-abbrev-table '())
 
+(define-abbrev-table 'vc-bzr-log-view-mode-abbrev-table '())
+
 (define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-svn-log-view-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
 
