@@ -586,8 +586,11 @@
         "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
 (setq save-abbrevs t)
-(setq-default abbrev-mode t)
 
+(add-hook 'prog-mode-hook
+       (lambda ()
+         (abbrev-mode -1)))
+(add-hook 'org-mode-hook #'abbrev-mode)
 ;; http://ergoemacs.org/emacs/emacs_pretty_lambda.html
 (defun pretty-lambda ()
   (setq prettify-symbols-alist

@@ -41,9 +41,7 @@
     ("`va" "\\value" nil 0)
    ))
 
-(define-abbrev-table 'Rd-mode-skeleton-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'Rd-mode-skeleton-abbrev-table '())
 
 (define-abbrev-table 'TeX-error-overview-mode-abbrev-table '())
 
@@ -70,6 +68,8 @@
    ))
 
 (define-abbrev-table 'calendar-mode-abbrev-table '())
+
+(define-abbrev-table 'cargo-process-mode-abbrev-table '())
 
 (define-abbrev-table 'change-log-mode-abbrev-table '())
 
@@ -104,6 +104,8 @@
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
 
 (define-abbrev-table 'css-mode-abbrev-table '())
+
+(define-abbrev-table 'debugger-mode-abbrev-table '())
 
 (define-abbrev-table 'diary-fancy-display-mode-abbrev-table '())
 
@@ -157,17 +159,23 @@
 
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
+(define-abbrev-table 'gfm-mode-abbrev-table '())
+
+(define-abbrev-table 'gfm-view-mode-abbrev-table '())
+
 (define-abbrev-table 'git-commit-elisp-text-mode-abbrev-table '())
 
 (define-abbrev-table 'global-abbrev-table
   '(
     ("BIV" "\\beta{}IV spectrin" nil 2)
     ("adn" "and" nil 1)
-    ("alpha" "\\alpha{}" nil 0)
+    ("alpha" "\\alpha{}" nil 4)
+    ("becuase" "because" nil 2)
     ("biv" "\\beta{}IV spectrin" nil 0)
     ("eb" "be" nil 0)
-    ("eta" "ta{}" nil 0)
+    ("eta" "\\eta{}" nil 1)
     ("kv12" "K_{v}1.2" nil 0)
+    ("nav" "Na_{v}" nil 1)
     ("nav12" "Na_{v}1.2" nil 0)
     ("nav16" "Na_{v}1.6" nil 0)
     ("um" "\\mu{}m" nil 1)
@@ -263,6 +271,10 @@
 
 (define-abbrev-table 'makefile-mode-abbrev-table '())
 
+(define-abbrev-table 'markdown-mode-abbrev-table '())
+
+(define-abbrev-table 'markdown-view-mode-abbrev-table '())
+
 (define-abbrev-table 'message-mode-abbrev-table '())
 
 (define-abbrev-table 'messages-buffer-mode-abbrev-table '())
@@ -297,11 +309,17 @@
 
 (define-abbrev-table 'prog-mode-abbrev-table '())
 
+(define-abbrev-table 'py-auto-completion-mode-abbrev-table '())
+
+(define-abbrev-table 'py-shell-mode-abbrev-table '())
+
 (define-abbrev-table 'python-mode-abbrev-table '())
 
 (define-abbrev-table 'python-mode-skeleton-abbrev-table
   '(
    ))
+
+(define-abbrev-table 'racer-help-mode-abbrev-table '())
 
 (define-abbrev-table 'rust-mode-abbrev-table '())
 
