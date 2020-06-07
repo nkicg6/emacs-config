@@ -395,7 +395,8 @@
 (add-hook 'org-mode-hook 'electric-pair-mode)
 (use-package org-bullets
   :defer t)
-
+;; latex headlines
+(setq org-latex-prefer-use-labels t)
 ;; dealing with time here: https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html
 (setq org-clock-idle-time 15)
 ;; Resume clocking task when emacs is restarted
