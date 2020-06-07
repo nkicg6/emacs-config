@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: tab
+# key: tab
+# --
+\begin{tabular}{lp{0.8\textwidth}}
+$0
+\end{tabular}

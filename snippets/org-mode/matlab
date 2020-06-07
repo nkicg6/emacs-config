@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: matlab
-# key: mat
-# --
-#+BEGIN_SRC octave :session ${1:homework} :results output :exports both
-$0
-#+END_SRC
