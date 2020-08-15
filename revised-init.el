@@ -130,9 +130,7 @@
 ;; Turn off the menu bar at the top of each frame because it's distracting
 (menu-bar-mode -1)
 ;; Show line numbers
-(use-package nlinum
-  :defer t)
-(global-nlinum-mode)
+(global-display-line-numbers-mode t)
 ;; You can uncomment this to remove the graphical toolbar at the top. After
 ;; awhile, you won't need the toolbar.
 (when (fboundp 'tool-bar-mode)
@@ -313,6 +311,18 @@
   :init
   (add-hook 'python-mode-hook 'elpy-mode))
 (elpy-enable)
+
+;; (setq elpy-shell-echo-output nil
+;;       python-shell-interpreter "python3"   
+;;       python-shell-interpreter-args "")
+
+(setq elpy-shell-echo-output nil
+      python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--simple-prompt")
+
+;; (setq elpy-shell-echo-output nil
+;;       python-shell-interpreter "python3"
+;;       python-shell-interpreter-args "-i")
 
 (setq python-shell-prompt-detect-failure-warning nil)
 (setq python-shell-completion-native-enable nil) ; stop annoying warning. 

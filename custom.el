@@ -14,6 +14,7 @@
     ("d5f17ae86464ef63c46ed4cb322703d91e8ed5e718bf5a7beb69dd63352b26b2" "98cc377af705c0f2133bb6d340bf0becd08944a588804ee655809da5d8140de6" "5dc0ae2d193460de979a463b907b4b2c6d2c9c4657b2e9e66b8898d2592e3de5" default)))
  '(electric-pair-mode t)
  '(elpy-rpc-python-command "python3")
+ '(elpy-syntax-check-command "pylint")
  '(fci-rule-color "#eee8d5")
  '(flycheck-python-flake8-executable nil)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
@@ -53,7 +54,7 @@
       :empty-lines-after 1))))
  '(package-selected-packages
    (quote
-    (racer cargo flycheck-rust flycheck rust-mode company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
+    (elpy racer cargo flycheck-rust flycheck rust-mode company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(python-shell-interpreter "python3")
