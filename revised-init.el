@@ -441,12 +441,12 @@
 (with-eval-after-load 'ox-latex
    (add-to-list 'org-latex-classes
                 '("elifecustom"
-                "\\documentclass[9pt,lineno]{elife}"
-             ("\\section{%s}" . "\\section*{%s}")
-             ("\\subsection{%s}" . "\\subsection*{%s}")
-             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
-             ("\\paragraph{%s}" . "\\paragraph*{%s}")
-             ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+                "\\documentclass[9pt,lineno]{elife} [NO-DEFAULT-PACKAGES]"
+             ("\\section{%s}" . "\\section{%s}")
+             ("\\subsection{%s}" . "\\subsection{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+             ("\\paragraph{%s}" . "\\paragraph{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph{%s}"))))
 ;; reftex
 (use-package reftex
   :commands turn-on-reftex
