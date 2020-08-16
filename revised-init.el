@@ -1,9 +1,9 @@
-;; revised, simplified init file for new computer.
+; revised, simplified init file for new computer.
 (setq user-full-name "Nick George"
       user-mail-address "nicholas.m.george@cuanschutz.edu")
 
 (defun my/tangle-dotfiles ()
-   "If the current file is this file, the code blocks are tangled"
+   "If the current file is this file, the code blocks are tangled."
    (when (equal (buffer-file-name) (expand-file-name "~/.emacs.d/revised-init.el"))
      (byte-compile-file "~/.emacs.d/revised-init.el")))
 
@@ -319,7 +319,7 @@
 (setq elpy-shell-echo-output nil
       python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt")
-
+(use-package blacken)
 ;; (setq elpy-shell-echo-output nil
 ;;       python-shell-interpreter "python3"
 ;;       python-shell-interpreter-args "-i")
@@ -334,6 +334,7 @@
   (hs-hide-all))
 
 (add-hook 'python-mode-hook 'hs-mode-and-hide)
+(add-hook 'python-mode-hook 'blacken-mode)
 (define-key python-mode-map (kbd "C-c h") 'hs-hide-all)
 (define-key python-mode-map (kbd "C-c s") 'hs-show-all)
 (define-key python-mode-map (kbd "C-<tab>") 'hs-toggle-hiding)
@@ -435,6 +436,17 @@
 
 (setq org-tags-column 45)
 
+;;; publishing
+
+(with-eval-after-load 'ox-latex
+   (add-to-list 'org-latex-classes
+                '("elifecustom"
+                "\\documentclass[9pt,lineno]{elife}"
+             ("\\section{%s}" . "\\section*{%s}")
+             ("\\subsection{%s}" . "\\subsection*{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+             ("\\paragraph{%s}" . "\\paragraph*{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
 ;; reftex
 (use-package reftex
   :commands turn-on-reftex
@@ -455,6 +467,8 @@
   (setq org-ref-pdf-directory '("~/PDFs")))
 
 (setq org-export-cording-system 'utf-8)
+
+;;; end publishing
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -617,6 +631,7 @@
 (add-hook 'lisp-mode-hook 'prettify-symbols-mode)
 (add-hook 'prog-mode-hook 'pretty-lambda )
 (add-hook 'prog-mode-hook 'prettify-symbols-mode)
+
 (use-package yasnippet
   :ensure t
   :defer t)
