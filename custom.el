@@ -46,6 +46,9 @@
  '(nrepl-message-colors
    (quote
     ("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4")))
+ '(org-agenda-files
+   (quote
+    ("~/Dropbox/lab_notebook/projects_and_data/mnc/publication/LaTeX/mnc/paper.org" "~/Dropbox/orgs/planner.org" "~/Dropbox/orgs/master_agenda.org" "~/Dropbox/orgs/daily_archive.org")))
  '(org-capture-templates
    (quote
     (("t" "todo" entry

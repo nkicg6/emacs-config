@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: figure-full
+# key: ff
+# --
+\begin{figure}
+\begin{fullwidth}
+\includegraphics[width=0.95\linewidth]{figures/$1.png}
+\caption{$2}
+\label{fig:$1}
+ \end{fullwidth}
+\end{figure}
+$0

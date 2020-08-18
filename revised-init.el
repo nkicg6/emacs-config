@@ -456,17 +456,25 @@
     (setq reftex-plug-intoAUCTex t))
   :defer t  
   )
-(use-package helm-bibtex)
+(use-package helm-bibtex
+  :init (setq bibtex-completion-bibliography
+      '("/Users/nick/Dropbox/bibliography/zotero-library.bib")))
 
 (use-package org-ref
   :after org
   :defer t
-  :init
-  (setq reftex-default-bibliography '("~/Dropbox/bibliography/zotero-library.bib"))
+  :init 
+  (setq reftex-default-bibliography '("/Users/nick/Dropbox/bibliography/zotero-lib.bib"))
   (setq org-ref-default-bibliography '("~/Dropbox/bibliography/zotero-library.bib"))
   (setq org-ref-pdf-directory '("~/PDFs")))
 
 (setq org-export-cording-system 'utf-8)
+
+(setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "bibtex %b"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;;; end publishing
 

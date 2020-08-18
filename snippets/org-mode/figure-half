@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: figure-half
+# key: fh
+# --
+
+\begin{wrapfigure}{l}{.46\textwidth}
+\includegraphics[width=\hsize]{figures/$1.png}
+\caption{$2}
+\label{fig:$1}
+\end{wrapfigure}
+$0
