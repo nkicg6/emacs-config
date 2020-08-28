@@ -44,21 +44,17 @@
 ;; Theme
 
 (use-package material-theme
-  :ensure t
   :defer t)
 
 (use-package zenburn-theme
-  :ensure t
   :defer t)
 
 (use-package solarized-theme
   :defer t
   :init
-  (setq solarized-use-variable-pitch nil)
-  :ensure t)
+  (setq solarized-use-variable-pitch nil))
 
 (use-package leuven-theme
-  :ensure t
   :config
   (load-theme 'leuven t))
 
@@ -260,7 +256,6 @@
   (setq smex-save-file (concat user-emacs-directory ".smex-items")))
 
 (use-package helm
-  :ensure t
   :defer t
   :bind  (("M-a" . helm-M-x)
           ("C-x C-f" . helm-find-files)
@@ -342,7 +337,6 @@
 (add-hook 'python-mode-hook 'highlight-indentation-current-column-mode)
 
 (use-package flycheck
-  :ensure t
   :defer t
   :init (global-flycheck-mode))
 
@@ -519,7 +513,6 @@
         ("clj-site" :components ("programming" "science"))))
 
 (use-package ess
-  :ensure t
   :defer t)
 
 (add-hook 'ess-mode-hook #'company-mode)
@@ -543,7 +536,6 @@
 ;;(ess-toggle-underscore nil)
 
 (use-package magit
-  :ensure t
   :defer t
   :config
   (define-key magit-status-mode-map (kbd "q") 'magit-quit-session))
@@ -598,7 +590,6 @@
 
 (use-package yasnippet
   :init (setq yas-trigger-key "<tab>")
-  :ensure t
   :config (yas-global-mode t))
 
 ;; NEURON settings
