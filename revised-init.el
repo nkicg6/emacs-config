@@ -28,13 +28,13 @@
 (use-package paredit)
 
 (use-package openwith
-  :defer t)
-
-(setq openwith-associations '(("\\.pptx?\\'" "open" (file))
+  :config
+  (setq openwith-associations '(("\\.pptx?\\'" "open" (file))
                               ("\\.docx?\\'" "open" (file))
                               ("\\.xlsx?\\'" "open" (file))
                               ("\\.ods?\\'" "open" (file))))
-(openwith-mode t)
+  (openwith-mode t)
+  :defer t)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
