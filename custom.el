@@ -15,7 +15,6 @@
  '(electric-pair-mode t)
  '(elpy-rpc-python-command "python3")
  '(elpy-syntax-check-command "flake8")
- '(fci-rule-color "#eee8d5")
  '(flycheck-python-flake8-executable nil)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
  '(highlight-symbol-colors
@@ -43,12 +42,9 @@
  '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
  '(magit-diff-use-overlays nil)
  '(markdown-command "/usr/local/bin/pandoc")
- '(nrepl-message-colors
-   (quote
-    ("#dc322f" "#cb4b16" "#b58900" "#5b7300" "#b3c34d" "#0061a8" "#2aa198" "#d33682" "#6c71c4")))
  '(org-agenda-files
    (quote
-    ("~/Dropbox/lab_notebook/projects_and_data/mnc/publication/LaTeX/mnc/paper.org" "~/Dropbox/orgs/planner.org" "~/Dropbox/orgs/master_agenda.org" "~/Dropbox/orgs/daily_archive.org")))
+    ("~/Dropbox/orgs/planner.org" "~/Dropbox/orgs/master_agenda.org" "~/Dropbox/orgs/daily_archive.org")))
  '(org-capture-templates
    (quote
     (("t" "todo" entry
@@ -57,36 +53,14 @@
       :empty-lines-after 1))))
  '(package-selected-packages
    (quote
-    (org-ref htmlize blacken elpy racer cargo flycheck-rust flycheck rust-mode company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
+    (helm helm-bibtex org-ref htmlize blacken elpy racer cargo flycheck-rust flycheck rust-mode company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(python-shell-interpreter "python3")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
  '(term-default-bg-color "#002b36")
  '(term-default-fg-color "#839496")
- '(vc-annotate-background nil)
  '(vc-annotate-background-mode nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#dc322f")
-     (40 . "#cb4366eb20b4")
-     (60 . "#c1167942154f")
-     (80 . "#b58900")
-     (100 . "#a6ae8f7c0000")
-     (120 . "#9ed892380000")
-     (140 . "#96be94cf0000")
-     (160 . "#8e5397440000")
-     (180 . "#859900")
-     (200 . "#77679bfc4635")
-     (220 . "#6d449d465bfd")
-     (240 . "#5fc09ea47092")
-     (260 . "#4c68a01784aa")
-     (280 . "#2aa198")
-     (300 . "#303498e7affc")
-     (320 . "#2fa1947cbb9b")
-     (340 . "#2c879008c736")
-     (360 . "#268bd2"))))
- '(vc-annotate-very-old-color nil)
  '(weechat-color-list
    (quote
     (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))

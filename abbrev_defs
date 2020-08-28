@@ -41,7 +41,9 @@
     ("`va" "\\value" nil 0)
    ))
 
-(define-abbrev-table 'Rd-mode-skeleton-abbrev-table '())
+(define-abbrev-table 'Rd-mode-skeleton-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'TeX-error-overview-mode-abbrev-table '())
 
@@ -167,11 +169,13 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
-    ("BIV" "\\beta{}IV spectrin" nil 2)
+    ("BIV" "βIV spectrin" nil 2)
+    ("Teh" "The" nil 0)
+    ("aalpha" "α" nil 7)
     ("adn" "and" nil 1)
-    ("alpha" "\\alpha{}" nil 4)
+    ("alpha" "α" nil 9)
     ("becuase" "because" nil 2)
-    ("biv" "\\beta{}IV spectrin" nil 0)
+    ("biv" "βIV spectrin" nil 0)
     ("eb" "be" nil 0)
     ("eta" "\\eta{}" nil 1)
     ("k" "K^{+}" nil 2)
@@ -181,7 +185,8 @@
     ("nav" "Na_{v}" nil 1)
     ("nav12" "Na_{v}1.2" nil 0)
     ("nav16" "Na_{v}1.6" nil 0)
-    ("um" "\\mu{}m" nil 1)
+    ("teh" "the" nil 1)
+    ("um" "µm" nil 1)
    ))
 
 (define-abbrev-table 'gnus-group-mode-abbrev-table '())

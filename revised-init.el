@@ -38,6 +38,9 @@
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; I keep hitting this on accident, so unbind
+(global-unset-key (kbd "C-x C-c"))
+
 ;; Theme
 
 (use-package material-theme
@@ -82,7 +85,7 @@
 (global-set-key (kbd "C-c y") 'kill-buffer-and-window) ;; kill buffer and window is C-c C-k
 (global-set-key (kbd "C-c c")'org-capture) ;; start org capture.
 (global-set-key (kbd "C-c m") (lambda () (interactive) (find-file "~/Dropbox/orgs/master_agenda.org"))) ;; master agenda in org.
-(global-set-key (kbd "C-c p") (lambda () (interactive) (find-file "~/Dropbox/orgs/planner.org")))
+(global-set-key (kbd "C-c p") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/projects_and_data/mnc/publication/LaTeX/mnc/paper.org")))
 (global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/revised-init.el"))) ;; config file
 (global-set-key (kbd "C-c l") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/lab_notebook.org"))) ;; lab notebook in org.
 
@@ -265,15 +268,9 @@
           ("C-x b" . helm-buffers-list))
   :config (progn
             (setq helm-buffers-fuzzy-matching t)
-            (helm-mode 1)))
-
-(use-package helm-projectile
-  :defer t)
-(helm-projectile-on)
-
-;; helm customizations
-(define-key helm-map (kbd "<left>") 'helm-find-files-up-one-level)
-(define-key helm-map (kbd "<right>") 'helm-execute-persistent-action)
+            (helm-mode 1)
+            (define-key helm-map (kbd "<left>") 'helm-find-files-up-one-level)
+            (define-key helm-map (kbd "<right>") 'helm-execute-persistent-action)))
 
 ;;  use recent file stuff
 (use-package recentf
@@ -289,7 +286,6 @@
   (setq create-lockfiles nil) ;; see this https://github.com/syl20bnr/spacemacs/issues/5554
 
 (use-package markdown-mode
-  :ensure t
   :defer t
   :commands (markdown-mode gfm-mode)
   :mode (("README\\.md\\'" . gfm-mode)
@@ -298,34 +294,6 @@
   :init (setq markdown-command "multimarkdown"))
 
 ;; regular python stuff
-   (use-package python-mode
-     :defer t
-     :ensure t)
-
-;; python environment
-(use-package elpy
-  :ensure t
-  :defer t
-  :config
-  (setenv "WORKON_HOME" "~/.ve")
-  :init
-  (add-hook 'python-mode-hook 'elpy-mode))
-(elpy-enable)
-
-;; (setq elpy-shell-echo-output nil
-;;       python-shell-interpreter "python3"   
-;;       python-shell-interpreter-args "")
-
-(setq elpy-shell-echo-output nil
-      python-shell-interpreter "ipython"
-      python-shell-interpreter-args "--simple-prompt")
-(use-package blacken)
-;; (setq elpy-shell-echo-output nil
-;;       python-shell-interpreter "python3"
-;;       python-shell-interpreter-args "-i")
-
-(setq python-shell-prompt-detect-failure-warning nil)
-(setq python-shell-completion-native-enable nil) ; stop annoying warning. 
 
 (defun hs-mode-and-hide ()
   "Turn on code folding and folds all code blocks."
@@ -333,16 +301,45 @@
   (hs-minor-mode)
   (hs-hide-all))
 
-(add-hook 'python-mode-hook 'hs-mode-and-hide)
-(add-hook 'python-mode-hook 'blacken-mode)
-(define-key python-mode-map (kbd "C-c h") 'hs-hide-all)
-(define-key python-mode-map (kbd "C-c s") 'hs-show-all)
-(define-key python-mode-map (kbd "C-<tab>") 'hs-toggle-hiding)
+(use-package python-mode
+  :defer t
+  :config
+  (add-hook 'python-mode-hook 'hs-mode-and-hide)
+  (add-hook 'python-mode-hook 'blacken-mode)
+  (define-key python-mode-map (kbd "C-c h") 'hs-hide-all)
+  (define-key python-mode-map (kbd "C-c s") 'hs-show-all)
+  (define-key python-mode-map (kbd "C-<tab>") 'hs-toggle-hiding))
+
+;; python environment
+
+(use-package elpy
+  :defer t
+  :config
+  (setenv "WORKON_HOME" "~/.ve")
+  (setq elpy-shell-echo-output nil
+      python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--simple-prompt")
+  
+  (elpy-enable)
+  :init
+  (add-hook 'python-mode-hook 'elpy-mode)
+  (setq python-shell-prompt-detect-failure-warning nil)
+  (setq python-shell-completion-native-enable nil) ; stop annoying warning. 
+)
+
+;; (setq elpy-shell-echo-output nil
+;;       python-shell-interpreter "python3"   
+;;       python-shell-interpreter-args "")
+
+;; (setq elpy-shell-echo-output nil
+;;       python-shell-interpreter "python3"
+;;       python-shell-interpreter-args "-i")
+
+(use-package blacken)
 
 ;; highlight indentation off, only use current column
 (highlight-indentation-mode nil)
 (add-hook 'python-mode-hook 'highlight-indentation-current-column-mode)
-;; (highlight-indentation-current-column-mode t)
 
 (use-package flycheck
   :ensure t
@@ -436,47 +433,6 @@
 
 (setq org-tags-column 45)
 
-;;; publishing
-
-(with-eval-after-load 'ox-latex
-   (add-to-list 'org-latex-classes
-                '("elifecustom"
-                "\\documentclass[9pt,lineno]{elife} [NO-DEFAULT-PACKAGES]"
-             ("\\section{%s}" . "\\section{%s}")
-             ("\\subsection{%s}" . "\\subsection{%s}")
-             ("\\subsubsection{%s}" . "\\subsubsection{%s}")
-             ("\\paragraph{%s}" . "\\paragraph{%s}")
-             ("\\subparagraph{%s}" . "\\subparagraph{%s}"))))
-;; reftex
-(use-package reftex
-  :commands turn-on-reftex
-  :init
-  (progn
-    (setq reftex-default-bibliography '("/Users/Nick/Dropbox/bibliography/zotero-library.bib"))
-    (setq reftex-plug-intoAUCTex t))
-  :defer t  
-  )
-(use-package helm-bibtex
-  :init (setq bibtex-completion-bibliography
-      '("/Users/nick/Dropbox/bibliography/zotero-library.bib")))
-
-(use-package org-ref
-  :after org
-  :defer t
-  :init 
-  (setq reftex-default-bibliography '("/Users/nick/Dropbox/bibliography/zotero-lib.bib"))
-  (setq org-ref-default-bibliography '("~/Dropbox/bibliography/zotero-library.bib"))
-  (setq org-ref-pdf-directory '("~/PDFs")))
-
-(setq org-export-cording-system 'utf-8)
-
-(setq org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "bibtex %b"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
-
-;;; end publishing
 
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -641,20 +597,53 @@
 (add-hook 'prog-mode-hook 'prettify-symbols-mode)
 
 (use-package yasnippet
+  :init (setq yas-trigger-key "<tab>")
   :ensure t
-  :defer t)
+  :config (yas-global-mode t))
 
-(yas-global-mode t)
-(setq yas-trigger-key "<tab>")
 ;; NEURON settings
 (add-to-list 'auto-mode-alist '("\\.hoc$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.mod$" . c-mode))
 (add-to-list 'auto-mode-alist '("\\.ses$" . c-mode))
 (add-hook 'c-mode-hook 'company-mode)
 (define-key c-mode-map (kbd "C-<tab>") #'company-complete)
-;;(add-hook 'c-mode-hook (lambda () (electric-indent-local-mode -1)))
 
 (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
+
+;;; publishing and org-ref
+
+(with-eval-after-load 'ox-latex
+   (add-to-list 'org-latex-classes
+                '("elifecustom"
+                "\\documentclass[9pt,lineno]{elife} [NO-DEFAULT-PACKAGES]"
+             ("\\section{%s}" . "\\section{%s}")
+             ("\\subsection{%s}" . "\\subsection{%s}")
+             ("\\subsubsection{%s}" . "\\subsubsection{%s}")
+             ("\\paragraph{%s}" . "\\paragraph{%s}")
+             ("\\subparagraph{%s}" . "\\subparagraph{%s}"))))
+
+(use-package helm-bibtex
+  :init (setq bibtex-completion-bibliography
+      '("/Users/nick/Dropbox/bibliography/zotero-library.bib")))
+
+(use-package org-ref
+  :after org
+  :init
+  (setq reftex-default-bibliography '("/Users/Nick/Dropbox/bibliography/zotero-library.bib"))
+  (setq org-latex-pdf-process
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "bibtex %b"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))  
+  :config
+  (setq reftex-default-bibliography '("/Users/nick/Dropbox/bibliography/zotero-lib.bib"))
+  (bind-key* "C-c ]" 'org-ref-helm-insert-cite-link)
+  (setq org-ref-pdf-directory '("~/PDFs"))
+  (require 'org-ref))
+
+(setq org-export-cording-system 'utf-8)
+
+;;; end publishing
 
 ;; rust
 ;; http://julienblanchard.com/2016/fancy-rust-development-with-emacs/
