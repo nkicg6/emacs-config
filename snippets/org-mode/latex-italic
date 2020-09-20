@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: latex-italic
+# key: li
+# --
+\textit{$1}$0

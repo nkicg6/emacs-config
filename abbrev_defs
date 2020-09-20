@@ -185,8 +185,10 @@
     ("nav" "Na_{v}" nil 1)
     ("nav12" "Na_{v}1.2" nil 0)
     ("nav16" "Na_{v}1.6" nil 0)
-    ("teh" "the" nil 1)
+    ("taht" "that" nil 0)
+    ("teh" "the" nil 2)
     ("um" "µm" nil 1)
+    ("waht" "what" nil 0)
    ))
 
 (define-abbrev-table 'gnus-group-mode-abbrev-table '())
@@ -348,6 +350,10 @@
 (define-abbrev-table 'snippet-mode-abbrev-table '())
 
 (define-abbrev-table 'special-mode-abbrev-table '())
+
+(define-abbrev-table 'sql-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
 
