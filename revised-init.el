@@ -7,6 +7,13 @@
    (when (equal (buffer-file-name) (expand-file-name "~/.emacs.d/revised-init.el"))
      (byte-compile-file "~/.emacs.d/revised-init.el")))
 
+(defun writing ()
+  "Set frame to centered and a nice size for writing."
+  (interactive)
+  (set-frame-size (selected-frame) 120 100)
+  (set-frame-position (selected-frame) 500 0))
+
+
 (add-hook 'after-save-hook #'my/tangle-dotfiles)
 
 ;; rainbows
@@ -81,6 +88,7 @@
 (global-set-key (kbd "C-c y") 'kill-buffer-and-window) ;; kill buffer and window is C-c C-k
 (global-set-key (kbd "C-c c")'org-capture) ;; start org capture.
 (global-set-key (kbd "C-c m") (lambda () (interactive) (find-file "~/Dropbox/orgs/master_agenda.org"))) ;; master agenda in org.
+(global-set-key (kbd "C-c o") (lambda () (interactive) (find-file "~/Dropbox/orgs/org.org"))) ;; master agenda in org.
 (global-set-key (kbd "C-c p") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/projects_and_data/mnc/publication/LaTeX/mnc/paper.org")))
 (global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/revised-init.el"))) ;; config file
 (global-set-key (kbd "C-c l") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/lab_notebook.org"))) ;; lab notebook in org.
@@ -130,8 +138,7 @@
 (menu-bar-mode -1)
 ;; Show line numbers
 (global-display-line-numbers-mode t)
-;; You can uncomment this to remove the graphical toolbar at the top. After
-;; awhile, you won't need the toolbar.
+;; remove toolbar
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
 
@@ -160,7 +167,7 @@
       ;; Mouse yank commands yank at point instead of at click.
       mouse-yank-at-point t)
 
-;; No cursor blinking, it's distracting
+;; No cursor blinking
 (blink-cursor-mode 0)
 
 ;; full path in title bar
@@ -168,9 +175,6 @@
 
 ;; frame size
 (if (window-system) (set-frame-size (selected-frame) 100 50))
-
-;; don't pop up font menu
-(global-set-key (kbd "s-t") '(lambda () (interactive)))
 
 ;; no bell
 (setq ring-bell-function 'ignore)
@@ -192,7 +196,6 @@
 ;; Don't use hard tabs
 (setq-default indent-tabs-mode nil)
 
-;; Emacs can automatically create backup files. This tells Emacs to
 ;; put all backups in ~/.emacs.d/backups. More info:
 ;; http://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html
 (setq backup-directory-alist `(("." . ,(concat user-emacs-directory
@@ -237,7 +240,9 @@
                       (mode . rust-mode)))
          ("shell/REPL" (or (mode . eshell-mode)
                            (mode . cider-repl-mode)
-                           (mode . comint-mode))))))
+                           (mode . comint-mode)))
+         ("web" (or (mode . web-mode)
+                    (mode .js-mode))))))
 (add-hook 'ibuffer-mode-hook
           '(lambda ()
              (ibuffer-switch-to-saved-filter-groups "home")))
@@ -288,6 +293,24 @@
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
 
+;; web-mode http://web-mode.org/
+
+(use-package web-mode)
+(setq auto-mode-alist (append
+                       '(("\\.html\\'" . web-mode)
+                         ("\\.css\\'" . web-mode)
+                         ("index\\'" . web-mode))
+                       auto-mode-alist))
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-enable-auto-pairing t)
+(setq web-mode-enable-css-colorization t)
+(setq web-mode-enable-current-element-highlight t)
+(setq web-mode-enable-current-column-highlight t)
+
+(setq web-mode-ac-sources-alist
+  '(("css" . (ac-source-css-property))
+    ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
 ;; regular python stuff
 
 (defun hs-mode-and-hide ()
@@ -306,11 +329,11 @@
   (define-key python-mode-map (kbd "C-<tab>") 'hs-toggle-hiding))
 
 ;; python environment
-
 (use-package elpy
   :defer t
   :config
   (setenv "WORKON_HOME" "~/.ve")
+  (add-hook 'elpy-mode-hook 'blacken-mode)
   (setq elpy-shell-echo-output nil
       python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt")
@@ -320,7 +343,8 @@
   (add-hook 'python-mode-hook 'elpy-mode)
   (setq python-shell-prompt-detect-failure-warning nil)
   (setq python-shell-completion-native-enable nil) ; stop annoying warning. 
-)
+  )
+(use-package pyenv-mode)
 
 ;; (setq elpy-shell-echo-output nil
 ;;       python-shell-interpreter "python3"   

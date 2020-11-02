@@ -53,7 +53,7 @@
       :empty-lines-after 1))))
  '(package-selected-packages
    (quote
-    (helm helm-bibtex org-ref htmlize blacken elpy racer cargo flycheck-rust flycheck rust-mode company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
+    (web-mode pyenv-mode helm helm-bibtex org-ref htmlize blacken elpy racer cargo flycheck-rust flycheck rust-mode company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(python-shell-interpreter "python3")
