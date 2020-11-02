@@ -27,6 +27,7 @@
   (if (< (x-display-pixel-width) 1500)
       (writing-small) (writing-large)))
 
+(size-indication-mode 1)
 
 (add-hook 'after-save-hook #'my/tangle-dotfiles)
 
