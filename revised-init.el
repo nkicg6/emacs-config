@@ -7,11 +7,25 @@
    (when (equal (buffer-file-name) (expand-file-name "~/.emacs.d/revised-init.el"))
      (byte-compile-file "~/.emacs.d/revised-init.el")))
 
+(defun writing-large ()
+  "For large screens."
+  (interactive)
+  (set-frame-size (selected-frame) 120 (x-display-pixel-height))
+  (set-frame-position (selected-frame) 480 0)
+  (message "writing-large"))
+
+(defun writing-small ()
+  "For small screens."
+  (interactive)
+  (set-frame-size (selected-frame) 120 (x-display-pixel-height))
+  (set-frame-position (selected-frame) 280 0)
+    (message "writing-large"))
+
 (defun writing ()
   "Set frame to centered and a nice size for writing."
   (interactive)
-  (set-frame-size (selected-frame) 120 100)
-  (set-frame-position (selected-frame) 500 0))
+  (if (< (x-display-pixel-width) 1500)
+      (writing-small) (writing-large)))
 
 
 (add-hook 'after-save-hook #'my/tangle-dotfiles)
