@@ -252,6 +252,8 @@
                      (mode . emacs-lisp-mode)
                      (mode . prog-mode)
                      (mode . c-mode)
+                     (mode . sh-mode)
+                     (filename . "*.sh")
                       (mode . rust-mode)))
          ("shell/REPL" (or (mode . eshell-mode)
                            (mode . cider-repl-mode)

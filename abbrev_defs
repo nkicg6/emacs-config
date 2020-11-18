@@ -41,9 +41,7 @@
     ("`va" "\\value" nil 0)
    ))
 
-(define-abbrev-table 'Rd-mode-skeleton-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'Rd-mode-skeleton-abbrev-table '())
 
 (define-abbrev-table 'TeX-error-overview-mode-abbrev-table '())
 
@@ -178,6 +176,7 @@
     ("biv" "βIV spectrin" nil 0)
     ("eb" "be" nil 0)
     ("eta" "\\eta{}" nil 1)
+    ("fro" "for" nil 0)
     ("k" "K^{+}" nil 2)
     ("kv" "K_{v}" nil 0)
     ("kv12" "K_{v}1.2" nil 0)
@@ -351,9 +350,7 @@
 
 (define-abbrev-table 'special-mode-abbrev-table '())
 
-(define-abbrev-table 'sql-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'sql-mode-abbrev-table '())
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
 
@@ -378,6 +375,8 @@
 (define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-svn-log-view-mode-abbrev-table '())
+
+(define-abbrev-table 'web-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
 
