@@ -119,6 +119,8 @@
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
 
+(define-abbrev-table 'eieio-custom-mode-abbrev-table '())
+
 (define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
 
 (define-abbrev-table 'elpy-refactor-mode-abbrev-table '())
@@ -171,13 +173,17 @@
     ("Teh" "The" nil 0)
     ("aalpha" "α" nil 7)
     ("adn" "and" nil 1)
+    ("ahve" "have" nil 0)
     ("alpha" "α" nil 9)
+    ("beacuse" "because" nil 0)
     ("becuase" "because" nil 2)
     ("biv" "βIV spectrin" nil 0)
+    ("btu" "but" nil 1)
     ("eb" "be" nil 0)
     ("eta" "\\eta{}" nil 1)
     ("fro" "for" nil 0)
     ("k" "K^{+}" nil 2)
+    ("knwo" "know" nil 1)
     ("kv" "K_{v}" nil 0)
     ("kv12" "K_{v}1.2" nil 0)
     ("na" "Na^{+}" nil 1)
@@ -313,6 +319,10 @@
    ))
 
 (define-abbrev-table 'plain-tex-mode-abbrev-table '())
+
+(define-abbrev-table 'poly-fallback-mode-abbrev-table '())
+
+(define-abbrev-table 'poly-head-tail-mode-abbrev-table '())
 
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 

@@ -104,7 +104,7 @@
 (global-set-key (kbd "C-c c")'org-capture) ;; start org capture.
 (global-set-key (kbd "C-c m") (lambda () (interactive) (find-file "~/Dropbox/orgs/master_agenda.org"))) ;; master agenda in org.
 (global-set-key (kbd "C-c o") (lambda () (interactive) (find-file "~/Dropbox/orgs/org.org"))) ;; master agenda in org.
-(global-set-key (kbd "C-c p") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/projects_and_data/mnc/publication/LaTeX/mnc/paper.org")))
+(global-set-key (kbd "C-c p") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/projects_and_data/mnc/publication/mnc/paper.org")))
 (global-set-key (kbd "C-c i") (lambda () (interactive) (find-file "~/.emacs.d/revised-init.el"))) ;; config file
 (global-set-key (kbd "C-c l") (lambda () (interactive) (find-file "~/Dropbox/lab_notebook/lab_notebook.org"))) ;; lab notebook in org.
 
@@ -254,12 +254,15 @@
                      (mode . c-mode)
                      (mode . sh-mode)
                      (filename . "*.sh")
+                     (filename . "Makefile")
                       (mode . rust-mode)))
          ("shell/REPL" (or (mode . eshell-mode)
                            (mode . cider-repl-mode)
-                           (mode . comint-mode)))
+                           (mode . comint-mode)
+                           (filename . "\*Python\*")))
          ("web" (or (mode . web-mode)
                     (mode .js-mode))))))
+
 (add-hook 'ibuffer-mode-hook
           '(lambda ()
              (ibuffer-switch-to-saved-filter-groups "home")))
