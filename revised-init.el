@@ -1,6 +1,5 @@
-; revised, simplified init file for new computer.
-(setq user-full-name "Nick George"
-      user-mail-address "nicholas.m.george@cuanschutz.edu")
+; simplified init file.
+(setq user-full-name "Nick George")
 
 (defun my/tangle-dotfiles ()
    "If the current file is this file, the code blocks are tangled."
