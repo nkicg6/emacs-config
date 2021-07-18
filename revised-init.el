@@ -30,6 +30,11 @@
 
 (add-hook 'after-save-hook #'my/tangle-dotfiles)
 
+;;;; Load custom packages ;;;;
+
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
+
+
 ;; rainbows
 (use-package rainbow-delimiters
   :defer t)
@@ -680,6 +685,9 @@
   (require 'org-ref))
 
 (setq org-export-cording-system 'utf-8)
+
+(setq bibtex2html-program "/usr/local/bin/bibtex2html")
+(require 'ox-bibtex)
 
 ;;; end publishing
 

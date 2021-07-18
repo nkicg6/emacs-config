@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: footnote
+# key: fn
+# --
+[fn:${1:author1}_${2:year}: $1 et al. $2 /${3:journal}/ ${4:link}] $0
