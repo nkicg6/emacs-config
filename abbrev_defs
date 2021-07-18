@@ -172,31 +172,43 @@
     ("BIV" "βIV spectrin" nil 2)
     ("Teh" "The" nil 0)
     ("aalpha" "α" nil 7)
-    ("adn" "and" nil 1)
+    ("adaptaions" "adaptations" nil 0)
+    ("adn" "and" nil 6)
     ("ahve" "have" nil 0)
     ("alpha" "α" nil 9)
     ("beacuse" "because" nil 0)
     ("becuase" "because" nil 2)
     ("biv" "βIV spectrin" nil 0)
-    ("btu" "but" nil 1)
+    ("btu" "but" nil 2)
     ("eb" "be" nil 0)
     ("eta" "\\eta{}" nil 1)
     ("fro" "for" nil 0)
+    ("iwth" "with" nil 1)
     ("k" "K^{+}" nil 2)
-    ("knwo" "know" nil 1)
+    ("knwo" "know" nil 6)
     ("kv" "K_{v}" nil 0)
     ("kv12" "K_{v}1.2" nil 0)
+    ("learnign" "learning" nil 1)
+    ("liek" "like" nil 0)
     ("na" "Na^{+}" nil 1)
     ("nav" "Na_{v}" nil 1)
     ("nav12" "Na_{v}1.2" nil 0)
-    ("nav16" "Na_{v}1.6" nil 0)
-    ("taht" "that" nil 0)
-    ("teh" "the" nil 2)
+    ("nav16" "Na_{v}1.6" nil 1)
+    ("somethign" "something" nil 1)
+    ("taht" "that" nil 1)
+    ("teh" "the" nil 4)
     ("um" "µm" nil 1)
     ("waht" "what" nil 0)
+    ("wtih" "with" nil 1)
    ))
 
 (define-abbrev-table 'gnus-group-mode-abbrev-table '())
+
+(define-abbrev-table 'go-dot-mod-mode-abbrev-table '())
+
+(define-abbrev-table 'go-mode-abbrev-table '())
+
+(define-abbrev-table 'godoc-mode-abbrev-table '())
 
 (define-abbrev-table 'grep-mode-abbrev-table '())
 
@@ -297,6 +309,8 @@
 (define-abbrev-table 'mhtml-mode-abbrev-table '())
 
 (define-abbrev-table 'nrepl-messages-mode-abbrev-table '())
+
+(define-abbrev-table 'nxml-mode-abbrev-table '())
 
 (define-abbrev-table 'objc-mode-abbrev-table
   '(

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: error
+# key: ife
+# --
+	if err != nil {
+		fmt.Println("File read error\n", err)
+		return
+	}
+        $0

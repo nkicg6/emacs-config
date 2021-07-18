@@ -49,7 +49,7 @@
     ("#ffb4ac" "#ddaa6f" "#e5c06d" "#3d454c" "#e2e9ea" "#40424a" "#7ec98f" "#e5786d" "#834c98")))
  '(org-agenda-files
    (quote
-    ("~/Dropbox/orgs/planner.org" "~/Dropbox/orgs/master_agenda.org" "~/Dropbox/orgs/daily_archive.org")))
+    ("~/Dropbox/lab_notebook/projects_and_data/mnc/publication/mnc/paper.org" "~/Dropbox/orgs/planner.org" "~/Dropbox/orgs/master_agenda.org" "~/Dropbox/orgs/daily_archive.org")))
  '(org-capture-templates
    (quote
     (("t" "todo" entry
@@ -58,7 +58,7 @@
       :empty-lines-after 1))))
  '(package-selected-packages
    (quote
-    (poly-R web-mode pyenv-mode helm helm-bibtex org-ref htmlize blacken elpy racer cargo flycheck-rust flycheck rust-mode company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
+    (go-mode poly-R web-mode pyenv-mode helm helm-bibtex org-ref htmlize blacken elpy racer cargo flycheck-rust flycheck rust-mode company-jedi org ox emacs-htmlize ox-publish pipenv paredit paredit-mode leuven-theme material-theme projectile s rainbow-delimiters use-package org-link-minor-mode)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(python-shell-interpreter "python3")

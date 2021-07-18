@@ -8,7 +8,7 @@
 #+OPTIONS: \n:1 toc:nil num:0 todo:nil ^:{} title:nil
 #+PROPERTY: header-args :eval never-export
 #+DATE: `(format-time-string "%Y-%m-%d %a")`
-#+HTML:<h1 id="mainTitle">$1</h1>
+#+HTML:<h1 id="mainTitle">$2</h1>
 #+TOC: headlines 1
 #+HTML:<div id="article">
 #+HTML:<div id="timedate">

@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: frontmatter
+# key: frontm
+# --
+
++++
+date = "`(format-time-string "%Y-%m-%d")`"
+title = "$1"
+description = "$2"
+tags = ["$3"]
+slug = "`(replace-regexp-in-string ".org" ""(replace-regexp-in-string "_" "-" (buffer-name)))`"
+draft = true
++++
+
+#+OPTIONS: \n:1 toc:2 num:0 todo:nil ^:{} title:nil
+#+PROPERTY: header-args :eval never-export
+
+$0

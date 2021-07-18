@@ -151,7 +151,7 @@
 ;; Turn off the menu bar at the top of each frame because it's distracting
 (menu-bar-mode -1)
 ;; Show line numbers
-(global-display-line-numbers-mode t)
+;; (global-display-line-numbers-mode t)
 ;; remove toolbar
 (when (fboundp 'tool-bar-mode)
   (tool-bar-mode -1))
@@ -408,6 +408,10 @@
                    (delete-trailing-whitespace))))))
 
 (setq flycheck-python-pycompile-executable "/usr/local/bin/python3")
+
+
+(setq org-export-with-sub-superscripts '{})
+(setq org-use-sub-superscripts '{})
 
 (setq org-src-window-setup (quote current-window))
 ;; auto open org files in org mode.
@@ -678,6 +682,13 @@
 (setq org-export-cording-system 'utf-8)
 
 ;;; end publishing
+
+;; go
+
+(use-package go-mode
+  :config (add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  )
 
 ;; rust
 ;; http://julienblanchard.com/2016/fancy-rust-development-with-emacs/
