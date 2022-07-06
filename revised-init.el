@@ -278,7 +278,6 @@
 ;; a filterable list of possible commands in the minibuffer
 ;; http://www.emacswiki.org/emacs/Smex
 (use-package smex
-  :defer t
   :bind 
   ("M-x" . smex)
   :config

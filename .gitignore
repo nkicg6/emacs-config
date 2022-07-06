@@ -22,3 +22,5 @@ recentf
 /elpy/
 /manual-packages/
 flycheck_*
+.lsp-session-*
+
