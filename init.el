@@ -32,10 +32,6 @@
 ;;(require 'bind-key)                ;; if you use any :bind variant
 (server-start)
 
-;; load the org config file
-
-(use-package cider)
-
 (load-file "~/.emacs.d/revised-init.elc")
 
 (setq gc-cons-threshold 800000)

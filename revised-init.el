@@ -257,6 +257,8 @@
                      (mode . prog-mode)
                      (mode . c-mode)
                      (mode . sh-mode)
+                     (filename . "*.rs")
+                     (mode . rustic-mode)
                      (filename . "*.sh")
                      (filename . "Makefile")
                       (mode . rust-mode)))
@@ -426,13 +428,13 @@
 
 
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "In-progress(ip)" "|" "DONE(d)" "CANCELLED(c)" ))))
+      (quote ((sequence "TODO(t)" "WAITING(w)"  "NEXT(n)" "|" "DONE(d)" "CANCELLED(c)" ))))
 ;; log time on finish
 (setq org-log-done 'time)
 
 (setq org-todo-keyword-faces
       '(("TODO" :foreground "red" :weight bold)
-        ("NEXT" :foreground "yellow" :weight bold)
+        ("NEXT" :foreground "black" :background "yellow" :weight bold)
         ("In-progress" :foreground "orange" :weight bold)
         ("WAITING" :foreground "black" :background "grey" :weight bold)
         ("DONE" :foreground "#2D6B2D" :weight bold)
@@ -615,6 +617,7 @@
 
 (setq ispell-program-name "/usr/local/bin/aspell")
 (add-hook 'org-mode-hook 'flyspell-mode)
+(add-hook 'markdown-mode-hook 'flyspell-mode)
 (setq abbrev-file-name             ;; tell emacs where to read abbrev
         "~/.emacs.d/abbrev_defs")    ;; definitions from...
 
@@ -687,7 +690,6 @@
 (setq org-export-cording-system 'utf-8)
 
 (setq bibtex2html-program "/usr/local/bin/bibtex2html")
-(require 'ox-bibtex)
 
 ;;; end publishing
 
@@ -699,25 +701,20 @@
   )
 
 ;; rust
-;; http://julienblanchard.com/2016/fancy-rust-development-with-emacs/
-(use-package rust-mode)
+;; https://youtu.be/omJhc7zprNs?t=337
 (use-package cargo)
-(use-package racer)
-(add-hook 'rust-mode-hook 'cargo-minor-mode)
-(setq rust-format-on-save t)
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
-(add-hook 'racer-mode-hook #'company-mode)
 
-(define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-(setq company-tooltip-align-annotations t)
-(add-hook 'rust-mode-hook
-          (lambda () (setq indent-tabs-mode nil)))
-(use-package flycheck-rust)
+(use-package rustic
+  :ensure t
+  :config 
+  (require 'lsp-rust) 
+  (setq rustic-format-on-save t)
+  (setq lsp-rust-analyzer-completion-add-call-parenthesis nil)
+  (setq lsp-rust-analyzer-proc-macro-enable t))
 
-(add-hook 'rust-mode-hook
-          (lambda ()
-            (local-set-key (kbd "C-c <tab>") #'rust-format-buffer)))
+(use-package lsp-mode
+  :ensure t
+  :bind (:map lsp-mode-map
+              ("C-c d" . lsp-describe-thing-at-point)))
 
-(with-eval-after-load 'rust-mode
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(use-package toml-mode :ensure)

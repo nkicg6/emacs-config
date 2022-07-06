@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: blog
+# key: blog
+# --
++++
+date="`(format-time-string "%Y-%m-%d")`"
+slug="`(replace-regexp-in-string ".md" ""(replace-regexp-in-string "_" "-" (buffer-name)))`"
+title="$1"
+description="$2"
+draft=true
+tags=[""]
+math=false
++++
+
+$0
+
